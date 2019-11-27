@@ -1,0 +1,324 @@
+FORMAT: 1A
+
+# Rubrics
+
+Rubrics is an api for managing rubrics and grades.
+
+## Data Structures
+### Course (Base Model)
++ Include Id
++ title: WAI (string, required)
+
+### Rubric (Base Model)
++ Include Id
++ title: Project Proposal (string, required)
++ course_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Rubric Item (Base Model)
++ Include Id
++ title: The Application (string, required)
++ descriptions (object, required)
+  + excellent: description for an excellent application
+  + good: description for an good application
+  + fair: description for an fair application
+  + poor: description for an poor application
++ points: 10.0 (number, required)
++ order: 10 (number, required)
++ rubric_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Student (Base Model)
++ Include Id
++ name: Jane Doe (string, required)
++ studentNumber: 123412141 (number, required)
++ course_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Grade (Base Model)
++ Include Id
++ student_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ rubric_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ feedback: Long text with all the feedback for the grade (string, required)
++ grade: 92.5 (number, required)
+
+### Base Model (object)
++ createdAt: `2019-08-05T08:40:51.620Z` (string, required) - Date resource was create
++ updatedAt: `2019-08-05T08:40:51.620Z` (string, required) - Date resource was last updated
+
+### Id
++ id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string, required) - Unique Identifier (uuid)
+
+
+# Group Course Collection
+
+
+## /courses
+### GET
+Get all the courses
+
++ Response 200 (application/json)
+    + Attributes (array[Course])
+
+### POST
+Create a new course
++ Request (application/json)
+    + Attributes (object)
+        + title: WAI (string, required)
++ Response 201 (application/json)
+    + Attributes (Course)
+    
+
+## /courses/{id}
+
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Course id
+    
+### GET
+Get one course by id
+
++ Response 200
+    + Attributes (Course)
+
+        
+### PUT
+Update a course by id
+
++ Response 202
+    + Attributes (Course)
+        
+        
+### DELETE
+Delete a course
+
++ Response 202
+
+# Group Rubric Collection
+
+
+## /rubrics
+### GET
+Get all the rubrics
+
++ Response 200 (application/json)
+    + Attributes (array[Rubric])
+
+### POST
+Create a new rubric
++ Request (application/json)
+    + Attributes (object)
+        + title: WAI (string, required)
++ Response 201 (application/json)
+    + Attributes (Rubric)
+    
+
+## /rubrics/{id}
+
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Rubric id
+    
+### GET
+Get one rubric by id
+
++ Response 200
+    + Attributes (Rubric)
+
+        
+### PUT
+Update a rubric by id
+
++ Response 202
+    + Attributes (Rubric)
+        
+        
+### DELETE
+Delete a rubric
+
++ Response 202
+
+
+
+        
+# Group Rubric Item Collection
+
+
+## /rubricItems
+### GET
+Get all the rubric items
+
++ Response 200 (application/json)
+    + Attributes (array[Rubric Item])
+
+### POST
+Create a new rubric item
++ Request (application/json)
+    + Attributes (object)
+        + title: WAI (string, required)
++ Response 201 (application/json)
+    + Attributes (Rubric Item)
+    
+
+## /rubricItems/{id}
+
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Rubric Item id
+    
+### GET
+Get one rubric item by id
+
++ Response 200
+    + Attributes (Rubric Item)
+
+        
+### PUT
+Update a rubric item by id
+
++ Response 202
+    + Attributes (Rubric Item)
+        
+        
+### DELETE
+Delete a rubric item
+
++ Response 202
+
+
+        
+# Group Student Collection
+
+
+## /students
+### GET
+Get all the students
+
++ Response 200 (application/json)
+    + Attributes (array[Student])
+
+### POST
+Create a new student
++ Request (application/json)
+    + Attributes (object)
+        + title: WAI (string, required)
++ Response 201 (application/json)
+    + Attributes (Student)
+    
+
+## /students/{id}
+
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Student id
+    
+### GET
+Get one student by id
+
++ Response 200
+    + Attributes (Student)
+
+        
+### PUT
+Update a student by id
+
++ Response 202
+    + Attributes (Student)
+        
+        
+### DELETE
+Delete a student
+
++ Response 202
+
+
+# Group Grade Collection
+
+
+## /grades
+### GET
+Get all the grades
+
++ Response 200 (application/json)
+    + Attributes (array[Grade])
+
+### POST
+Create a new grade
++ Request (application/json)
+    + Attributes (object)
+        + title: WAI (string, required)
++ Response 201 (application/json)
+    + Attributes (Grade)
+    
+
+## /grades/{id}
+
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Grade id
+    
+### GET
+Get one grade by id
+
++ Response 200
+    + Attributes (Grade)
+
+        
+### PUT
+Update a grade by id
+
++ Response 202
+    + Attributes (Grade)
+        
+        
+### DELETE
+Delete a grade
+
++ Response 202
+
+
+# Group Authentication
+
+## /auth/signup
+
+### POST 
+Sign a user up
++ Request (application/json)
+    + Attributes (object)
+        + name: Rachel Higley (string, required)
+        + email: rhigley@fullsail.com (string, required)
+        + username: rhigley (string, required)
+        + password: pwd123 (string, required)
++ Response 200 (application/json)
+    + Attributes (object)
+      + loggedIn: true (boolean, required)
+      + token: JSONWEBTOKEN (string, required)
+
+## /auth/login
+### POST
+Log a user in
++ Request (application/json)
+    + Attributes (object)
+        + username: rhigley (string, required)
+        + password: pwd123 (string, required)
++ Response 200 (application/json)
+    + Attributes (object)
+      + loggedIn: true (boolean, required)
+      + token: JSONWEBTOKEN (string, required)
+    
+## /auth/forgot
+
+### POST
+Send a reset password email when a user forgets their password
++ Request (application/json)
+    + Attributes (object)
+        + email: rhigley@fullsail.com (string, required)
++ Response 200 (application/json)
+    + Attributes (object)
+      + message: 'Check your email for further instructions'
+      
+## /auth/reset
+
+### POST 
+Update the user's password with a new one and log them in
++ Request (application/json)
+    + Attributes (object)
+        + token: RESETTOKEN (string, required)
+        + password: pwd123 (string, required)
+        + rePassword: pwd123 (string, required)
++ Response 200 (application/json)
+    + Attributes (object)
+      + loggedIn: true (boolean, required)
+      + token: JSONWEBTOKEN (string, required)

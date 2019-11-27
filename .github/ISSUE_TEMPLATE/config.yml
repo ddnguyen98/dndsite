@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Examples
+    url: https://github.com/rhigleyfs/capstone-example/issues
+    about: Check out these example issues for inspiration
