@@ -12,7 +12,7 @@
     "install-api": "npm install --prefix api",
     "install-reactjs": "npm install --prefix reactjs",
     "build-reactjs": "nm run build --prefix reactjs",
-    "heroku-postbuild": "concurrently \"npm: install-*\"; \"npm:build-*\""
+    "heroku-postbuild": "concurrently \"npm: install-*\" \"npm:build-*\""
   },
   "repository": {
     "type": "git",
