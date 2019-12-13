@@ -1,0 +1,40 @@
+.home__banner {
+    background: url('../images/Banner_Art.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+
+    padding: 8rem 0 ;
+
+    color: #ffffff;
+
+    box-shadow: inset 0px -200px 87px -16px rgba(0,0,0,0.6);
+}
+
+.home__banner h1 {
+    font-size: 46px;
+}
+
+.home__banner p {
+    font-size: 20px;
+}
+
+.home__cards {
+    padding: 2rem 0;
+}
+
+.home__card {
+    margin: 0 3rem;
+}
+
+.home__button {
+    color:  #ffffff;
+    background-color: #710627;
+    font-family: 'Malgun Gothic';
+}
+
+.home__button:hover {
+    background-color: #90052F;
+}
+

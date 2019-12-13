@@ -1,43 +1,176 @@
 FORMAT: 1A
 
-# Rubrics
+# Three Headed Dragon
 
-Rubrics is an api for managing rubrics and grades.
+Three Headed dragon is an api for managing users and their character data
 
 ## Data Structures
-### Course (Base Model)
+### User (Base Model)
 + Include Id
-+ title: WAI (string, required)
++ email: test@test.com (string, required)
++ username: CoolKid (string, required)
++ password: applessauce (string, required)
 
-### Rubric (Base Model)
-+ Include Id
-+ title: Project Proposal (string, required)
-+ course_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
 
-### Rubric Item (Base Model)
+### Character (Base Model)
 + Include Id
-+ title: The Application (string, required)
-+ descriptions (object, required)
-  + excellent: description for an excellent application
-  + good: description for an good application
-  + fair: description for an fair application
-  + poor: description for an poor application
-+ points: 10.0 (number, required)
-+ order: 10 (number, required)
-+ rubric_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ name: Sir Henry (string, required)
++ player: Dominic (string, required)
++ alignment: Chaotic Neutral (string, required)
++ level: 6 (number, required)
++ class: Fighter (string, required)
++ race: Dog (string, required)
++ campaign: Barktastic (string, required)
++ diety: Korn (string, required)
++ size: Medium (string, required)
++ age: 12 (number, required)
++ gender: Male (string, required)
++ hair: Brown (string, required)
++ height: 6"11 (string, required)
++ gender: Male (string, required)
++ weight: 32 (number, required)
++ eyes: red (string, required)
++ gender: Male (string, required)
++ currency: 32g (string, required)
++ languages: Comon (string, required)
++ description: Male (string, required)
++ personality: Male (string, required)
++ traits: Male (string, required)
++ flaws: Male (string, required)
++ contacts: Male (string, required)
++ enemies: Male (string, required)
++ notes: Male (string, required)
 
-### Student (Base Model)
-+ Include Id
-+ name: Jane Doe (string, required)
-+ studentNumber: 123412141 (number, required)
-+ course_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ stat (array, required)
+  + 11
+  + 11
+  + 11
+  + 11
+  + 11
+  + 11
++ statMod (array, required)
+  + +2
+  + +2
+  + +2
+  + +2
+  + +2
+  + +2
 
-### Grade (Base Model)
++ hp: 122 (number, required)
++ hpWounds: 52 (number, required)
++ hpDice: 3d12 (string, required)
++ dmgReduction: Blunt (string, required)
+
++ ac: 122 (number, required)
++ acArmor: 52 (number, required)
++ acShield: 122 (number, required)
++ acDex: 52 (number, required)
++ acNatural: 122 (number, required)
++ acMisc: 52 (number, required)
++ acTouch: 122 (number, required)
++ acFlat: 52 (number, required)
+
++ init: 1 (number, required)
++ initDex: 2 (number, required)
++ initMisc: 3 (number, required)
+
++ speed: 3 (number, required)
+
++ statMod (array, required)
+  + +2
+  + +2
++ statMod (array, required)
+  + +2
+  + +2
+
++ skillName (array, required)
+  + Riding
+  + Running
++ skillModType (array, required)
+  + Dex
+  + Dex
++ skillTotal (array, required)
+  + 5
+  + 5
++ skillAbilityMod (array, required)
+  + +2
+  + +2
++ skillRank (array, required)
+  + 3
+  + 3
+  
++ savingThrow (array, required)
+  + 5
+  + 5
++ savingThrowBase (array, required)
+  + 3
+  + 3
++ savingThrowMod (array, required)
+  + 2
+  + 2
+  
++ weight (array, required)
+  + 20
+  + 60
+  + 180
+  + 180
+  + 30
+  
++ savingThrow (array, required)
+  + 5
+  + 5
++ savingThrowBase (array, required)
+  + 3
+  + 3
++ savingThrowMod (array, required)
+  + 2
+  + 2
+
++ user_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Spell (Base Model)
 + Include Id
-+ student_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-+ rubric_id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-+ feedback: Long text with all the feedback for the grade (string, required)
-+ grade: 92.5 (number, required)
++ title: shock (string, required)
++ components: V,S (string, required)
++ castingTime: 3 seconds (string, required)
++ range: 2ft (string, required)
++ target: 1 person (string, required)
++ duration: instant (string, required)
++ savingThrow: dex (string, required)
++ description: it hurt! (string, required)
+
++ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+
+### Feat (Base Model)
++ Include Id
++ title: Big boomb (string, required)
++ description: it go explode! (string, required)
+
++ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Weapon (Base Model)
++ Include Id
++ title: Sword of killing (string, required)
++ attackBonus: 3 (number, required)
++ damage: 3d12 (string, required)
++ critical: 17-20 (string, required)
++ range: 3ft (string, required)
++ specialProps: It burns them for 2 damage (string)
++ ammunition: "" (string)
++ weight: 3 (number, required)
++ size: medium (string, required)
++ type: slash (string, required)
+
++ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Item (Base Model)
++ Include Id
++ title: apple (string, required)
++ description: it taste good (string, required)
++ weight: 3 (number, required)
+
++ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
 
 ### Base Model (object)
 + createdAt: `2019-08-05T08:40:51.620Z` (string, required) - Date resource was create
@@ -47,228 +180,206 @@ Rubrics is an api for managing rubrics and grades.
 + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string, required) - Unique Identifier (uuid)
 
 
-# Group Course Collection
+# Group User Collection
 
 
-## /courses
+## /users
 ### GET
-Get all the courses
+Get all the users
 
 + Response 200 (application/json)
-    + Attributes (array[Course])
+    + Attributes (array[User])
 
 ### POST
-Create a new course
+Create a new user
++ Request (application/json)
+    + Attributes (object)
+        + email: test@test.com (string, required)
+        + username: CoolKid (string, required)
+        + password: applessauce (string, required)
++ Response 201 (application/json)
+    + Attributes (User)
+    
+
+## /users/{id}
+
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+    
+### GET
+Get one user by id
+
++ Response 200
+    + Attributes (User)
+
+### PUT
+Update a user by id
+
++ Response 202
+    + Attributes (User)
+
+### DELETE
+Delete a character
+
++ Response 202
+
+# Group Character Collection
+
+## /characters
+### GET
+Get all the characters
+
++ Response 200 (application/json)
+    + Attributes (array[Character])
+
+### POST
+Create a new character
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Course)
+    + Attributes (Character)
     
-
-## /courses/{id}
-
+## /characters/{id}
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Course id
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
     
 ### GET
-Get one course by id
+Get one character by id
 
 + Response 200
-    + Attributes (Course)
+    + Attributes (Character)
 
-        
 ### PUT
-Update a course by id
+Update a character by id
 
 + Response 202
-    + Attributes (Course)
-        
-        
+    + Attributes (Character)
 ### DELETE
-Delete a course
+Delete a character
 
 + Response 202
 
-# Group Rubric Collection
-
-
-## /rubrics
+# Group Feat Collection
+## /feats
 ### GET
-Get all the rubrics
+Get all the feats
 
 + Response 200 (application/json)
-    + Attributes (array[Rubric])
+    + Attributes (array[Feat])
 
 ### POST
-Create a new rubric
+Create a new feat
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Rubric)
+    + Attributes (Feat)
     
-
-## /rubrics/{id}
-
+## /feats/{id}
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Rubric id
-    
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+
 ### GET
-Get one rubric by id
+Get one feat by id
 
 + Response 200
-    + Attributes (Rubric)
+    + Attributes (Feat)
 
-        
 ### PUT
-Update a rubric by id
+Update a Feat
 
 + Response 202
-    + Attributes (Rubric)
-        
-        
+    + Attributes (Feat)
 ### DELETE
-Delete a rubric
+Delete a Feat
 
 + Response 202
 
-
-
-        
-# Group Rubric Item Collection
-
-
-## /rubricItems
+# Group Item Collection
+## /items
 ### GET
-Get all the rubric items
+Get all the items
 
 + Response 200 (application/json)
-    + Attributes (array[Rubric Item])
+    + Attributes (array[Item])
 
 ### POST
-Create a new rubric item
+Create a new character
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Rubric Item)
+    + Attributes (Item)
     
-
-## /rubricItems/{id}
-
+## /items/{id}
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Rubric Item id
-    
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+
 ### GET
-Get one rubric item by id
+Get one item by id
 
 + Response 200
-    + Attributes (Rubric Item)
+    + Attributes (Item)
 
-        
 ### PUT
-Update a rubric item by id
+Update a item by id
 
 + Response 202
-    + Attributes (Rubric Item)
-        
-        
+    + Attributes (Item)
+
 ### DELETE
-Delete a rubric item
+Delete a item
 
 + Response 202
 
 
-        
-# Group Student Collection
-
-
-## /students
+# Group Spell Collection
+## /characters
 ### GET
-Get all the students
+Get all the characters
 
 + Response 200 (application/json)
-    + Attributes (array[Student])
+    + Attributes (array[Character])
 
 ### POST
-Create a new student
+Create a new character
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Student)
+    + Attributes (Character)
     
-
-## /students/{id}
-
+## /characters/{id}
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Student id
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
     
 ### GET
-Get one student by id
+Get one character by id
 
-+ Response 200
-    + Attributes (Student)
-
-        
-### PUT
-Update a student by id
-
-+ Response 202
-    + Attributes (Student)
-        
-        
-### DELETE
-Delete a student
-
-+ Response 202
-
-
-# Group Grade Collection
-
-
-## /grades
+# Group Weapon Collection
+## /characters
 ### GET
-Get all the grades
+Get all the characters
 
 + Response 200 (application/json)
-    + Attributes (array[Grade])
+    + Attributes (array[Character])
 
 ### POST
-Create a new grade
+Create a new character
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Grade)
+    + Attributes (Character)
     
-
-## /grades/{id}
-
+## /characters/{id}
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - Grade id
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
     
 ### GET
-Get one grade by id
-
-+ Response 200
-    + Attributes (Grade)
-
-        
-### PUT
-Update a grade by id
-
-+ Response 202
-    + Attributes (Grade)
-        
-        
-### DELETE
-Delete a grade
-
-+ Response 202
-
-
+Get one character by id
+    
 # Group Authentication
 
 ## /auth/signup
@@ -277,7 +388,6 @@ Delete a grade
 Sign a user up
 + Request (application/json)
     + Attributes (object)
-        + name: Rachel Higley (string, required)
         + email: rhigley@fullsail.com (string, required)
         + username: rhigley (string, required)
         + password: pwd123 (string, required)

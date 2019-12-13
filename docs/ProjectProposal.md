@@ -104,4 +104,3 @@ Pros: Can sign in using google/oauth
 Cons: Template looks a bit bootstrapy, could use more work to make it look unique
 
 Differences: Will try to make my site more visually appealing.
-

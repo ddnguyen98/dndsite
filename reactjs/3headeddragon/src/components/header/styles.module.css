@@ -1,0 +1,56 @@
+
+.nav__logo {
+    background: url("../images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 80px;
+    display: inline-block;
+    vertical-align: middle;
+
+    margin-right: 1rem;
+}
+
+.nav__heading{
+    font-size: 32px;
+    color: #CDD5D1;
+}
+
+.nav__heading:hover{
+    color: #E6E6E6;
+}
+
+.nav__loggedIn{
+    font-size: 18px;
+    color: #CDD5D1;
+    padding: 0;
+    cursor: default;
+}
+
+.nav__navbar1{
+    padding: 0 0 .5rem 0;
+    background: #302E2B;
+}
+
+.nav__navbar1 span{
+    padding: .5rem 1rem;
+}
+
+.nav__navbar2{
+    padding: 0;
+    background: #595959;
+}
+.nav__navbar2 span{  
+    padding: 0;  
+}
+
+.nav__navbar2 a{    
+    color: #CDD5D1;
+    cursor: pointer;
+    padding: .5rem 1rem;
+}
+.nav__navbar2 a:hover{
+    color: #E6E6E6;
+    text-decoration: none;
+}
+

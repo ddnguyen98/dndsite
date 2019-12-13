@@ -1,0 +1,11 @@
+span, a, h1, h2 {
+    font-family: 'BIZ UDGothic';
+}
+
+p {
+    font-family: 'Malgun Gothic';
+}
+
+.body {
+    background-color: #FBF5F3;
+}
