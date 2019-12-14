@@ -4,10 +4,10 @@ const path = require('path');
 const app = express();
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-  app.use(express.static(path.join(__dirname, '../../3headeddragon/build')));
+  app.use(express.static(path.join(__dirname, '../../reactjs/build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../3headeddragon/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../reactjs/build', 'index.html'));
   });
 }
 
