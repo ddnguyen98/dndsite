@@ -8,6 +8,7 @@ import Home from './components/home';
 import Login from './components/login';
 import Register from './components/register';
 import Sheets from './components/sheets';
+import Character from './components/character';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/sheets" exact component={Sheets} />
+          <Route path="/character" exact component={Character} />
         </main>
       </Router>
     </div>
