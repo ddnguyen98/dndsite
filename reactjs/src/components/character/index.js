@@ -8,19 +8,25 @@ import {
   Input,
   Col,
   Row,
+  Table,
+  Nav,
+  NavLink,
+  Card,
+  CardBody,
 } from 'reactstrap';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { FaEye } from 'react-icons/fa';
+import { Tab, Tabs, TabPanel } from 'react-tabs';
+
+import { FaEye, FaTrash } from 'react-icons/fa';
 import styles from './styles.module.css';
 
-class index extends Component {
+class Character extends Component {
   render() {
     return (
       <div>
         <Container className={styles.form}>
           <Form>
             {/* Header for saving */}
-            <div>
+            <div className={styles.heading}>
               <Button>Save</Button>
               <FaEye />
             </div>
@@ -171,8 +177,8 @@ class index extends Component {
                   </Col>
                 </Row>
                 <Row xs="3">
-                  <Col>
-                    <div>
+                  <Col className={styles.collum}>
+                    <div className={styles.borders}>
                       {/* HP */}
                       <div>
                         <h2>Hit Points</h2>
@@ -253,10 +259,11 @@ class index extends Component {
                       </div>
                     </div>
                   </Col>
-                  <Col>
-                    <div>
+                  <Col className={styles.collum}>
+                    <div className={styles.borders}>
                       {/* Armor */}
                       <div>
+                        <h2>Armor</h2>
                         <div>
                           <FormGroup>
                             <Label for="input">Input</Label>
@@ -412,15 +419,484 @@ class index extends Component {
                       </div>
                     </div>
                   </Col>
-                  <Col>
-                    <div>
+                  <Col className={styles.collum}>
+                    <div className={styles.borders}>
                       {/* Attack Bonus */}
-                      <div>Content</div>
-                      {/* weight */}
-                      <div>Content</div>
+                      <div>
+                        <h2>Attack Bonuses</h2>
+                        <div>
+                          <div>
+                            <FormGroup>
+                              <Label for="input">Input</Label>
+                              <Input
+                                name="email"
+                                id="input"
+                                placeholder="with a placeholder"
+                              />
+                            </FormGroup>
+                            <div>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Weight */}
+                      <div>
+                        <h2>Weight</h2>
+                        <div>
+                          <FormGroup>
+                            <Label for="input">Input</Label>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="input">Input</Label>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="input">Input</Label>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="input">Input</Label>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="input">Input</Label>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </FormGroup>
+                        </div>
+                      </div>
                     </div>
                   </Col>
                 </Row>
+                {/* Skills */}
+                <Row xs="1">
+                  <div>
+                    <div>Skills</div>
+                    <Table striped>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Key Atribute</th>
+                          <th>Total</th>
+                          <th>Ability Mod</th>
+                          <th>Rank</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </td>
+                          <td>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </td>
+                          <td>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </td>
+                          <td>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </td>
+                          <td>
+                            <Input
+                              name="email"
+                              id="input"
+                              placeholder="with a placeholder"
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </div>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Tabs>
+                  <Nav tabs>
+                    <Tab>
+                      <NavLink href="#">Character Details</NavLink>
+                    </Tab>
+                    <Tab>
+                      <NavLink href="#">Feats/Abilities</NavLink>
+                    </Tab>
+                    <Tab>
+                      <NavLink href="#">Items</NavLink>
+                    </Tab>
+                    <Tab>
+                      <NavLink href="#">Spells</NavLink>
+                    </Tab>
+                    <Tab>
+                      <NavLink href="#">Weapons</NavLink>
+                    </Tab>
+                  </Nav>
+                  {/* Character Details */}
+                  <TabPanel>
+                    <div>
+                      <Row xs="2">
+                        <Col>
+                          <Row xs="2">
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row xs="1">
+                            <Col>
+                              <Input
+                                type="textarea"
+                                name="email"
+                                id="input"
+                                placeholder="with a placeholder"
+                              />
+                            </Col>
+                          </Row>
+                        </Col>
+                        <Col>
+                          <Row xs="2">
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </div>
+                  </TabPanel>
+                  {/* Feats/Abilities */}
+                  <TabPanel>
+                    <div>
+                      <div>
+                        <Button>Add</Button>
+                      </div>
+                      <Row xs="3">
+                        <Col>
+                          <Card>
+                            <FaTrash />
+                            <FormGroup>
+                              <Label for="input">Input</Label>
+                              <Input
+                                name="email"
+                                id="input"
+                                placeholder="with a placeholder"
+                              />
+                            </FormGroup>
+                            <CardBody>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </div>
+                  </TabPanel>
+                  {/* Items */}
+                  <TabPanel>
+                    <div>
+                      <Button>Add</Button>
+                    </div>
+                    <div>
+                      <Table striped>
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Weight</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Input
+                                name="email"
+                                id="input"
+                                placeholder="with a placeholder"
+                              />
+                            </td>
+                            <td>
+                              <Input
+                                name="email"
+                                id="input"
+                                placeholder="with a placeholder"
+                              />
+                            </td>
+                            <td>
+                              <Input
+                                name="email"
+                                id="input"
+                                placeholder="with a placeholder"
+                              />
+                            </td>
+                            <FaTrash />
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </div>
+                  </TabPanel>
+                  {/* Spells */}
+                  <TabPanel>
+                    <div>
+                      <div>
+                        <Button>Add</Button>
+                      </div>
+                      <Row xs="3">
+                        <Col>
+                          <Card>
+                            <CardBody>
+                              <FaTrash />
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                              <FormGroup>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </div>{' '}
+                  </TabPanel>
+                  {/* Weapons */}
+                  <TabPanel>
+                    <div>Any content 5</div>
+                  </TabPanel>
+                </Tabs>
               </Col>
             </Row>
           </Form>
@@ -430,4 +906,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default Character;
