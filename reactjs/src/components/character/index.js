@@ -562,6 +562,7 @@ class Character extends Component {
                 </Row>
               </Col>
             </Row>
+            {/* Tabs */}
             <Row>
               <Col>
                 <Tabs>
@@ -894,7 +895,122 @@ class Character extends Component {
                   </TabPanel>
                   {/* Weapons */}
                   <TabPanel>
-                    <div>Any content 5</div>
+                    <div>
+                      <div>
+                        <Button>Add</Button>
+                      </div>
+                      <Row xs="1">
+                        <Col>
+                          <div>
+                            <Row xs="6">
+                              <Col>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                              </Col>
+                              <Col>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                              </Col>
+                              <Col>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                              </Col>
+                              <Col>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                              </Col>
+                              <Col>
+                                <FormGroup>
+                                  <Label for="input">Input</Label>
+                                  <Input
+                                    name="email"
+                                    id="input"
+                                    placeholder="with a placeholder"
+                                  />
+                                </FormGroup>
+                              </Col>
+                              <FaTrash />
+                            </Row>
+                            <Row xs="3">
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                              <FormGroup>
+                                <Label for="input">Input</Label>
+                                <Input
+                                  type="textarea"
+                                  name="email"
+                                  id="input"
+                                  placeholder="with a placeholder"
+                                />
+                              </FormGroup>
+                              <Row xs="1">
+                                <Col>
+                                  <FormGroup>
+                                    <Label for="input">Input</Label>
+                                    <Input
+                                      name="email"
+                                      id="input"
+                                      placeholder="with a placeholder"
+                                    />
+                                  </FormGroup>
+                                </Col>
+                                <Col>
+                                  <FormGroup>
+                                    <Label for="input">Input</Label>
+                                    <Input
+                                      name="email"
+                                      id="input"
+                                      placeholder="with a placeholder"
+                                    />
+                                  </FormGroup>
+                                </Col>
+                                <Col>
+                                  <FormGroup>
+                                    <Label for="input">Input</Label>
+                                    <Input
+                                      name="email"
+                                      id="input"
+                                      placeholder="with a placeholder"
+                                    />
+                                  </FormGroup>
+                                </Col>
+                              </Row>
+                            </Row>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
                   </TabPanel>
                 </Tabs>
               </Col>
