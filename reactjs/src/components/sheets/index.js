@@ -26,7 +26,7 @@ class Sheets extends Component {
           <Row xs="3" className={styles.container}>
             <Col>
               <Card className={styles.card}>
-                <Link to="/">
+                <Link to="/character">
                   <FaTrash className={styles.icon} />
                   <CardImg
                     top
