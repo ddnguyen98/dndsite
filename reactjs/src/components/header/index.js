@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 
 class Header extends Component {
   render() {
+    const { loggedIn } = this.props;
     return (
       <div>
         <Navbar className={styles.nav__navbar1} expand="md">
@@ -20,9 +21,13 @@ class Header extends Component {
               <div className={styles.nav__logo} />
               Three Headed Dragon
             </NavbarBrand>
-            <NavbarText className={styles.nav__loggedIn}>
-              User Logged In
-            </NavbarText>
+            {loggedIn && (
+              <>
+                <NavbarText className={styles.nav__loggedIn}>
+                  Chadster
+                </NavbarText>
+              </>
+            )}
           </Container>
         </Navbar>
         <Navbar className={styles.nav__navbar2} expand="md">
@@ -35,17 +40,32 @@ class Header extends Component {
                 <Link to="/sheets">Sheets</Link>
               </NavItem>
             </Nav>
-            <Link to="/register">
-              <NavbarText>Register</NavbarText>
-            </Link>
-            <Link to="/login">
-              <NavbarText>Login</NavbarText>
-            </Link>
+            {loggedIn && (
+              <>
+                <Link to="/">
+                  <NavbarText>Logout</NavbarText>
+                </Link>
+              </>
+            )}
+            {!loggedIn && (
+              <>
+                <Link to="/register">
+                  <NavbarText>Register</NavbarText>
+                </Link>
+                <Link to="/login">
+                  <NavbarText>Login</NavbarText>
+                </Link>
+              </>
+            )}
           </Container>
         </Navbar>
       </div>
     );
   }
 }
+
+Header.defaultProps = {
+  loggedIn: true,
+};
 
 export default Header;

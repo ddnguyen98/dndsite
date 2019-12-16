@@ -16,6 +16,7 @@ import styles from './styles.module.css';
 
 class Sheets extends Component {
   render() {
+    const { characters } = this.props;
     return (
       <div className={styles.sheets}>
         <Container>
@@ -24,87 +25,49 @@ class Sheets extends Component {
             <Button>Add</Button>
           </div>
           <Row xs="3" className={styles.container}>
-            <Col>
-              <Card className={styles.card}>
-                <Link to="/character">
-                  <FaTrash className={styles.icon} />
-                  <CardImg
-                    top
-                    src="henry.jpg"
-                    alt="Character Image"
-                    height="280px"
-                  />
-                  <CardBody>
-                    <h2>
-                      <CardTitle>Sir Henry</CardTitle>
-                    </h2>
-                    <CardSubtitle>Dungeons Of Dread</CardSubtitle>
-                  </CardBody>
-                </Link>
-              </Card>
-            </Col>
-            <Col>
-              <Card className={styles.card}>
-                <Link to="/">
-                  <FaTrash className={styles.icon} />
-                  <CardImg
-                    top
-                    src="henry.jpg"
-                    alt="Character Image"
-                    height="280px"
-                  />
-                  <CardBody>
-                    <h2>
-                      <CardTitle>Sir Henry</CardTitle>
-                    </h2>
-                    <CardSubtitle>Dungeons Of Dread</CardSubtitle>
-                  </CardBody>
-                </Link>
-              </Card>
-            </Col>
-            <Col>
-              <Card className={styles.card}>
-                <Link to="/">
-                  <FaTrash className={styles.icon} />
-                  <CardImg
-                    top
-                    src="henry.jpg"
-                    alt="Character Image"
-                    height="280px"
-                  />
-                  <CardBody>
-                    <h2>
-                      <CardTitle>Sir Henry</CardTitle>
-                    </h2>
-                    <CardSubtitle>Dungeons Of Dread</CardSubtitle>
-                  </CardBody>
-                </Link>
-              </Card>
-            </Col>
-            <Col>
-              <Card className={styles.card}>
-                <Link to="/">
-                  <FaTrash className={styles.icon} />
-                  <CardImg
-                    top
-                    src="henry.jpg"
-                    alt="Character Image"
-                    height="280px"
-                  />
-                  <CardBody>
-                    <h2>
-                      <CardTitle>Sir Henry</CardTitle>
-                    </h2>
-                    <CardSubtitle>Dungeons Of Dread</CardSubtitle>
-                  </CardBody>
-                </Link>
-              </Card>
-            </Col>
+            {characters.map(character => (
+              <Col>
+                <Card className={styles.card}>
+                  <Link to="/character">
+                    <FaTrash className={styles.icon} />
+                    <CardImg
+                      top
+                      src="henry.jpg"
+                      alt="Character Image"
+                      height="280px"
+                    />
+                    <CardBody>
+                      <h2>
+                        <CardTitle>{character.name}</CardTitle>
+                      </h2>
+                      <CardSubtitle>{character.campaign}</CardSubtitle>
+                    </CardBody>
+                  </Link>
+                </Card>
+              </Col>
+            ))}
           </Row>
         </Container>
       </div>
     );
   }
 }
+
+Sheets.defaultProps = {
+  characters: [
+    {
+      name: 'Sir Henry',
+      campaign: 'Arfs alot',
+    },
+    {
+      name: 'Sir Bob',
+      campaign: 'Arfs alot',
+    },
+    {
+      name: 'Sir James',
+      campaign: 'Arfs alot',
+    },
+  ],
+};
 
 export default Sheets;
