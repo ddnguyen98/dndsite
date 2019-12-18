@@ -4,6 +4,9 @@ import {
   REQ_SHEETS_SUCCESS,
   REQ_SHEETS_ERROR,
   REQ_SHEETS_PENDING,
+  ADD_SHEET_PENDING,
+  ADD_SHEET_SUCCESS,
+  ADD_SHEET_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -14,7 +17,7 @@ const initialState = {
   error: null,
 };
 
-const sheetPending = state => {
+const sheetsPending = state => {
   return {
     ...state,
     isLoading: true,
@@ -22,7 +25,7 @@ const sheetPending = state => {
   };
 };
 
-const sheetSuccess = (state, action) => {
+const sheetsSuccess = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -48,7 +51,7 @@ const sheetSuccess = (state, action) => {
   };
 };
 
-const sheetError = (state, action) => {
+const sheetsError = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -56,8 +59,58 @@ const sheetError = (state, action) => {
   };
 };
 
+function sheetPending(state, action) {
+  // set loading state and clear error
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        ...state.byId[action.payload.id],
+        isLoading: true,
+        error: null,
+      },
+    },
+  };
+}
+
+function sheetSuccess(state, action) {
+  // clear loading and error, update cache time, add sheets
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
+function sheetError(state, action) {
+  // clear loading and set error
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        ...state.byId[action.payload.id],
+        isLoading: false,
+        error: action.err,
+      },
+    },
+  };
+}
+
 export default createReducer(initialState, {
-  [REQ_SHEETS_PENDING]: sheetPending,
-  [REQ_SHEETS_SUCCESS]: sheetSuccess,
-  [REQ_SHEETS_ERROR]: sheetError,
+  [REQ_SHEETS_PENDING]: sheetsPending,
+  [REQ_SHEETS_SUCCESS]: sheetsSuccess,
+  [REQ_SHEETS_ERROR]: sheetsError,
+  [ADD_SHEET_PENDING]: sheetPending,
+  [ADD_SHEET_SUCCESS]: sheetSuccess,
+  [ADD_SHEET_ERROR]: sheetError,
 });

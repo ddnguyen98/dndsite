@@ -1,7 +1,11 @@
+import uuid from 'uuid/v1';
 import {
   REQ_SHEETS_PENDING,
   REQ_SHEETS_SUCCESS,
   REQ_SHEETS_ERROR,
+  ADD_SHEET_PENDING,
+  ADD_SHEET_SUCCESS,
+  ADD_SHEET_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -21,4 +25,11 @@ export const fetchSheets = () => ({
   },
 });
 
-export const fetchAwesome = () => ({});
+export const createSheet = sheet => {
+  const id = uuid();
+  return {
+    types: [ADD_SHEET_PENDING, ADD_SHEET_SUCCESS, ADD_SHEET_ERROR],
+    callAPI: () => API.post('/characters', { id, ...sheet }),
+    payload: { id },
+  };
+};
