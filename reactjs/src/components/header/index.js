@@ -7,7 +7,9 @@ import {
   NavbarText,
   Container,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import styles from './styles.module.css';
 
 class Header extends Component {
@@ -63,6 +65,10 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  loggedIn: PropTypes.bool,
+};
 
 Header.defaultProps = {
   loggedIn: true,

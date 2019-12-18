@@ -11,12 +11,20 @@ import {
   CardSubtitle,
   Button,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
+import container from './container';
+
 import styles from './styles.module.css';
 
 class Sheets extends Component {
+  componentDidMount() {
+    const { fetchSheets } = this.props;
+    fetchSheets();
+  }
+
   render() {
-    const { characters } = this.props;
+    const { sheets } = this.props;
     return (
       <div className={styles.sheets}>
         <Container>
@@ -25,22 +33,22 @@ class Sheets extends Component {
             <Button>Add</Button>
           </div>
           <Row xs="3" className={styles.container}>
-            {characters.map(character => (
+            {sheets.map(sheet => (
               <Col>
                 <Card className={styles.card}>
-                  <Link to="/character">
+                  <Link to={`/character/${sheet.id}`}>
                     <FaTrash className={styles.icon} />
                     <CardImg
                       top
-                      src="henry.jpg"
+                      src={sheet.image}
                       alt="Character Image"
                       height="280px"
                     />
                     <CardBody>
                       <h2>
-                        <CardTitle>{character.name}</CardTitle>
+                        <CardTitle>{sheet.name}</CardTitle>
                       </h2>
-                      <CardSubtitle>{character.campaign}</CardSubtitle>
+                      <CardSubtitle>{sheet.campaign}</CardSubtitle>
                     </CardBody>
                   </Link>
                 </Card>
@@ -53,21 +61,13 @@ class Sheets extends Component {
   }
 }
 
-Sheets.defaultProps = {
-  characters: [
-    {
-      name: 'Sir Henry',
-      campaign: 'Arfs alot',
-    },
-    {
-      name: 'Sir Bob',
-      campaign: 'Arfs alot',
-    },
-    {
-      name: 'Sir James',
-      campaign: 'Arfs alot',
-    },
-  ],
+Sheets.propTypes = {
+  sheets: PropTypes.arrayOf(PropTypes.object),
+  fetchSheets: PropTypes.func.isRequired,
 };
 
-export default Sheets;
+Sheets.defaultProps = {
+  sheets: [],
+};
+
+export default container(Sheets);

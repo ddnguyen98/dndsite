@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import { Tab, Tabs, TabPanel } from 'react-tabs';
 
-import { FaEye, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import styles from './styles.module.css';
 
 class Character extends Component {
@@ -41,11 +41,10 @@ class Character extends Component {
             {/* Header for saving */}
             <div className={styles.heading}>
               <Button>Save</Button>
-              <FaEye />
             </div>
             <Row>
               {/* Character Image + Basic User Details */}
-              <Col xs="3">
+              <Col xs="3" className={styles.inputBasic}>
                 <img
                   src="henry.jpg"
                   alt="character"
@@ -53,61 +52,61 @@ class Character extends Component {
                   height="250"
                 />
                 <FormGroup>
-                  <Label for="name">Name</Label>
                   <Input name="name" id="name" value={characterDetails.name} />
+                  <Label for="name">Name</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="input">Level</Label>
                   <Input
                     name="level"
                     id="level"
                     value={characterDetails.level}
                   />
+                  <Label for="input">Level</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="class">Class</Label>
                   <Input
                     name="class"
                     id="class"
                     value={characterDetails.class}
                   />
+                  <Label for="class">Class</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="race">Race</Label>
                   <Input name="race" id="race" value={characterDetails.race} />
+                  <Label for="race">Race</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="alignment">Alignment</Label>
                   <Input
                     name="alignment"
                     id="alignment"
                     value={characterDetails.alignment}
                   />
+                  <Label for="alignment">Alignment</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="size">Size</Label>
                   <Input name="size" id="size" value={characterDetails.size} />
+                  <Label for="size">Size</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="campaign">Campaign</Label>
                   <Input
                     name="campaign"
                     id="campaign"
                     value={characterDetails.campaign}
                   />
+                  <Label for="campaign">Campaign</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="player">Player</Label>
                   <Input
                     name="player"
                     id="player"
                     value={characterDetails.player}
                   />
+                  <Label for="player">Player</Label>
                 </FormGroup>
               </Col>
               {/* User Stats */}
               <Col>
-                <Row xs="6">
+                <Row xs="7" className={styles.stats}>
                   <Col>
                     <FormGroup>
                       <Label for="strength">Strength</Label>
