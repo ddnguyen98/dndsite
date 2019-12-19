@@ -1,42 +1,33 @@
 import uuid from 'uuid/v1';
 import {
-  REQ_SKILLS_PENDING,
-  REQ_SKILLS_SUCCESS,
-  REQ_SKILLS_ERROR,
-  ADD_SKILL_PENDING,
-  ADD_SKILL_SUCCESS,
-  ADD_SKILL_ERROR,
-  REQ_SKILL_PENDING,
-  REQ_SKILL_SUCCESS,
-  REQ_SKILL_ERROR,
-  UPDATE_SKILL_PENDING,
-  UPDATE_SKILL_SUCCESS,
-  UPDATE_SKILL_ERROR,
-  DELETE_SKILL_PENDING,
-  DELETE_SKILL_SUCCESS,
-  DELETE_SKILL_ERROR,
+  REQ_FEATS_PENDING,
+  REQ_FEATS_SUCCESS,
+  REQ_FEATS_ERROR,
+  ADD_FEAT_PENDING,
+  ADD_FEAT_SUCCESS,
+  ADD_FEAT_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
 
 const CACHE_TIME = 1000 * 60 * 5;
 
-export const fetchSkills = () => ({
-  types: [REQ_SKILLS_PENDING, REQ_SKILLS_SUCCESS, REQ_SKILLS_ERROR],
-  callAPI: () => API.get('/skills'),
+export const fetchFeats = () => ({
+  types: [REQ_FEATS_PENDING, REQ_FEATS_SUCCESS, REQ_FEATS_ERROR],
+  callAPI: () => API.get('/feats'),
   shouldCallAPI: state => {
-    const { loadedAt, isLoading } = state.skills;
+    const { loadedAt, isLoading } = state.feats;
     if (isLoading) return false;
     const isCached = Date.now() - loadedAt < CACHE_TIME;
     return !loadedAt || !isCached;
   },
 });
 
-export const createSkill = skill => {
+export const createFeat = feat => {
   const id = uuid();
   return {
-    types: [ADD_SKILL_PENDING, ADD_SKILL_SUCCESS, ADD_SKILL_ERROR],
-    callAPI: () => API.post('/skills', { id, ...skill }),
+    types: [ADD_FEAT_PENDING, ADD_FEAT_SUCCESS, ADD_FEAT_ERROR],
+    callAPI: () => API.post('/feats', { id, ...feat }),
     payload: { id },
   };
 };

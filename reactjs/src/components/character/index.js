@@ -46,10 +46,10 @@ class Character extends Component {
   }
 
   componentDidMount() {
-    const { fetchSkills } = this.props;
+    const { fetchSkills, fetchFeats } = this.props;
     this.loadData();
     fetchSkills();
-    console.log(this.props);
+    fetchFeats();
   }
 
   handleInputChange = event => {
@@ -474,6 +474,12 @@ class Character extends Component {
     event.preventDefault();
     const { createSkill } = this.props;
     createSkill();
+  };
+
+  addFeat = event => {
+    event.preventDefault();
+    const { createFeat } = this.props;
+    createFeat();
   };
 
   render() {
@@ -1354,7 +1360,7 @@ class Character extends Component {
                   <TabPanel>
                     <div>
                       <div>
-                        <Button>Add</Button>
+                        <Button onClick={this.addFeat}>Add</Button>
                       </div>
                       <Row xs="3">
                         {feats.map(feat => (
@@ -2013,6 +2019,8 @@ Character.propTypes = {
   updateSheet: PropTypes.func.isRequired,
   fetchSkills: PropTypes.func.isRequired,
   createSkill: PropTypes.func.isRequired,
+  fetchFeats: PropTypes.func.isRequired,
+  createFeat: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {

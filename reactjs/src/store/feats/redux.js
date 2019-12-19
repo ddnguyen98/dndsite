@@ -1,21 +1,12 @@
 import createReducer from '../utils/createReducer';
 
 import {
-  REQ_SKILLS_PENDING,
-  REQ_SKILLS_SUCCESS,
-  REQ_SKILLS_ERROR,
-  ADD_SKILL_PENDING,
-  ADD_SKILL_SUCCESS,
-  ADD_SKILL_ERROR,
-  REQ_SKILL_PENDING,
-  REQ_SKILL_SUCCESS,
-  REQ_SKILL_ERROR,
-  UPDATE_SKILL_PENDING,
-  UPDATE_SKILL_SUCCESS,
-  UPDATE_SKILL_ERROR,
-  DELETE_SKILL_PENDING,
-  DELETE_SKILL_SUCCESS,
-  DELETE_SKILL_ERROR,
+  REQ_FEATS_PENDING,
+  REQ_FEATS_SUCCESS,
+  REQ_FEATS_ERROR,
+  ADD_FEAT_PENDING,
+  ADD_FEAT_SUCCESS,
+  ADD_FEAT_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -26,7 +17,7 @@ const initialState = {
   error: null,
 };
 
-const skillsPending = state => {
+const featsPending = state => {
   return {
     ...state,
     isLoading: true,
@@ -34,7 +25,7 @@ const skillsPending = state => {
   };
 };
 
-const skillsSuccess = (state, action) => {
+const featsSuccess = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -42,11 +33,11 @@ const skillsSuccess = (state, action) => {
     loadedAt: Date.now(),
     byId: {
       ...state.byId,
-      ...action.data.reduce((obj, skill) => {
+      ...action.data.reduce((obj, feat) => {
         return {
           ...obj,
-          [skill.id]: {
-            data: skill,
+          [feat.id]: {
+            data: feat,
             isLoading: false,
             loadedAt: Date.now(),
             error: null,
@@ -55,12 +46,12 @@ const skillsSuccess = (state, action) => {
       }, {}),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(skill => skill.id)]),
+      ...new Set([...state.allIds, ...action.data.map(feat => feat.id)]),
     ],
   };
 };
 
-const skillsError = (state, action) => {
+const featsError = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -68,7 +59,7 @@ const skillsError = (state, action) => {
   };
 };
 
-function skillPending(state, action) {
+function featPending(state, action) {
   // set loading state and clear error
   return {
     ...state,
@@ -83,8 +74,8 @@ function skillPending(state, action) {
   };
 }
 
-function skillSuccess(state, action) {
-  // clear loading and error, update cache time, add skills
+function featSuccess(state, action) {
+  // clear loading and error, update cache time, add feats
   return {
     ...state,
     byId: {
@@ -100,7 +91,7 @@ function skillSuccess(state, action) {
   };
 }
 
-function skillError(state, action) {
+function featError(state, action) {
   // clear loading and set error
   return {
     ...state,
@@ -116,19 +107,10 @@ function skillError(state, action) {
 }
 
 export default createReducer(initialState, {
-  [REQ_SKILLS_PENDING]: skillsPending,
-  [REQ_SKILLS_SUCCESS]: skillsSuccess,
-  [REQ_SKILLS_ERROR]: skillsError,
-  [ADD_SKILL_PENDING]: skillPending,
-  [ADD_SKILL_SUCCESS]: skillSuccess,
-  [ADD_SKILL_ERROR]: skillError,
-  [REQ_SKILL_PENDING]: skillPending,
-  [REQ_SKILL_SUCCESS]: skillSuccess,
-  [REQ_SKILL_ERROR]: skillError,
-  [UPDATE_SKILL_PENDING]: skillPending,
-  [UPDATE_SKILL_SUCCESS]: skillSuccess,
-  [UPDATE_SKILL_ERROR]: skillError,
-  [DELETE_SKILL_PENDING]: skillPending,
-  [DELETE_SKILL_SUCCESS]: skillSuccess,
-  [DELETE_SKILL_ERROR]: skillError,
+  [REQ_FEATS_PENDING]: featsPending,
+  [REQ_FEATS_SUCCESS]: featsSuccess,
+  [REQ_FEATS_ERROR]: featsError,
+  [ADD_FEAT_PENDING]: featPending,
+  [ADD_FEAT_SUCCESS]: featSuccess,
+  [ADD_FEAT_ERROR]: featError,
 });

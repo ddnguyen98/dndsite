@@ -5,6 +5,7 @@ import {
   deleteSheet,
 } from '../../store/sheets/actions';
 import { fetchSkills, createSkill } from '../../store/skills/actions';
+import { fetchFeats, createFeat } from '../../store/feats/actions';
 
 function mapStateToProps(state, props) {
   const {
@@ -23,10 +24,15 @@ function mapStateToProps(state, props) {
 
   const {
     skills: { byId, allIds },
+    feats: { byId: byId1, allIds: allIds1 },
   } = state;
-  // turn the array of ids into an array of objects
 
-  return { sheet, skills: allIds.map(id1 => byId[id1].data) };
+  console.log(state);
+  return {
+    sheet,
+    skills: allIds.map(id1 => byId[id1].data),
+    feats: allIds1.map(id2 => byId1[id2].data),
+  };
 }
 
 // set the actions we need in this component
@@ -36,6 +42,8 @@ const mapDispatchToProps = {
   deleteSheet,
   fetchSkills,
   createSkill,
+  fetchFeats,
+  createFeat,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps);
