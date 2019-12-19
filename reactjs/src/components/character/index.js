@@ -46,10 +46,11 @@ class Character extends Component {
   }
 
   componentDidMount() {
-    const { fetchSkills, fetchFeats } = this.props;
+    const { fetchSkills, fetchFeats, fetchItems } = this.props;
     this.loadData();
     fetchSkills();
     fetchFeats();
+    fetchItems();
   }
 
   handleInputChange = event => {
@@ -480,6 +481,12 @@ class Character extends Component {
     event.preventDefault();
     const { createFeat } = this.props;
     createFeat();
+  };
+
+  addItem = event => {
+    event.preventDefault();
+    const { createItem } = this.props;
+    createItem();
   };
 
   render() {
@@ -1396,7 +1403,7 @@ class Character extends Component {
                   {/* Items */}
                   <TabPanel>
                     <div>
-                      <Button>Add</Button>
+                      <Button onClick={this.addItem}>Add</Button>
                     </div>
                     <div>
                       <Table striped>
@@ -1409,7 +1416,7 @@ class Character extends Component {
                         </thead>
                         <tbody>
                           {items.map(item => (
-                            <tr>
+                            <tr id={item.id}>
                               <td>
                                 <Input
                                   name="itemName"
@@ -2021,6 +2028,8 @@ Character.propTypes = {
   createSkill: PropTypes.func.isRequired,
   fetchFeats: PropTypes.func.isRequired,
   createFeat: PropTypes.func.isRequired,
+  fetchItems: PropTypes.func.isRequired,
+  createItem: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {
@@ -2048,26 +2057,6 @@ Character.defaultProps = {
   ],
 
   items: [
-    {
-      itemName: 'ageelity',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-    {
-      itemName: 'Amazing Saw',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-    {
-      itemName: 'One Punch',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-    {
-      itemName: 'Die',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
   ],
 
   characterSpells: [

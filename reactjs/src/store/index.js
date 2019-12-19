@@ -7,11 +7,13 @@ import callAPI from './utils/callAPIMiddleware';
 import sheets from './sheets/redux';
 import skills from './skills/redux';
 import feats from './feats/redux';
+import items from './items/redux';
 
 const rootReducer = combineReducers({
   sheets,
   skills,
   feats,
+  items,
 });
 
 const middleware = applyMiddleware(thunkMiddleware, callAPI, createLogger());
