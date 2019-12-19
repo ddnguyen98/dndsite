@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   Container,
   Button,
@@ -15,11 +16,27 @@ import {
   CardBody,
 } from 'reactstrap';
 import { Tab, Tabs, TabPanel } from 'react-tabs';
-
+import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
+
+import container from './container';
+
 import styles from './styles.module.css';
 
 class Character extends Component {
+  componentDidMount() {
+    this.loadData();
+  }
+
+  loadData = async () => {
+    const { match: { params: { id } }, fetchSheet } = this.props;
+    if (!id) return;
+    await fetchSheet(id);
+    const { sheet } = this.props;
+    this.setState({ ...sheet });
+    console.log(state);
+  };
+
   render() {
     const {
       characterDetails,
@@ -46,7 +63,7 @@ class Character extends Component {
               {/* Character Image + Basic User Details */}
               <Col xs="3" className={styles.inputBasic}>
                 <img
-                  src="henry.jpg"
+                  src={`../${characterDetails.image}`}
                   alt="character"
                   width="100%"
                   height="250"
@@ -1454,6 +1471,10 @@ class Character extends Component {
   }
 }
 
+Character.propTypes = {
+  fetchSheet: PropTypes.func.isRequired,
+};
+
 Character.defaultProps = {
   characterDetails: {
     name: 'Sir Henry',
@@ -1480,6 +1501,7 @@ Character.defaultProps = {
     flaws: 'Real stinky',
     contacts: 'Sir dog line',
     enemies: 'cats',
+    image: 'henry.jpg',
   },
 
   feats: [
@@ -1664,4 +1686,4 @@ Character.defaultProps = {
   ],
 };
 
-export default Character;
+export default container(Character);

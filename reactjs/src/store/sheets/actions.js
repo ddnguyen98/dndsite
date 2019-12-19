@@ -6,6 +6,9 @@ import {
   ADD_SHEET_PENDING,
   ADD_SHEET_SUCCESS,
   ADD_SHEET_ERROR,
+  REQ_SHEET_PENDING,
+  REQ_SHEET_SUCCESS,
+  REQ_SHEET_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -17,10 +20,8 @@ export const fetchSheets = () => ({
   callAPI: () => API.get('/characters'),
   shouldCallAPI: state => {
     const { loadedAt, isLoading } = state.sheets;
-    // if sheets are currently loading don't call
     if (isLoading) return false;
     const isCached = Date.now() - loadedAt < CACHE_TIME;
-    // if we don't have the item or it's beyond the cache timeout make the api call
     return !loadedAt || !isCached;
   },
 });
@@ -33,3 +34,16 @@ export const createSheet = sheet => {
     payload: { id },
   };
 };
+
+export const fetchSheet = id => ({
+  types: [REQ_SHEET_PENDING, REQ_SHEET_SUCCESS, REQ_SHEET_ERROR],
+  callAPI: () => API.get(`/characters/${id}`),
+  shouldCallAPI: state => {
+    const sheet = state.sheets.byId[id] || {};
+    const { loadedAt, isLoading } = sheet;
+    if (!sheet || isLoading) return false;
+    const isCached = Date.now() - loadedAt < CACHE_TIME;
+    return !loadedAt || !isCached;
+  },
+  payload: { id },
+});
