@@ -33,10 +33,10 @@ class Character extends Component {
         attackTotal: [],
         attackBase: [],
         attackMod: [],
+        attackMisc: [],
         spellsKnown: [],
         spellsPerDay: [],
         spellDC: [],
-        attackMisc: [],
         savingThrow: [],
         savingThrowBase: [],
         savingThrowMod: [],
@@ -182,7 +182,264 @@ class Character extends Component {
         this.setState({ inputs: { ...inputs, savingThrowMod: array } });
         break;
       }
-
+      case 'attackTotalM': {
+        const array = inputs.attackTotal;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackTotal: array } });
+        break;
+      }
+      case 'attackBaseM': {
+        const array = inputs.attackBase;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackBase: array } });
+        break;
+      }
+      case 'attackModM': {
+        const array = inputs.attackMod;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackMod: array } });
+        break;
+      }
+      case 'attackMiscM': {
+        const array = inputs.attackMisc;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackMisc: array } });
+        break;
+      }
+      case 'attackTotalR': {
+        const array = inputs.attackTotal;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackTotal: array } });
+        break;
+      }
+      case 'attackBaseR': {
+        const array = inputs.attackBase;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackBase: array } });
+        break;
+      }
+      case 'attackModR': {
+        const array = inputs.attackMod;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackMod: array } });
+        break;
+      }
+      case 'attackMiscR': {
+        const array = inputs.attackMisc;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackMisc: array } });
+        break;
+      }
+      case 'weightLight': {
+        const array = inputs.weight;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightMedium': {
+        const array = inputs.weight;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightHeavy': {
+        const array = inputs.weight;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightPull': {
+        const array = inputs.weight;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightTotal': {
+        const array = inputs.weight;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'spellsKnown0': {
+        const array = inputs.spellsKnown;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC0': {
+        const array = inputs.spellDC;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay0': {
+        const array = inputs.spellsPerDay;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown1': {
+        const array = inputs.spellsKnown;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC1': {
+        const array = inputs.spellDC;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay1': {
+        const array = inputs.spellsPerDay;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown2': {
+        const array = inputs.spellsKnown;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC2': {
+        const array = inputs.spellDC;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay2': {
+        const array = inputs.spellsPerDay;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown3': {
+        const array = inputs.spellsKnown;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC3': {
+        const array = inputs.spellDC;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay3': {
+        const array = inputs.spellsPerDay;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown4': {
+        const array = inputs.spellsKnown;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC4': {
+        const array = inputs.spellDC;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay4': {
+        const array = inputs.spellsPerDay;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown5': {
+        const array = inputs.spellsKnown;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC5': {
+        const array = inputs.spellDC;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay5': {
+        const array = inputs.spellsPerDay;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown6': {
+        const array = inputs.spellsKnown;
+        array[6] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC6': {
+        const array = inputs.spellDC;
+        array[6] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay6': {
+        const array = inputs.spellsPerDay;
+        array[6] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown7': {
+        const array = inputs.spellsKnown;
+        array[7] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC7': {
+        const array = inputs.spellDC;
+        array[7] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay7': {
+        const array = inputs.spellsPerDay;
+        array[7] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown8': {
+        const array = inputs.spellsKnown;
+        array[8] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC8': {
+        const array = inputs.spellDC;
+        array[8] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay8': {
+        const array = inputs.spellsPerDay;
+        array[8] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown9': {
+        const array = inputs.spellsKnown;
+        array[9] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC9': {
+        const array = inputs.spellDC;
+        array[9] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay9': {
+        const array = inputs.spellsPerDay;
+        array[9] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
       default: {
         this.setState({ inputs: { ...inputs, [name]: value } });
       }
@@ -207,7 +464,7 @@ class Character extends Component {
     event.preventDefault();
     const { updateSheet, match: { params: { id } }  } = this.props;
     const { inputs } = this.state;
-    updateSheet({ inputs });
+    updateSheet({ id, inputs });
   };
 
   render() {
@@ -699,6 +956,7 @@ class Character extends Component {
                                 name="attackTotalM"
                                 id="attackTotalM"
                                 value={inputs.attackTotal[0]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <div>
@@ -708,6 +966,7 @@ class Character extends Component {
                                   name="attackBaseM"
                                   id="attackBaseM"
                                   value={inputs.attackBase[0]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -716,6 +975,7 @@ class Character extends Component {
                                   name="attackModM"
                                   id="attackModM"
                                   value={inputs.attackMod[0]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -724,6 +984,7 @@ class Character extends Component {
                                   name="attackMiscM"
                                   id="attackMiscM"
                                   value={inputs.attackMisc[0]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </div>
@@ -735,6 +996,7 @@ class Character extends Component {
                                 name="attackTotalR"
                                 id="attackTotalR"
                                 value={inputs.attackTotal[1]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <div>
@@ -744,6 +1006,7 @@ class Character extends Component {
                                   name="attackBaseR"
                                   id="attackBaseR"
                                   value={inputs.attackBase[1]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -752,6 +1015,7 @@ class Character extends Component {
                                   name="attackModR"
                                   id="attackModR"
                                   value={inputs.attackMod[1]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -760,6 +1024,7 @@ class Character extends Component {
                                   name="attackMiscR"
                                   id="attackMiscR"
                                   value={inputs.attackMisc[1]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </div>
@@ -776,6 +1041,7 @@ class Character extends Component {
                               name="weightLight"
                               id="weightLight"
                               value={inputs.weight[0]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -784,6 +1050,7 @@ class Character extends Component {
                               name="weightMedium"
                               id="weightMedium"
                               value={inputs.weight[1]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -792,6 +1059,7 @@ class Character extends Component {
                               name="weightHeavy"
                               id="weightHeavy"
                               value={inputs.weight[2]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -800,6 +1068,7 @@ class Character extends Component {
                               name="weightPull"
                               id="weightPull"
                               value={inputs.weight[3]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -808,6 +1077,7 @@ class Character extends Component {
                               name="weightTotal"
                               id="weightTotal"
                               value={inputs.weight[4]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                         </div>
@@ -911,13 +1181,19 @@ class Character extends Component {
                                   name="height"
                                   id="height"
                                   value={inputs.height}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
                             <Col>
                               <FormGroup>
                                 <Label for="age">Age</Label>
-                                <Input name="age" id="age" value={inputs.age} />
+                                <Input
+                                  name="age"
+                                  id="age"
+                                  value={inputs.age}
+                                  onChange={this.handleInputChange}
+                                />
                               </FormGroup>
                             </Col>
                             <Col>
@@ -927,6 +1203,7 @@ class Character extends Component {
                                   name="eyes"
                                   id="eyes"
                                   value={inputs.eyes}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -937,6 +1214,7 @@ class Character extends Component {
                                   name="hair"
                                   id="hair"
                                   value={inputs.hair}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -947,6 +1225,7 @@ class Character extends Component {
                                   name="characterWeight"
                                   id="characterWeight"
                                   value={inputs.characterWeight}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -957,6 +1236,7 @@ class Character extends Component {
                                   name="diety"
                                   id="diety"
                                   value={inputs.diety}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -969,6 +1249,7 @@ class Character extends Component {
                                 name="notes"
                                 id="notes"
                                 value={inputs.notes}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                           </Row>
@@ -982,6 +1263,7 @@ class Character extends Component {
                                 name="currency"
                                 id="currency"
                                 value={inputs.currency}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -991,6 +1273,7 @@ class Character extends Component {
                                 name="languages"
                                 id="languages"
                                 value={inputs.languages}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -1000,6 +1283,7 @@ class Character extends Component {
                                 name="description"
                                 id="description"
                                 value={inputs.description}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -1009,6 +1293,7 @@ class Character extends Component {
                                 name="personality"
                                 id="personality"
                                 value={inputs.personality}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -1018,6 +1303,7 @@ class Character extends Component {
                                 name="traits"
                                 id="traits"
                                 value={inputs.traits}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -1027,6 +1313,7 @@ class Character extends Component {
                                 name="flaws"
                                 id="flaws"
                                 value={inputs.flaws}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -1036,6 +1323,7 @@ class Character extends Component {
                                 name="contacts"
                                 id="contacts"
                                 value={inputs.contacts}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -1045,6 +1333,7 @@ class Character extends Component {
                                 name="enemies"
                                 id="enemies"
                                 value={inputs.enemies}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                           </Row>
@@ -1152,6 +1441,7 @@ class Character extends Component {
                                     name="spellsKnown0"
                                     id="spellsKnown0"
                                     value={inputs.spellsKnown[0]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1162,6 +1452,7 @@ class Character extends Component {
                                     name="spellsKnown1"
                                     id="spellsKnown1"
                                     value={inputs.spellsKnown[1]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1172,6 +1463,7 @@ class Character extends Component {
                                     name="spellsKnown2"
                                     id="spellsKnown2"
                                     value={inputs.spellsKnown[2]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1182,6 +1474,7 @@ class Character extends Component {
                                     name="spellsKnown3"
                                     id="spellsKnown3"
                                     value={inputs.spellsKnown[3]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1192,6 +1485,7 @@ class Character extends Component {
                                     name="spellsKnown4"
                                     id="spellsKnown4"
                                     value={inputs.spellsKnown[4]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1202,6 +1496,7 @@ class Character extends Component {
                                     name="spellsKnown5"
                                     id="spellsKnown5"
                                     value={inputs.spellsKnown[5]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1212,6 +1507,7 @@ class Character extends Component {
                                     name="spellsKnown6"
                                     id="spellsKnown6"
                                     value={inputs.spellsKnown[6]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1222,6 +1518,7 @@ class Character extends Component {
                                     name="spellsKnown7"
                                     id="spellsKnown7"
                                     value={inputs.spellsKnown[7]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1232,6 +1529,7 @@ class Character extends Component {
                                     name="spellsKnown8"
                                     id="spellsKnown8"
                                     value={inputs.spellsKnown[8]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1242,6 +1540,7 @@ class Character extends Component {
                                     name="spellsKnown9"
                                     id="spellsKnown9"
                                     value={inputs.spellsKnown[9]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1257,6 +1556,7 @@ class Character extends Component {
                                     name="spellDC0"
                                     id="spellDC0"
                                     value={inputs.spellDC[0]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1267,6 +1567,7 @@ class Character extends Component {
                                     name="spellDC1"
                                     id="spellDC1"
                                     value={inputs.spellDC[1]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1277,6 +1578,7 @@ class Character extends Component {
                                     name="spellDC2"
                                     id="spellDC2"
                                     value={inputs.spellDC[2]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1287,6 +1589,7 @@ class Character extends Component {
                                     name="spellDC3"
                                     id="spellDC3"
                                     value={inputs.spellDC[3]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1297,6 +1600,7 @@ class Character extends Component {
                                     name="spellDC4"
                                     id="spellDC4"
                                     value={inputs.spellDC[4]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1307,6 +1611,7 @@ class Character extends Component {
                                     name="spellDC5"
                                     id="spellDC5"
                                     value={inputs.spellDC[5]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1317,6 +1622,7 @@ class Character extends Component {
                                     name="spellDC6"
                                     id="spellDC6"
                                     value={inputs.spellDC[6]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1327,6 +1633,7 @@ class Character extends Component {
                                     name="spellDC7"
                                     id="spellDC7"
                                     value={inputs.spellDC[7]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1337,6 +1644,7 @@ class Character extends Component {
                                     name="spellDC8"
                                     id="spellDC8"
                                     value={inputs.spellDC[8]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1347,6 +1655,7 @@ class Character extends Component {
                                     name="spellDC9"
                                     id="spellDC9"
                                     value={inputs.spellDC[9]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1362,6 +1671,7 @@ class Character extends Component {
                                     name="spellsPerDay0"
                                     id="spellsPerDay0"
                                     value={inputs.spellsPerDay[0]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1372,6 +1682,7 @@ class Character extends Component {
                                     name="spellsPerDay1"
                                     id="spellsPerDay1"
                                     value={inputs.spellsPerDay[1]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1382,6 +1693,7 @@ class Character extends Component {
                                     name="spellsPerDay2"
                                     id="spellsPerDay2"
                                     value={inputs.spellsPerDay[2]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1392,6 +1704,7 @@ class Character extends Component {
                                     name="spellsPerDay3"
                                     id="spellsPerDay3"
                                     value={inputs.spellsPerDay[3]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1402,6 +1715,7 @@ class Character extends Component {
                                     name="spellsPerDay4"
                                     id="spellsPerDay4"
                                     value={inputs.spellsPerDay[4]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1412,6 +1726,7 @@ class Character extends Component {
                                     name="spellsPerDay5"
                                     id="spellsPerDay5"
                                     value={inputs.spellsPerDay[5]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1422,6 +1737,7 @@ class Character extends Component {
                                     name="spellsPerDay6"
                                     id="spellsPerDay6"
                                     value={inputs.spellsPerDay[6]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1432,6 +1748,7 @@ class Character extends Component {
                                     name="spellsPerDay7"
                                     id="spellsPerDay7"
                                     value={inputs.spellsPerDay[7]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1442,6 +1759,7 @@ class Character extends Component {
                                     name="spellsPerDay8"
                                     id="spellsPerDay8"
                                     value={inputs.spellsPerDay[8]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1452,6 +1770,7 @@ class Character extends Component {
                                     name="spellsPerDay9"
                                     id="spellsPerDay9"
                                     value={inputs.spellsPerDay[9]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
