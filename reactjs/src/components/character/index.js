@@ -46,7 +46,10 @@ class Character extends Component {
   }
 
   componentDidMount() {
+    const { fetchSkills } = this.props;
     this.loadData();
+    fetchSkills();
+    console.log(this.props);
   }
 
   handleInputChange = event => {
@@ -465,6 +468,12 @@ class Character extends Component {
     const { updateSheet, match: { params: { id } }  } = this.props;
     const { inputs } = this.state;
     updateSheet({ id, inputs });
+  };
+
+  addSkill = event => {
+    event.preventDefault();
+    const { createSkill } = this.props;
+    createSkill();
   };
 
   render() {
@@ -1089,7 +1098,7 @@ class Character extends Component {
                 <Row xs="1">
                   <div>
                     <h2>Skills</h2>
-                    <Button>Add</Button>
+                    <Button onClick={this.addSkill}>Add</Button>
                     <Table striped>
                       <thead>
                         <tr>
@@ -1102,7 +1111,7 @@ class Character extends Component {
                       </thead>
                       <tbody>
                         {skills.map(skill => (
-                          <tr>
+                          <tr id={skill.id}>
                             <td>
                               <Input
                                 name="skillName"
@@ -2002,10 +2011,14 @@ class Character extends Component {
 Character.propTypes = {
   fetchSheet: PropTypes.func.isRequired,
   updateSheet: PropTypes.func.isRequired,
+  fetchSkills: PropTypes.func.isRequired,
+  createSkill: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {
   sheet: {},
+
+  skills: [],
 
   feats: [
     {
@@ -2046,16 +2059,6 @@ Character.defaultProps = {
       itemName: 'Die',
       itemDescription: 'Woww jaksdjaskldjaskldaj',
       itemWeight: 12,
-    },
-  ],
-
-  skills: [
-    {
-      skillName: 'Riding',
-      skillModType: 'Dex',
-      skillTotal: 6,
-      skillAbilityMod: 3,
-      skillRank: 3,
     },
   ],
 

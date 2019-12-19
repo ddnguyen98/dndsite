@@ -40,7 +40,7 @@ class Sheets extends Component {
           </div>
           <Row xs="3" className={styles.container}>
             {sheets.map(sheet => (
-              <Col>
+              <Col key={sheet.id}>
                 <Card className={styles.card}>
                   <FaTrash className={styles.icon} />
                   <Link to={`/character/${sheet.id}`}>

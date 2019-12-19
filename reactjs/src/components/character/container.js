@@ -4,6 +4,7 @@ import {
   updateSheet,
   deleteSheet,
 } from '../../store/sheets/actions';
+import { fetchSkills, createSkill } from '../../store/skills/actions';
 
 function mapStateToProps(state, props) {
   const {
@@ -20,10 +21,21 @@ function mapStateToProps(state, props) {
     },
   } = state;
 
-  return { sheet };
+  const {
+    skills: { byId, allIds },
+  } = state;
+  // turn the array of ids into an array of objects
+
+  return { sheet, skills: allIds.map(id1 => byId[id1].data) };
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchSheet, updateSheet, deleteSheet };
+const mapDispatchToProps = {
+  fetchSheet,
+  updateSheet,
+  deleteSheet,
+  fetchSkills,
+  createSkill,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps);

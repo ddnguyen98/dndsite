@@ -5,9 +5,11 @@ import { createLogger } from 'redux-logger';
 import callAPI from './utils/callAPIMiddleware';
 
 import sheets from './sheets/redux';
+import skills from './skills/redux';
 
 const rootReducer = combineReducers({
   sheets,
+  skills,
 });
 
 const middleware = applyMiddleware(thunkMiddleware, callAPI, createLogger());
