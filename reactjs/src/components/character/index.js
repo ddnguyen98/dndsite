@@ -24,29 +24,196 @@ import container from './container';
 import styles from './styles.module.css';
 
 class Character extends Component {
-  componentDidMount() {
-    this.loadData();
-    console.log(this.props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputs: {
+        stat: [],
+        statMod: [],
+        attackTotal: [],
+        attackBase: [],
+        attackMod: [],
+        spellsKnown: [],
+        spellsPerDay: [],
+        spellDC: [],
+        attackMisc: [],
+        savingThrow: [],
+        savingThrowBase: [],
+        savingThrowMod: [],
+        weight: [],
+      },
+    };
   }
 
+  componentDidMount() {
+    this.loadData();
+  }
+
+  handleInputChange = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { inputs } = this.state;
+
+    switch (name) {
+      case 'strength': {
+        const array = inputs.stat;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'dexterity': {
+        const array = inputs.stat;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'constitution': {
+        const array = inputs.stat;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'intelligence': {
+        const array = inputs.stat;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'wisdom': {
+        const array = inputs.stat;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'charisma': {
+        const array = inputs.stat;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'strengthMod': {
+        const array = inputs.statMod;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'dexterityMod': {
+        const array = inputs.statMod;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'constitutionMod': {
+        const array = inputs.statMod;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'intelligenceMod': {
+        const array = inputs.statMod;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'wisdomMod': {
+        const array = inputs.statMod;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'charismaMod': {
+        const array = inputs.statMod;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'fortitude': {
+        const array = inputs.savingThrow;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, savingThrow: array } });
+        break;
+      }
+      case 'fortitudeBase': {
+        const array = inputs.savingThrowBase;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, savingThrowBase: array } });
+        break;
+      }
+      case 'fortitudeMod': {
+        const array = inputs.savingThrowMod;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, savingThrowMod: array } });
+        break;
+      }
+      case 'reflex': {
+        const array = inputs.savingThrow;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, savingThrow: array } });
+        break;
+      }
+      case 'reflexBase': {
+        const array = inputs.savingThrowBase;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, savingThrowBase: array } });
+        break;
+      }
+      case 'reflexMod': {
+        const array = inputs.savingThrowMod;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, savingThrowMod: array } });
+        break;
+      }
+      case 'will': {
+        const array = inputs.savingThrow;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, savingThrow: array } });
+        break;
+      }
+      case 'willBase': {
+        const array = inputs.savingThrowBase;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, savingThrowBase: array } });
+        break;
+      }
+      case 'willMod': {
+        const array = inputs.savingThrowMod;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, savingThrowMod: array } });
+        break;
+      }
+
+      default: {
+        this.setState({ inputs: { ...inputs, [name]: value } });
+      }
+    }
+  };
+
   loadData = async () => {
-    const { match: { params: { id } }, fetchSheet } = this.props;
+    const {
+      match: {
+        params: { id },
+      },
+      fetchSheet,
+    } = this.props;
     if (!id) return;
     await fetchSheet(id);
     const { sheet } = this.props;
-    this.setState({ ...sheet });
+    this.setState({ inputs: { ...sheet } });
+  };
+
+  save = event => {
+    // make sure the form doesn't submit with the browser
+    event.preventDefault();
+    const { updateSheet, match: { params: { id } }  } = this.props;
+    const { inputs } = this.state;
+    updateSheet({ inputs });
   };
 
   render() {
-    const {
-      skills,
-      feats,
-      items,
-      characterSpells,
-      weapons,
-    } = this.props;
+    const { skills, feats, items, characterSpells, weapons } = this.props;
 
-    const { sheet } = this.props;
+    const { inputs } = this.state;
 
     return (
       <div>
@@ -54,26 +221,32 @@ class Character extends Component {
           <Form>
             {/* Header for saving */}
             <div className={styles.heading}>
-              <Button>Save</Button>
+              <Button type="submit">Save</Button>
             </div>
             <Row>
               {/* Character Image + Basic User Details */}
               <Col xs="3" className={styles.inputBasic}>
                 <img
-                  src={`../${sheet.image}`}
+                  src={`../${inputs.image}`}
                   alt="character"
                   width="100%"
                   height="250"
                 />
                 <FormGroup>
-                  <Input name="name" id="name" value={sheet.name} />
+                  <Input
+                    name="name"
+                    id="name"
+                    value={inputs.name}
+                    onChange={this.handleInputChange}
+                  />
                   <Label for="name">Name</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
                     name="level"
                     id="level"
-                    value={sheet.level}
+                    onChange={this.handleInputChange}
+                    value={inputs.level}
                   />
                   <Label for="input">Level</Label>
                 </FormGroup>
@@ -81,31 +254,44 @@ class Character extends Component {
                   <Input
                     name="class"
                     id="class"
-                    value={sheet.class}
+                    onChange={this.handleInputChange}
+                    value={inputs.class}
                   />
                   <Label for="class">Class</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Input name="race" id="race" value={sheet.race} />
+                  <Input
+                    name="race"
+                    id="race"
+                    onChange={this.handleInputChange}
+                    value={inputs.race}
+                  />
                   <Label for="race">Race</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
                     name="alignment"
                     id="alignment"
-                    value={sheet.alignment}
+                    value={inputs.alignment}
+                    onChange={this.handleInputChange}
                   />
                   <Label for="alignment">Alignment</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Input name="size" id="size" value={sheet.size} />
+                  <Input
+                    name="size"
+                    id="size"
+                    value={inputs.size}
+                    onChange={this.handleInputChange}
+                  />
                   <Label for="size">Size</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
                     name="campaign"
                     id="campaign"
-                    value={sheet.campaign}
+                    value={inputs.campaign}
+                    onChange={this.handleInputChange}
                   />
                   <Label for="campaign">Campaign</Label>
                 </FormGroup>
@@ -113,7 +299,8 @@ class Character extends Component {
                   <Input
                     name="player"
                     id="player"
-                    value={sheet.player}
+                    value={inputs.player}
+                    onChange={this.handleInputChange}
                   />
                   <Label for="player">Player</Label>
                 </FormGroup>
@@ -127,14 +314,16 @@ class Character extends Component {
                       <Input
                         name="strength"
                         id="strength"
-                        value={sheet.stat[0]}
+                        value={inputs.stat[0]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="strengthMod"
                         id="strengthMod"
-                        value={sheet.statMod[0]}
+                        value={inputs.statMod[0]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -144,14 +333,16 @@ class Character extends Component {
                       <Input
                         name="dexterity"
                         id="dexterity"
-                        value={sheet.stat[1]}
+                        value={inputs.stat[1]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="dexterityMod"
                         id="dexterityMod"
-                        value={sheet.statMod[1]}
+                        value={inputs.statMod[1]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -161,14 +352,16 @@ class Character extends Component {
                       <Input
                         name="constitution"
                         id="constitution"
-                        value={sheet.stat[2]}
+                        value={inputs.stat[2]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="constitutionMod"
                         id="constitutionMod"
-                        value={sheet.statMod[2]}
+                        value={inputs.statMod[2]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -178,31 +371,30 @@ class Character extends Component {
                       <Input
                         name="intelligence"
                         id="intelligence"
-                        value={sheet.stat[3]}
+                        value={inputs.stat[3]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="intelligenceMod"
                         id="intelligenceMod"
-                        value={sheet.statMod[3]}
+                        value={inputs.statMod[3]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="wisdom">Wisdom</Label>
-                      <Input
-                        name="wisdom"
-                        id="wisdom"
-                        value={sheet.stat[4]}
-                      />
+                      <Input name="wisdom" id="wisdom" value={inputs.stat[4]} />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="wisdomMod"
                         id="wisdomMod"
-                        value={sheet.statMod[4]}
+                        value={inputs.statMod[4]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -212,14 +404,16 @@ class Character extends Component {
                       <Input
                         name="charisma"
                         id="charisma"
-                        value={sheet.stat[5]}
+                        value={inputs.stat[5]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="charismaMod"
                         id="charismaMod"
-                        value={sheet.statMod[5]}
+                        value={inputs.statMod[5]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -235,20 +429,22 @@ class Character extends Component {
                           <Input
                             name="hpWounds"
                             id="hpWounds"
-                            value={sheet.hpWounds}
+                            value={inputs.hpWounds}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                         /
                         <FormGroup>
                           <Label for="hp">Max</Label>
-                          <Input name="hp" id="hp" value={sheet.hp} />
+                          <Input name="hp" id="hp" value={inputs.hp} />
                         </FormGroup>
                         <FormGroup>
                           <Label for="hpDice">Hie Dice</Label>
                           <Input
                             name="hpDice"
                             id="hpDice"
-                            value={sheet.hpDice}
+                            value={inputs.hpDice}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </div>
@@ -260,7 +456,8 @@ class Character extends Component {
                             type="textarea"
                             name="dmgReduction"
                             id="inpdmgReductionut"
-                            value={sheet.dmgReduction}
+                            value={inputs.dmgReduction}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </div>
@@ -271,7 +468,8 @@ class Character extends Component {
                           <Input
                             name="speed"
                             id="speed"
-                            value={sheet.speed}
+                            value={inputs.speed}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                         <div>
@@ -280,7 +478,8 @@ class Character extends Component {
                             <Input
                               name="init"
                               id="init"
-                              value={sheet.init}
+                              value={inputs.init}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -288,7 +487,8 @@ class Character extends Component {
                             <Input
                               name="initDex"
                               id="initDex"
-                              value={sheet.initDex}
+                              value={inputs.initDex}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -296,7 +496,8 @@ class Character extends Component {
                             <Input
                               name="initMisc"
                               id="initMisc"
-                              value={sheet.initMisc}
+                              value={inputs.initMisc}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                         </div>
@@ -314,7 +515,8 @@ class Character extends Component {
                             <Input
                               name="acTouch"
                               id="acTouch"
-                              value={sheet.acTouch}
+                              value={inputs.acTouch}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -322,7 +524,8 @@ class Character extends Component {
                             <Input
                               name="armor"
                               id="armor"
-                              value={sheet.ac}
+                              value={inputs.ac}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -330,7 +533,8 @@ class Character extends Component {
                             <Input
                               name="acFlat"
                               id="acFlat"
-                              value={sheet.acFlat}
+                              value={inputs.acFlat}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -340,7 +544,8 @@ class Character extends Component {
                               <Input
                                 name="acArmor"
                                 id="acArmor"
-                                value={sheet.acArmor}
+                                value={inputs.acArmor}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -348,7 +553,8 @@ class Character extends Component {
                               <Input
                                 name="acShield"
                                 id="acShield"
-                                value={sheet.acShield}
+                                value={inputs.acShield}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -356,7 +562,8 @@ class Character extends Component {
                               <Input
                                 name="acDex"
                                 id="acDex"
-                                value={sheet.acDex}
+                                value={inputs.acDex}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -364,7 +571,8 @@ class Character extends Component {
                               <Input
                                 name="acNatural"
                                 id="acNatural"
-                                value={sheet.acNatural}
+                                value={inputs.acNatural}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -372,7 +580,8 @@ class Character extends Component {
                               <Input
                                 name="acMisc"
                                 id="acMisc"
-                                value={sheet.acMisc}
+                                value={inputs.acMisc}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -387,7 +596,8 @@ class Character extends Component {
                             <Input
                               name="fortitude"
                               id="fortitude"
-                              value={sheet.savingThrow[0]}
+                              value={inputs.savingThrow[0]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -396,7 +606,8 @@ class Character extends Component {
                               <Input
                                 name="fortitudeBase"
                                 id="fortitudeBase"
-                                value={sheet.savingThrowBase[0]}
+                                value={inputs.savingThrowBase[0]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -404,7 +615,8 @@ class Character extends Component {
                               <Input
                                 name="fortitudeMod"
                                 id="fortitudeMod"
-                                value={sheet.savingThrowMod[0]}
+                                value={inputs.savingThrowMod[0]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -415,7 +627,8 @@ class Character extends Component {
                             <Input
                               name="reflex"
                               id="reflex"
-                              value={sheet.savingThrow[1]}
+                              value={inputs.savingThrow[1]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -424,7 +637,8 @@ class Character extends Component {
                               <Input
                                 name="reflexBase"
                                 id="reflexBase"
-                                value={sheet.savingThrowBase[1]}
+                                value={inputs.savingThrowBase[1]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -432,7 +646,8 @@ class Character extends Component {
                               <Input
                                 name="reflexMod"
                                 id="reflexMod"
-                                value={sheet.savingThrowMod[1]}
+                                value={inputs.savingThrowMod[1]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -443,7 +658,8 @@ class Character extends Component {
                             <Input
                               name="will"
                               id="will"
-                              value={sheet.savingThrow[3]}
+                              value={inputs.savingThrow[2]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -452,7 +668,8 @@ class Character extends Component {
                               <Input
                                 name="willBase"
                                 id="willBase"
-                                value={sheet.savingThrowBase[3]}
+                                value={inputs.savingThrowBase[2]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -460,7 +677,8 @@ class Character extends Component {
                               <Input
                                 name="willMod"
                                 id="willMod"
-                                value={sheet.savingThrowMod[3]}
+                                value={inputs.savingThrowMod[2]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -480,7 +698,7 @@ class Character extends Component {
                               <Input
                                 name="attackTotalM"
                                 id="attackTotalM"
-                                value={sheet.attackTotal[0]}
+                                value={inputs.attackTotal[0]}
                               />
                             </FormGroup>
                             <div>
@@ -489,7 +707,7 @@ class Character extends Component {
                                 <Input
                                   name="attackBaseM"
                                   id="attackBaseM"
-                                  value={sheet.attackBase[0]}
+                                  value={inputs.attackBase[0]}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -497,7 +715,7 @@ class Character extends Component {
                                 <Input
                                   name="attackModM"
                                   id="attackModM"
-                                  value={sheet.attackMod[0]}
+                                  value={inputs.attackMod[0]}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -505,7 +723,7 @@ class Character extends Component {
                                 <Input
                                   name="attackMiscM"
                                   id="attackMiscM"
-                                  value={sheet.attackMisc[0]}
+                                  value={inputs.attackMisc[0]}
                                 />
                               </FormGroup>
                             </div>
@@ -516,7 +734,7 @@ class Character extends Component {
                               <Input
                                 name="attackTotalR"
                                 id="attackTotalR"
-                                value={sheet.attackTotal[1]}
+                                value={inputs.attackTotal[1]}
                               />
                             </FormGroup>
                             <div>
@@ -525,7 +743,7 @@ class Character extends Component {
                                 <Input
                                   name="attackBaseR"
                                   id="attackBaseR"
-                                  value={sheet.attackBase[1]}
+                                  value={inputs.attackBase[1]}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -533,7 +751,7 @@ class Character extends Component {
                                 <Input
                                   name="attackModR"
                                   id="attackModR"
-                                  value={sheet.attackMod[1]}
+                                  value={inputs.attackMod[1]}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -541,7 +759,7 @@ class Character extends Component {
                                 <Input
                                   name="attackMiscR"
                                   id="attackMiscR"
-                                  value={sheet.attackMisc[1]}
+                                  value={inputs.attackMisc[1]}
                                 />
                               </FormGroup>
                             </div>
@@ -557,7 +775,7 @@ class Character extends Component {
                             <Input
                               name="weightLight"
                               id="weightLight"
-                              value={sheet.weight[0]}
+                              value={inputs.weight[0]}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -565,7 +783,7 @@ class Character extends Component {
                             <Input
                               name="weightMedium"
                               id="weightMedium"
-                              value={sheet.weight[1]}
+                              value={inputs.weight[1]}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -573,7 +791,7 @@ class Character extends Component {
                             <Input
                               name="weightHeavy"
                               id="weightHeavy"
-                              value={sheet.weight[2]}
+                              value={inputs.weight[2]}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -581,7 +799,7 @@ class Character extends Component {
                             <Input
                               name="weightPull"
                               id="weightPull"
-                              value={sheet.weight[3]}
+                              value={inputs.weight[3]}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -589,7 +807,7 @@ class Character extends Component {
                             <Input
                               name="weightTotal"
                               id="weightTotal"
-                              value={sheet.weight[4]}
+                              value={inputs.weight[4]}
                             />
                           </FormGroup>
                         </div>
@@ -692,18 +910,14 @@ class Character extends Component {
                                 <Input
                                   name="height"
                                   id="height"
-                                  value={sheet.height}
+                                  value={inputs.height}
                                 />
                               </FormGroup>
                             </Col>
                             <Col>
                               <FormGroup>
                                 <Label for="age">Age</Label>
-                                <Input
-                                  name="age"
-                                  id="age"
-                                  value={sheet.age}
-                                />
+                                <Input name="age" id="age" value={inputs.age} />
                               </FormGroup>
                             </Col>
                             <Col>
@@ -712,7 +926,7 @@ class Character extends Component {
                                 <Input
                                   name="eyes"
                                   id="eyes"
-                                  value={sheet.eyes}
+                                  value={inputs.eyes}
                                 />
                               </FormGroup>
                             </Col>
@@ -722,17 +936,17 @@ class Character extends Component {
                                 <Input
                                   name="hair"
                                   id="hair"
-                                  value={sheet.hair}
+                                  value={inputs.hair}
                                 />
                               </FormGroup>
                             </Col>
                             <Col>
                               <FormGroup>
-                                <Label for="weight">Weight</Label>
+                                <Label for="characterWeight">Weight</Label>
                                 <Input
-                                  name="weight"
-                                  id="weight"
-                                  value={sheet.weight}
+                                  name="characterWeight"
+                                  id="characterWeight"
+                                  value={inputs.characterWeight}
                                 />
                               </FormGroup>
                             </Col>
@@ -742,7 +956,7 @@ class Character extends Component {
                                 <Input
                                   name="diety"
                                   id="diety"
-                                  value={sheet.diety}
+                                  value={inputs.diety}
                                 />
                               </FormGroup>
                             </Col>
@@ -754,7 +968,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="notes"
                                 id="notes"
-                                value={sheet.notes}
+                                value={inputs.notes}
                               />
                             </Col>
                           </Row>
@@ -767,7 +981,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="currency"
                                 id="currency"
-                                value={sheet.currency}
+                                value={inputs.currency}
                               />
                             </Col>
                             <Col>
@@ -776,7 +990,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="languages"
                                 id="languages"
-                                value={sheet.languages}
+                                value={inputs.languages}
                               />
                             </Col>
                             <Col>
@@ -785,7 +999,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="description"
                                 id="description"
-                                value={sheet.description}
+                                value={inputs.description}
                               />
                             </Col>
                             <Col>
@@ -794,7 +1008,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="personality"
                                 id="personality"
-                                value={sheet.personality}
+                                value={inputs.personality}
                               />
                             </Col>
                             <Col>
@@ -803,7 +1017,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="traits"
                                 id="traits"
-                                value={sheet.traits}
+                                value={inputs.traits}
                               />
                             </Col>
                             <Col>
@@ -812,7 +1026,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="flaws"
                                 id="flaws"
-                                value={sheet.flaws}
+                                value={inputs.flaws}
                               />
                             </Col>
                             <Col>
@@ -821,7 +1035,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="contacts"
                                 id="contacts"
-                                value={sheet.contacts}
+                                value={inputs.contacts}
                               />
                             </Col>
                             <Col>
@@ -830,7 +1044,7 @@ class Character extends Component {
                                 type="textarea"
                                 name="enemies"
                                 id="enemies"
-                                value={sheet.enemies}
+                                value={inputs.enemies}
                               />
                             </Col>
                           </Row>
@@ -937,7 +1151,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown0"
                                     id="spellsKnown0"
-                                    value={sheet.spellsKnown[0]}
+                                    value={inputs.spellsKnown[0]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -947,7 +1161,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown1"
                                     id="spellsKnown1"
-                                    value={sheet.spellsKnown[1]}
+                                    value={inputs.spellsKnown[1]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -957,7 +1171,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown2"
                                     id="spellsKnown2"
-                                    value={sheet.spellsKnown[2]}
+                                    value={inputs.spellsKnown[2]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -967,7 +1181,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown3"
                                     id="spellsKnown3"
-                                    value={sheet.spellsKnown[3]}
+                                    value={inputs.spellsKnown[3]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -977,7 +1191,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown4"
                                     id="spellsKnown4"
-                                    value={sheet.spellsKnown[4]}
+                                    value={inputs.spellsKnown[4]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -987,7 +1201,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown5"
                                     id="spellsKnown5"
-                                    value={sheet.spellsKnown[5]}
+                                    value={inputs.spellsKnown[5]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -997,7 +1211,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown6"
                                     id="spellsKnown6"
-                                    value={sheet.spellsKnown[6]}
+                                    value={inputs.spellsKnown[6]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1007,7 +1221,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown7"
                                     id="spellsKnown7"
-                                    value={sheet.spellsKnown[7]}
+                                    value={inputs.spellsKnown[7]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1017,7 +1231,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown8"
                                     id="spellsKnown8"
-                                    value={sheet.spellsKnown[8]}
+                                    value={inputs.spellsKnown[8]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1027,7 +1241,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown9"
                                     id="spellsKnown9"
-                                    value={sheet.spellsKnown[9]}
+                                    value={inputs.spellsKnown[9]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1042,7 +1256,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC0"
                                     id="spellDC0"
-                                    value={sheet.spellDC[0]}
+                                    value={inputs.spellDC[0]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1052,7 +1266,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC1"
                                     id="spellDC1"
-                                    value={sheet.spellDC[1]}
+                                    value={inputs.spellDC[1]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1062,7 +1276,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC2"
                                     id="spellDC2"
-                                    value={sheet.spellDC[2]}
+                                    value={inputs.spellDC[2]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1072,7 +1286,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC3"
                                     id="spellDC3"
-                                    value={sheet.spellDC[3]}
+                                    value={inputs.spellDC[3]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1082,7 +1296,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC4"
                                     id="spellDC4"
-                                    value={sheet.spellDC[4]}
+                                    value={inputs.spellDC[4]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1092,7 +1306,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC5"
                                     id="spellDC5"
-                                    value={sheet.spellDC[5]}
+                                    value={inputs.spellDC[5]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1102,7 +1316,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC6"
                                     id="spellDC6"
-                                    value={sheet.spellDC[6]}
+                                    value={inputs.spellDC[6]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1112,7 +1326,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC7"
                                     id="spellDC7"
-                                    value={sheet.spellDC[7]}
+                                    value={inputs.spellDC[7]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1122,7 +1336,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC8"
                                     id="spellDC8"
-                                    value={sheet.spellDC[8]}
+                                    value={inputs.spellDC[8]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1132,7 +1346,7 @@ class Character extends Component {
                                   <Input
                                     name="spellDC9"
                                     id="spellDC9"
-                                    value={sheet.spellDC[9]}
+                                    value={inputs.spellDC[9]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1147,7 +1361,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay0"
                                     id="spellsPerDay0"
-                                    value={sheet.spellsPerDay[0]}
+                                    value={inputs.spellsPerDay[0]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1157,7 +1371,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay1"
                                     id="spellsPerDay1"
-                                    value={sheet.spellsPerDay[1]}
+                                    value={inputs.spellsPerDay[1]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1167,7 +1381,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay2"
                                     id="spellsPerDay2"
-                                    value={sheet.spellsPerDay[2]}
+                                    value={inputs.spellsPerDay[2]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1177,7 +1391,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay3"
                                     id="spellsPerDay3"
-                                    value={sheet.spellsPerDay[3]}
+                                    value={inputs.spellsPerDay[3]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1187,7 +1401,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay4"
                                     id="spellsPerDay4"
-                                    value={sheet.spellsPerDay[4]}
+                                    value={inputs.spellsPerDay[4]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1197,7 +1411,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay5"
                                     id="spellsPerDay5"
-                                    value={sheet.spellsPerDay[5]}
+                                    value={inputs.spellsPerDay[5]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1207,7 +1421,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay6"
                                     id="spellsPerDay6"
-                                    value={sheet.spellsPerDay[6]}
+                                    value={inputs.spellsPerDay[6]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1217,7 +1431,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay7"
                                     id="spellsPerDay7"
-                                    value={sheet.spellsPerDay[7]}
+                                    value={inputs.spellsPerDay[7]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1227,7 +1441,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay8"
                                     id="spellsPerDay8"
-                                    value={sheet.spellsPerDay[8]}
+                                    value={inputs.spellsPerDay[8]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1237,7 +1451,7 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay9"
                                     id="spellsPerDay9"
-                                    value={sheet.spellsPerDay[9]}
+                                    value={inputs.spellsPerDay[9]}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1357,9 +1571,7 @@ class Character extends Component {
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponsheet">
-                                    Attack Bonus
-                                  </Label>
+                                  <Label for="weaponsheet">Attack Bonus</Label>
                                   <Input
                                     name="weaponsheet"
                                     id="weaponsheet"
@@ -1470,6 +1682,7 @@ class Character extends Component {
 
 Character.propTypes = {
   fetchSheet: PropTypes.func.isRequired,
+  updateSheet: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {
@@ -1524,7 +1737,7 @@ Character.defaultProps = {
       skillTotal: 6,
       skillAbilityMod: 3,
       skillRank: 3,
-    }
+    },
   ],
 
   characterSpells: [

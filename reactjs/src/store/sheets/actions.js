@@ -9,6 +9,9 @@ import {
   REQ_SHEET_PENDING,
   REQ_SHEET_SUCCESS,
   REQ_SHEET_ERROR,
+  UPDATE_SHEET_PENDING,
+  UPDATE_SHEET_SUCCESS,
+  UPDATE_SHEET_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -46,4 +49,10 @@ export const fetchSheet = id => ({
     return !loadedAt || !isCached;
   },
   payload: { id },
+});
+
+export const updateSheet = sheet => ({
+  types: [UPDATE_SHEET_PENDING, UPDATE_SHEET_SUCCESS, UPDATE_SHEET_ERROR],
+  callAPI: () => API.put(`/characters/${sheet.id}`),
+  payload: { id: sheet.id },
 });

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchSheet } from '../../store/sheets/actions';
+import { fetchSheet, updateSheet } from '../../store/sheets/actions';
 
 function mapStateToProps(state, props) {
   const {
@@ -20,6 +20,6 @@ function mapStateToProps(state, props) {
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchSheet };
+const mapDispatchToProps = { fetchSheet, updateSheet };
 
 export default connect(mapStateToProps, mapDispatchToProps);

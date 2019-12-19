@@ -10,6 +10,9 @@ import {
   REQ_SHEET_PENDING,
   REQ_SHEET_SUCCESS,
   REQ_SHEET_ERROR,
+  UPDATE_SHEET_PENDING,
+  UPDATE_SHEET_SUCCESS,
+  UPDATE_SHEET_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -119,4 +122,7 @@ export default createReducer(initialState, {
   [REQ_SHEET_PENDING]: sheetPending,
   [REQ_SHEET_SUCCESS]: sheetSuccess,
   [REQ_SHEET_ERROR]: sheetError,
+  [UPDATE_SHEET_PENDING]: sheetPending,
+  [UPDATE_SHEET_SUCCESS]: sheetSuccess,
+  [UPDATE_SHEET_ERROR]: sheetError,
 });
