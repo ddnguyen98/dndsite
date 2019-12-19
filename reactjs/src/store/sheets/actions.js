@@ -12,6 +12,9 @@ import {
   UPDATE_SHEET_PENDING,
   UPDATE_SHEET_SUCCESS,
   UPDATE_SHEET_ERROR,
+  DELETE_SHEET_PENDING,
+  DELETE_SHEET_SUCCESS,
+  DELETE_SHEET_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -55,4 +58,9 @@ export const updateSheet = sheet => ({
   types: [UPDATE_SHEET_PENDING, UPDATE_SHEET_SUCCESS, UPDATE_SHEET_ERROR],
   callAPI: () => API.put(`/characters/${sheet.id}`),
   payload: { id: sheet.id },
+});
+
+export const deleteSheet = sheet => ({
+  types: [DELETE_SHEET_PENDING, DELETE_SHEET_SUCCESS, DELETE_SHEET_ERROR],
+  callAPI: () => API.delete(`/characters/${sheet.id}`),
 });

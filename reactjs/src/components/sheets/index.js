@@ -42,8 +42,8 @@ class Sheets extends Component {
             {sheets.map(sheet => (
               <Col>
                 <Card className={styles.card}>
+                  <FaTrash className={styles.icon} />
                   <Link to={`/character/${sheet.id}`}>
-                    <FaTrash className={styles.icon} />
                     <CardImg
                       top
                       src={sheet.image}
