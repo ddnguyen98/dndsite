@@ -1,4 +1,5 @@
 import createReducer from '../utils/createReducer';
+import { removeIdFromArray, removeIdFromObject } from '../utils/utils';
 
 import {
   REQ_SHEETS_SUCCESS,
@@ -83,7 +84,16 @@ function sheetPending(state, action) {
   };
 }
 
+function deleteSuccess(state, action) {
+  return {
+    ...state,
+    byId: removeIdFromObject(action.payload.id, state.byId),
+    allIds: removeIdFromArray(action.payload.id, state.allIds),
+  };
+}
+
 function sheetSuccess(state, action) {
+  console.log(action);
   // clear loading and error, update cache time, add sheets
   return {
     ...state,
@@ -93,7 +103,7 @@ function sheetSuccess(state, action) {
         isLoading: false,
         error: null,
         loadedAt: Date.now(),
-        data: action.data,
+        data: action.payload.data,
       },
     },
     allIds: [...new Set([...state.allIds, action.payload.id])],
@@ -129,6 +139,6 @@ export default createReducer(initialState, {
   [UPDATE_SHEET_SUCCESS]: sheetSuccess,
   [UPDATE_SHEET_ERROR]: sheetError,
   [DELETE_SHEET_PENDING]: sheetPending,
-  [DELETE_SHEET_SUCCESS]: sheetSuccess,
+  [DELETE_SHEET_SUCCESS]: deleteSuccess,
   [DELETE_SHEET_ERROR]: sheetError,
 });

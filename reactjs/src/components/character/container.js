@@ -4,11 +4,23 @@ import {
   updateSheet,
   deleteSheet,
 } from '../../store/sheets/actions';
-import { fetchSkills, createSkill } from '../../store/skills/actions';
-import { fetchFeats, createFeat } from '../../store/feats/actions';
-import { fetchItems, createItem } from '../../store/items/actions';
-import { fetchSpells, createSpell } from '../../store/spells/actions';
-import { fetchWeapons, createWeapon } from '../../store/weapons/actions';
+import {
+  fetchSkills,
+  createSkill,
+  deleteSkill,
+} from '../../store/skills/actions';
+import { fetchFeats, createFeat, deleteFeat } from '../../store/feats/actions';
+import { fetchItems, createItem, deleteItem } from '../../store/items/actions';
+import {
+  fetchSpells,
+  createSpell,
+  deleteSpell,
+} from '../../store/spells/actions';
+import {
+  fetchWeapons,
+  createWeapon,
+  deleteWeapon,
+} from '../../store/weapons/actions';
 
 function mapStateToProps(state, props) {
   const {
@@ -50,14 +62,19 @@ const mapDispatchToProps = {
   deleteSheet,
   fetchSkills,
   createSkill,
+  deleteSkill,
   fetchFeats,
   createFeat,
+  deleteFeat,
   fetchItems,
   createItem,
+  deleteItem,
   fetchSpells,
   createSpell,
+  deleteSpell,
   fetchWeapons,
   createWeapon,
+  deleteWeapon,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps);

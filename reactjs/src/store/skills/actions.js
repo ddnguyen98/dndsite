@@ -40,3 +40,9 @@ export const createSkill = skill => {
     payload: { id },
   };
 };
+
+export const deleteSkill = id => ({
+  types: [DELETE_SKILL_PENDING, DELETE_SKILL_SUCCESS, DELETE_SKILL_ERROR],
+  callAPI: () => API.delete(`/skills/${id}`),
+  payload: { id },
+});

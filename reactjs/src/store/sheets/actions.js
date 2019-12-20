@@ -57,10 +57,11 @@ export const fetchSheet = id => ({
 export const updateSheet = sheet => ({
   types: [UPDATE_SHEET_PENDING, UPDATE_SHEET_SUCCESS, UPDATE_SHEET_ERROR],
   callAPI: () => API.put(`/characters/${sheet.id}`),
-  payload: { id: sheet.id },
+  payload: { id: sheet.id, data: sheet.inputs },
 });
 
-export const deleteSheet = sheet => ({
+export const deleteSheet = id => ({
   types: [DELETE_SHEET_PENDING, DELETE_SHEET_SUCCESS, DELETE_SHEET_ERROR],
-  callAPI: () => API.delete(`/characters/${sheet.id}`),
+  callAPI: () => API.delete(`/characters/${id}`),
+  payload: { id },
 });

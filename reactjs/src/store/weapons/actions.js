@@ -6,6 +6,9 @@ import {
   ADD_WEAPON_PENDING,
   ADD_WEAPON_SUCCESS,
   ADD_WEAPON_ERROR,
+  DELETE_WEAPON_PENDING,
+  DELETE_WEAPON_SUCCESS,
+  DELETE_WEAPON_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -31,3 +34,9 @@ export const createWeapon = weapon => {
     payload: { id },
   };
 };
+
+export const deleteWeapon = id => ({
+  types: [DELETE_WEAPON_PENDING, DELETE_WEAPON_SUCCESS, DELETE_WEAPON_ERROR],
+  callAPI: () => API.delete(`/weapons/${id}`),
+  payload: { id },
+});

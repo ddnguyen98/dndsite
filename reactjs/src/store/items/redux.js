@@ -1,4 +1,5 @@
 import createReducer from '../utils/createReducer';
+import { removeIdFromArray, removeIdFromObject } from '../utils/utils';
 
 import {
   REQ_ITEMS_PENDING,
@@ -7,6 +8,9 @@ import {
   ADD_ITEM_PENDING,
   ADD_ITEM_SUCCESS,
   ADD_ITEM_ERROR,
+  DELETE_ITEM_SUCCESS,
+  DELETE_ITEM_ERROR,
+  DELETE_ITEM_PENDING,
 } from '../actionTypes';
 
 const initialState = {
@@ -91,6 +95,14 @@ function itemSuccess(state, action) {
   };
 }
 
+function deleteSuccess(state, action) {
+  return {
+    ...state,
+    byId: removeIdFromObject(action.payload.id, state.byId),
+    allIds: removeIdFromArray(action.payload.id, state.allIds),
+  };
+}
+
 function itemError(state, action) {
   // clear loading and set error
   return {
@@ -113,4 +125,7 @@ export default createReducer(initialState, {
   [ADD_ITEM_PENDING]: itemPending,
   [ADD_ITEM_SUCCESS]: itemSuccess,
   [ADD_ITEM_ERROR]: itemError,
+  [DELETE_ITEM_PENDING]: itemPending,
+  [DELETE_ITEM_SUCCESS]: deleteSuccess,
+  [DELETE_ITEM_ERROR]: itemError,
 });

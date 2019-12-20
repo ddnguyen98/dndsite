@@ -6,6 +6,9 @@ import {
   ADD_SPELL_PENDING,
   ADD_SPELL_SUCCESS,
   ADD_SPELL_ERROR,
+  DELETE_SPELL_PENDING,
+  DELETE_SPELL_SUCCESS,
+  DELETE_SPELL_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -31,3 +34,9 @@ export const createSpell = spell => {
     payload: { id },
   };
 };
+
+export const deleteSpell = id => ({
+  types: [DELETE_SPELL_PENDING, DELETE_SPELL_SUCCESS, DELETE_SPELL_ERROR],
+  callAPI: () => API.delete(`/spells/${id}`),
+  payload: { id },
+});

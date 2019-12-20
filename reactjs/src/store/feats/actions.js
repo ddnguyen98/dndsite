@@ -6,6 +6,9 @@ import {
   ADD_FEAT_PENDING,
   ADD_FEAT_SUCCESS,
   ADD_FEAT_ERROR,
+  DELETE_FEAT_SUCCESS,
+  DELETE_FEAT_ERROR,
+  DELETE_FEAT_PENDING,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -31,3 +34,9 @@ export const createFeat = feat => {
     payload: { id },
   };
 };
+
+export const deleteFeat = id => ({
+  types: [DELETE_FEAT_PENDING, DELETE_FEAT_SUCCESS, DELETE_FEAT_ERROR],
+  callAPI: () => API.delete(`/feats/${id}`),
+  payload: { id },
+});

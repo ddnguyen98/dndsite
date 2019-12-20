@@ -6,6 +6,9 @@ import {
   ADD_ITEM_PENDING,
   ADD_ITEM_SUCCESS,
   ADD_ITEM_ERROR,
+  DELETE_ITEM_SUCCESS,
+  DELETE_ITEM_ERROR,
+  DELETE_ITEM_PENDING,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -31,3 +34,9 @@ export const createItem = item => {
     payload: { id },
   };
 };
+
+export const deleteItem = id => ({
+  types: [DELETE_ITEM_PENDING, DELETE_ITEM_SUCCESS, DELETE_ITEM_ERROR],
+  callAPI: () => API.delete(`/items/${id}`),
+  payload: { id },
+});

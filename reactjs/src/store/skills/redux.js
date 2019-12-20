@@ -1,4 +1,5 @@
 import createReducer from '../utils/createReducer';
+import { removeIdFromArray, removeIdFromObject } from '../utils/utils';
 
 import {
   REQ_SKILLS_PENDING,
@@ -100,6 +101,15 @@ function skillSuccess(state, action) {
   };
 }
 
+function deleteSuccess(state, action) {
+  console.log(action);
+  return {
+    ...state,
+    byId: removeIdFromObject(action.payload.id, state.byId),
+    allIds: removeIdFromArray(action.payload.id, state.allIds),
+  };
+}
+
 function skillError(state, action) {
   // clear loading and set error
   return {
@@ -129,6 +139,6 @@ export default createReducer(initialState, {
   [UPDATE_SKILL_SUCCESS]: skillSuccess,
   [UPDATE_SKILL_ERROR]: skillError,
   [DELETE_SKILL_PENDING]: skillPending,
-  [DELETE_SKILL_SUCCESS]: skillSuccess,
+  [DELETE_SKILL_SUCCESS]: deleteSuccess,
   [DELETE_SKILL_ERROR]: skillError,
 });

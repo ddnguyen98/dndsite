@@ -28,6 +28,7 @@ class Character extends Component {
     super(props);
     this.state = {
       inputs: {
+        image: 'henry.jpg',
         stat: [],
         statMod: [],
         attackTotal: [],
@@ -53,7 +54,6 @@ class Character extends Component {
     fetchItems();
     fetchSpells();
     fetchWeapons();
-
   }
 
   handleInputChange = event => {
@@ -466,7 +466,7 @@ class Character extends Component {
     this.setState({ inputs: { ...sheet } });
   };
 
-  save = event => {
+  saveForm = event => {
     // make sure the form doesn't submit with the browser
     event.preventDefault();
     const { updateSheet, match: { params: { id } }  } = this.props;
@@ -480,10 +480,20 @@ class Character extends Component {
     createSkill();
   };
 
+  deleteSkill = id => {
+    const { deleteSkill } = this.props;
+    deleteSkill(id);
+  };
+
   addFeat = event => {
     event.preventDefault();
     const { createFeat } = this.props;
     createFeat();
+  };
+
+  deleteFeat = id => {
+    const { deleteFeat } = this.props;
+    deleteFeat(id);
   };
 
   addItem = event => {
@@ -492,10 +502,20 @@ class Character extends Component {
     createItem();
   };
 
+  deleteItem = id => {
+    const { deleteItem } = this.props;
+    deleteItem(id);
+  };
+
   addSpell = event => {
     event.preventDefault();
     const { createSpell } = this.props;
     createSpell();
+  };
+
+  deleteSpell = id => {
+    const { deleteSpell } = this.props;
+    deleteSpell(id);
   };
 
   addWeapon = event => {
@@ -503,6 +523,12 @@ class Character extends Component {
     const { createWeapon } = this.props;
     createWeapon();
   };
+
+  deleteWeapon = id => {
+    const { deleteWeapon } = this.props;
+    deleteWeapon(id);
+  };
+
 
   render() {
     const { skills, feats, items, spells, weapons } = this.props;
@@ -512,7 +538,7 @@ class Character extends Component {
     return (
       <div>
         <Container className={styles.form}>
-          <Form>
+          <Form onSubmit={this.saveForm}>
             {/* Header for saving */}
             <div className={styles.heading}>
               <Button type="submit">Save</Button>
@@ -1175,7 +1201,7 @@ class Character extends Component {
                                 value={skill.skillRank}
                               />
                             </td>
-                            <FaTrash />
+                            <FaTrash onClick={()=>{this.deleteSkill(skill.id)}}/>
                           </tr>
                         ))}
                       </tbody>
@@ -1389,7 +1415,7 @@ class Character extends Component {
                           <Col>
                             <Card>
                               <CardBody>
-                                <FaTrash />
+                                <FaTrash onClick={()=>{this.deleteFeat(feat.id)}}/>
                                 <FormGroup>
                                   <Label for="featName">Name</Label>
                                   <Input
@@ -1453,7 +1479,7 @@ class Character extends Component {
                                   value={item.itemWeight}
                                 />
                               </td>
-                              <FaTrash />
+                              <FaTrash onClick={()=>{this.deleteItem(item.id)}}/>
                             </tr>
                           ))}
                         </tbody>
@@ -1820,7 +1846,7 @@ class Character extends Component {
                               <Col>
                                 <Card>
                                   <CardBody>
-                                    <FaTrash />
+                                    <FaTrash onClick={()=>{this.deleteSpell(spell.id)}} />
                                     <FormGroup>
                                       <Label for="spellName">Name</Label>
                                       <Input
@@ -1965,7 +1991,7 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <FaTrash />
+                              <FaTrash onClick={()=>{this.deleteWeapon(weapon.id)}} />
                             </Row>
                             <Row xs="3">
                               <FormGroup>
@@ -2041,14 +2067,19 @@ Character.propTypes = {
   updateSheet: PropTypes.func.isRequired,
   fetchSkills: PropTypes.func.isRequired,
   createSkill: PropTypes.func.isRequired,
+  deleteSkill: PropTypes.func.isRequired,
   fetchFeats: PropTypes.func.isRequired,
   createFeat: PropTypes.func.isRequired,
+  deleteFeat: PropTypes.func.isRequired,
   fetchItems: PropTypes.func.isRequired,
   createItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
   fetchSpells: PropTypes.func.isRequired,
   createSpell: PropTypes.func.isRequired,
+  deleteSpell: PropTypes.func.isRequired,
   fetchWeapons: PropTypes.func.isRequired,
   createWeapon: PropTypes.func.isRequired,
+  deleteWeapon: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {

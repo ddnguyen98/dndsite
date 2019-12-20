@@ -29,6 +29,11 @@ class Sheets extends Component {
     createSheet();
   };
 
+  delete = id => {
+    const { deleteSheet } = this.props;
+    deleteSheet(id);
+  };
+
   render() {
     const { sheets } = this.props;
     return (
@@ -42,7 +47,12 @@ class Sheets extends Component {
             {sheets.map(sheet => (
               <Col key={sheet.id}>
                 <Card className={styles.card}>
-                  <FaTrash className={styles.icon} />
+                  <FaTrash
+                    className={styles.icon}
+                    onClick={() => {
+                      this.delete(sheet.id);
+                    }}
+                  />
                   <Link to={`/character/${sheet.id}`}>
                     <CardImg
                       top
@@ -71,6 +81,7 @@ Sheets.propTypes = {
   sheets: PropTypes.arrayOf(PropTypes.object),
   fetchSheets: PropTypes.func.isRequired,
   createSheet: PropTypes.func.isRequired,
+  deleteSheet: PropTypes.func.isRequired,
 };
 
 Sheets.defaultProps = {

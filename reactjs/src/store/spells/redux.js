@@ -1,4 +1,5 @@
 import createReducer from '../utils/createReducer';
+import { removeIdFromArray, removeIdFromObject } from '../utils/utils';
 
 import {
   REQ_SPELLS_PENDING,
@@ -7,6 +8,9 @@ import {
   ADD_SPELL_PENDING,
   ADD_SPELL_SUCCESS,
   ADD_SPELL_ERROR,
+  DELETE_SPELL_PENDING,
+  DELETE_SPELL_SUCCESS,
+  DELETE_SPELL_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -91,6 +95,14 @@ function spellSuccess(state, action) {
   };
 }
 
+function deleteSuccess(state, action) {
+  return {
+    ...state,
+    byId: removeIdFromObject(action.payload.id, state.byId),
+    allIds: removeIdFromArray(action.payload.id, state.allIds),
+  };
+}
+
 function spellError(state, action) {
   // clear loading and set error
   return {
@@ -113,4 +125,7 @@ export default createReducer(initialState, {
   [ADD_SPELL_PENDING]: spellPending,
   [ADD_SPELL_SUCCESS]: spellSuccess,
   [ADD_SPELL_ERROR]: spellError,
+  [DELETE_SPELL_PENDING]: spellPending,
+  [DELETE_SPELL_SUCCESS]: deleteSuccess,
+  [DELETE_SPELL_ERROR]: spellError,
 });
