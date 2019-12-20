@@ -46,12 +46,14 @@ class Character extends Component {
   }
 
   componentDidMount() {
-    const { fetchSkills, fetchFeats, fetchItems, fetchSpells } = this.props;
+    const { fetchSkills, fetchFeats, fetchItems, fetchSpells, fetchWeapons } = this.props;
     this.loadData();
     fetchSkills();
     fetchFeats();
     fetchItems();
     fetchSpells();
+    fetchWeapons();
+
   }
 
   handleInputChange = event => {
@@ -494,6 +496,12 @@ class Character extends Component {
     event.preventDefault();
     const { createSpell } = this.props;
     createSpell();
+  };
+
+  addWeapon = event => {
+    event.preventDefault();
+    const { createWeapon } = this.props;
+    createWeapon();
   };
 
   render() {
@@ -1901,7 +1909,7 @@ class Character extends Component {
                   <TabPanel>
                     <div>
                       <div>
-                        <Button>Add</Button>
+                        <Button onClick={this.addWeapon}>Add</Button>
                       </div>
                       <Row xs="1">
                         {weapons.map(weapon => (
@@ -1919,11 +1927,11 @@ class Character extends Component {
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponsheet">Attack Bonus</Label>
+                                  <Label for="weaponAttackBonus">Attack Bonus</Label>
                                   <Input
-                                    name="weaponsheet"
-                                    id="weaponsheet"
-                                    value={weapon.weaponsheet}
+                                    name="weaponAttackBonus"
+                                    id="weaponAttackBonus"
+                                    value={weapon.weaponAttackBonus}
                                   />
                                 </FormGroup>
                               </Col>
@@ -2039,6 +2047,8 @@ Character.propTypes = {
   createItem: PropTypes.func.isRequired,
   fetchSpells: PropTypes.func.isRequired,
   createSpell: PropTypes.func.isRequired,
+  fetchWeapons: PropTypes.func.isRequired,
+  createWeapon: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {
@@ -2047,22 +2057,6 @@ Character.defaultProps = {
   skills: [],
 
   feats: [
-    {
-      featName: 'ageelity',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-    {
-      featName: 'Amazing Saw',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-    {
-      featName: 'One Punch',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-    {
-      featName: 'Die',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
   ],
 
   items: [
@@ -2071,42 +2065,6 @@ Character.defaultProps = {
   spells: [
   ],
   weapons: [
-    {
-      weaponName: 'arbok',
-      weaponsheet: 1,
-      weaponDamage: '3d12',
-      weaponCritical: '15-20',
-      weaponRange: '5ft',
-      weaponSpecial: 'Can be used as a butter knife',
-      weaponAmmunition: 'None',
-      weaponWeight: 5,
-      weaponSize: 'medium',
-      weaponType: 'slashing',
-    },
-    {
-      weaponName: 'Jamer',
-      weaponsheet: 1,
-      weaponDamage: '3d12',
-      weaponCritical: '15-20',
-      weaponRange: '5ft',
-      weaponSpecial: 'Can be used as a butter knife',
-      weaponAmmunition: 'None',
-      weaponWeight: 5,
-      weaponSize: 'medium',
-      weaponType: 'slashing',
-    },
-    {
-      weaponName: 'Broink',
-      weaponsheet: 1,
-      weaponDamage: '3d12',
-      weaponCritical: '15-20',
-      weaponRange: '5ft',
-      weaponSpecial: 'Can be used as a butter knife',
-      weaponAmmunition: 'None',
-      weaponWeight: 5,
-      weaponSize: 'medium',
-      weaponType: 'slashing',
-    },
   ],
 };
 
