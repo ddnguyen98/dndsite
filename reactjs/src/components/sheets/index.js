@@ -23,6 +23,12 @@ class Sheets extends Component {
     fetchSheets();
   }
 
+  addSheet = event => {
+    event.preventDefault();
+    const { createSheet } = this.props;
+    createSheet();
+  };
+
   render() {
     const { sheets } = this.props;
     return (
@@ -30,14 +36,14 @@ class Sheets extends Component {
         <Container>
           <div className={styles.heading}>
             <h2>Characters</h2>
-            <Button>Add</Button>
+            <Button onClick={this.addSheet}>Add</Button>
           </div>
           <Row xs="3" className={styles.container}>
             {sheets.map(sheet => (
-              <Col>
+              <Col key={sheet.id}>
                 <Card className={styles.card}>
+                  <FaTrash className={styles.icon} />
                   <Link to={`/character/${sheet.id}`}>
-                    <FaTrash className={styles.icon} />
                     <CardImg
                       top
                       src={sheet.image}
@@ -64,6 +70,7 @@ class Sheets extends Component {
 Sheets.propTypes = {
   sheets: PropTypes.arrayOf(PropTypes.object),
   fetchSheets: PropTypes.func.isRequired,
+  createSheet: PropTypes.func.isRequired,
 };
 
 Sheets.defaultProps = {

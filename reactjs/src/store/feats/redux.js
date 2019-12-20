@@ -1,21 +1,12 @@
 import createReducer from '../utils/createReducer';
 
 import {
-  REQ_SHEETS_SUCCESS,
-  REQ_SHEETS_ERROR,
-  REQ_SHEETS_PENDING,
-  ADD_SHEET_PENDING,
-  ADD_SHEET_SUCCESS,
-  ADD_SHEET_ERROR,
-  REQ_SHEET_PENDING,
-  REQ_SHEET_SUCCESS,
-  REQ_SHEET_ERROR,
-  UPDATE_SHEET_PENDING,
-  UPDATE_SHEET_SUCCESS,
-  UPDATE_SHEET_ERROR,
-  DELETE_SHEET_PENDING,
-  DELETE_SHEET_SUCCESS,
-  DELETE_SHEET_ERROR,
+  REQ_FEATS_PENDING,
+  REQ_FEATS_SUCCESS,
+  REQ_FEATS_ERROR,
+  ADD_FEAT_PENDING,
+  ADD_FEAT_SUCCESS,
+  ADD_FEAT_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -26,7 +17,7 @@ const initialState = {
   error: null,
 };
 
-const sheetsPending = state => {
+const featsPending = state => {
   return {
     ...state,
     isLoading: true,
@@ -34,7 +25,7 @@ const sheetsPending = state => {
   };
 };
 
-const sheetsSuccess = (state, action) => {
+const featsSuccess = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -42,11 +33,11 @@ const sheetsSuccess = (state, action) => {
     loadedAt: Date.now(),
     byId: {
       ...state.byId,
-      ...action.data.reduce((obj, sheet) => {
+      ...action.data.reduce((obj, feat) => {
         return {
           ...obj,
-          [sheet.id]: {
-            data: sheet,
+          [feat.id]: {
+            data: feat,
             isLoading: false,
             loadedAt: Date.now(),
             error: null,
@@ -55,12 +46,12 @@ const sheetsSuccess = (state, action) => {
       }, {}),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(sheet => sheet.id)]),
+      ...new Set([...state.allIds, ...action.data.map(feat => feat.id)]),
     ],
   };
 };
 
-const sheetsError = (state, action) => {
+const featsError = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -68,7 +59,7 @@ const sheetsError = (state, action) => {
   };
 };
 
-function sheetPending(state, action) {
+function featPending(state, action) {
   // set loading state and clear error
   return {
     ...state,
@@ -83,8 +74,8 @@ function sheetPending(state, action) {
   };
 }
 
-function sheetSuccess(state, action) {
-  // clear loading and error, update cache time, add sheets
+function featSuccess(state, action) {
+  // clear loading and error, update cache time, add feats
   return {
     ...state,
     byId: {
@@ -100,7 +91,7 @@ function sheetSuccess(state, action) {
   };
 }
 
-function sheetError(state, action) {
+function featError(state, action) {
   // clear loading and set error
   return {
     ...state,
@@ -116,19 +107,10 @@ function sheetError(state, action) {
 }
 
 export default createReducer(initialState, {
-  [REQ_SHEETS_PENDING]: sheetsPending,
-  [REQ_SHEETS_SUCCESS]: sheetsSuccess,
-  [REQ_SHEETS_ERROR]: sheetsError,
-  [ADD_SHEET_PENDING]: sheetPending,
-  [ADD_SHEET_SUCCESS]: sheetSuccess,
-  [ADD_SHEET_ERROR]: sheetError,
-  [REQ_SHEET_PENDING]: sheetPending,
-  [REQ_SHEET_SUCCESS]: sheetSuccess,
-  [REQ_SHEET_ERROR]: sheetError,
-  [UPDATE_SHEET_PENDING]: sheetPending,
-  [UPDATE_SHEET_SUCCESS]: sheetSuccess,
-  [UPDATE_SHEET_ERROR]: sheetError,
-  [DELETE_SHEET_PENDING]: sheetPending,
-  [DELETE_SHEET_SUCCESS]: sheetSuccess,
-  [DELETE_SHEET_ERROR]: sheetError,
+  [REQ_FEATS_PENDING]: featsPending,
+  [REQ_FEATS_SUCCESS]: featsSuccess,
+  [REQ_FEATS_ERROR]: featsError,
+  [ADD_FEAT_PENDING]: featPending,
+  [ADD_FEAT_SUCCESS]: featSuccess,
+  [ADD_FEAT_ERROR]: featError,
 });

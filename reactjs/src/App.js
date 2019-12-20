@@ -24,7 +24,7 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/sheets" exact component={Sheets} />
-            <Route path="/character" exact component={Character} />
+            <Route path="/character/:id" exact component={Character} />
           </main>
         </Router>
       </div>

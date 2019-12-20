@@ -1,21 +1,21 @@
 import createReducer from '../utils/createReducer';
 
 import {
-  REQ_SHEETS_SUCCESS,
-  REQ_SHEETS_ERROR,
-  REQ_SHEETS_PENDING,
-  ADD_SHEET_PENDING,
-  ADD_SHEET_SUCCESS,
-  ADD_SHEET_ERROR,
-  REQ_SHEET_PENDING,
-  REQ_SHEET_SUCCESS,
-  REQ_SHEET_ERROR,
-  UPDATE_SHEET_PENDING,
-  UPDATE_SHEET_SUCCESS,
-  UPDATE_SHEET_ERROR,
-  DELETE_SHEET_PENDING,
-  DELETE_SHEET_SUCCESS,
-  DELETE_SHEET_ERROR,
+  REQ_SKILLS_PENDING,
+  REQ_SKILLS_SUCCESS,
+  REQ_SKILLS_ERROR,
+  ADD_SKILL_PENDING,
+  ADD_SKILL_SUCCESS,
+  ADD_SKILL_ERROR,
+  REQ_SKILL_PENDING,
+  REQ_SKILL_SUCCESS,
+  REQ_SKILL_ERROR,
+  UPDATE_SKILL_PENDING,
+  UPDATE_SKILL_SUCCESS,
+  UPDATE_SKILL_ERROR,
+  DELETE_SKILL_PENDING,
+  DELETE_SKILL_SUCCESS,
+  DELETE_SKILL_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -26,7 +26,7 @@ const initialState = {
   error: null,
 };
 
-const sheetsPending = state => {
+const skillsPending = state => {
   return {
     ...state,
     isLoading: true,
@@ -34,7 +34,7 @@ const sheetsPending = state => {
   };
 };
 
-const sheetsSuccess = (state, action) => {
+const skillsSuccess = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -42,11 +42,11 @@ const sheetsSuccess = (state, action) => {
     loadedAt: Date.now(),
     byId: {
       ...state.byId,
-      ...action.data.reduce((obj, sheet) => {
+      ...action.data.reduce((obj, skill) => {
         return {
           ...obj,
-          [sheet.id]: {
-            data: sheet,
+          [skill.id]: {
+            data: skill,
             isLoading: false,
             loadedAt: Date.now(),
             error: null,
@@ -55,12 +55,12 @@ const sheetsSuccess = (state, action) => {
       }, {}),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(sheet => sheet.id)]),
+      ...new Set([...state.allIds, ...action.data.map(skill => skill.id)]),
     ],
   };
 };
 
-const sheetsError = (state, action) => {
+const skillsError = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -68,7 +68,7 @@ const sheetsError = (state, action) => {
   };
 };
 
-function sheetPending(state, action) {
+function skillPending(state, action) {
   // set loading state and clear error
   return {
     ...state,
@@ -83,8 +83,8 @@ function sheetPending(state, action) {
   };
 }
 
-function sheetSuccess(state, action) {
-  // clear loading and error, update cache time, add sheets
+function skillSuccess(state, action) {
+  // clear loading and error, update cache time, add skills
   return {
     ...state,
     byId: {
@@ -100,7 +100,7 @@ function sheetSuccess(state, action) {
   };
 }
 
-function sheetError(state, action) {
+function skillError(state, action) {
   // clear loading and set error
   return {
     ...state,
@@ -116,19 +116,19 @@ function sheetError(state, action) {
 }
 
 export default createReducer(initialState, {
-  [REQ_SHEETS_PENDING]: sheetsPending,
-  [REQ_SHEETS_SUCCESS]: sheetsSuccess,
-  [REQ_SHEETS_ERROR]: sheetsError,
-  [ADD_SHEET_PENDING]: sheetPending,
-  [ADD_SHEET_SUCCESS]: sheetSuccess,
-  [ADD_SHEET_ERROR]: sheetError,
-  [REQ_SHEET_PENDING]: sheetPending,
-  [REQ_SHEET_SUCCESS]: sheetSuccess,
-  [REQ_SHEET_ERROR]: sheetError,
-  [UPDATE_SHEET_PENDING]: sheetPending,
-  [UPDATE_SHEET_SUCCESS]: sheetSuccess,
-  [UPDATE_SHEET_ERROR]: sheetError,
-  [DELETE_SHEET_PENDING]: sheetPending,
-  [DELETE_SHEET_SUCCESS]: sheetSuccess,
-  [DELETE_SHEET_ERROR]: sheetError,
+  [REQ_SKILLS_PENDING]: skillsPending,
+  [REQ_SKILLS_SUCCESS]: skillsSuccess,
+  [REQ_SKILLS_ERROR]: skillsError,
+  [ADD_SKILL_PENDING]: skillPending,
+  [ADD_SKILL_SUCCESS]: skillSuccess,
+  [ADD_SKILL_ERROR]: skillError,
+  [REQ_SKILL_PENDING]: skillPending,
+  [REQ_SKILL_SUCCESS]: skillSuccess,
+  [REQ_SKILL_ERROR]: skillError,
+  [UPDATE_SKILL_PENDING]: skillPending,
+  [UPDATE_SKILL_SUCCESS]: skillSuccess,
+  [UPDATE_SKILL_ERROR]: skillError,
+  [DELETE_SKILL_PENDING]: skillPending,
+  [DELETE_SKILL_SUCCESS]: skillSuccess,
+  [DELETE_SKILL_ERROR]: skillError,
 });
