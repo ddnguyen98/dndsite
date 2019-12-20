@@ -8,12 +8,14 @@ import sheets from './sheets/redux';
 import skills from './skills/redux';
 import feats from './feats/redux';
 import items from './items/redux';
+import spells from './spells/redux';
 
 const rootReducer = combineReducers({
   sheets,
   skills,
   feats,
   items,
+  spells,
 });
 
 const middleware = applyMiddleware(thunkMiddleware, callAPI, createLogger());

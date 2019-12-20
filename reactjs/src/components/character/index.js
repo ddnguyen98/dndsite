@@ -46,11 +46,12 @@ class Character extends Component {
   }
 
   componentDidMount() {
-    const { fetchSkills, fetchFeats, fetchItems } = this.props;
+    const { fetchSkills, fetchFeats, fetchItems, fetchSpells } = this.props;
     this.loadData();
     fetchSkills();
     fetchFeats();
     fetchItems();
+    fetchSpells();
   }
 
   handleInputChange = event => {
@@ -489,8 +490,14 @@ class Character extends Component {
     createItem();
   };
 
+  addSpell = event => {
+    event.preventDefault();
+    const { createSpell } = this.props;
+    createSpell();
+  };
+
   render() {
-    const { skills, feats, items, characterSpells, weapons } = this.props;
+    const { skills, feats, items, spells, weapons } = this.props;
 
     const { inputs } = this.state;
 
@@ -1449,7 +1456,7 @@ class Character extends Component {
                   <TabPanel>
                     <div>
                       <div>
-                        <Button>Add</Button>
+                        <Button onClick={this.addSpell}>Add</Button>
                       </div>
                       <Row xs="2">
                         <Col>
@@ -1801,7 +1808,7 @@ class Character extends Component {
                         </Col>
                         <Col>
                           <Row xs="3">
-                            {characterSpells.map(spell => (
+                            {spells.map(spell => (
                               <Col>
                                 <Card>
                                   <CardBody>
@@ -2030,6 +2037,8 @@ Character.propTypes = {
   createFeat: PropTypes.func.isRequired,
   fetchItems: PropTypes.func.isRequired,
   createItem: PropTypes.func.isRequired,
+  fetchSpells: PropTypes.func.isRequired,
+  createSpell: PropTypes.func.isRequired,
 };
 
 Character.defaultProps = {
@@ -2059,37 +2068,7 @@ Character.defaultProps = {
   items: [
   ],
 
-  characterSpells: [
-    {
-      spellName: 'Ackavar',
-      spellComponents: 'VS, CH',
-      spellCastingTime: 'Instant',
-      spellRange: '3ft',
-      spellTarget: '1 person',
-      spellDuration: 'instantaneous',
-      spellSavingThrow: 'Dex',
-      spellDescription: 'Ackavar',
-    },
-    {
-      spellName: 'asddadasda',
-      spellComponents: 'VS, CH',
-      spellCastingTime: 'Instant',
-      spellRange: '3ft',
-      spellTarget: '1 person',
-      spellDuration: 'instantaneous',
-      spellSavingThrow: 'Dex',
-      spellDescription: 'Ackavar',
-    },
-    {
-      spellName: '3321312ff',
-      spellComponents: 'VS, CH',
-      spellCastingTime: 'Instant',
-      spellRange: '3ft',
-      spellTarget: '1 person',
-      spellDuration: 'instantaneous',
-      spellSavingThrow: 'Dex',
-      spellDescription: 'Ackavar',
-    },
+  spells: [
   ],
   weapons: [
     {
