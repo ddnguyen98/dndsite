@@ -1,0 +1,29 @@
+
+.wrapper h2 {
+    padding: 2rem;
+}
+
+.form {
+    width: 50%;
+    margin: auto;
+    padding: 2rem;
+}
+
+.login {
+    text-align: center;
+    padding: 5rem 0;
+}
+
+.button {
+    padding: .5rem 2rem;
+    border-radius: 0;
+    background-color: #75092A;
+}
+
+.wrapper {
+    padding-bottom: auto;
+}
+
+.wrapper span{
+    font-family: 'Malgun Gothic';
+}
