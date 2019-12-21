@@ -8,6 +8,9 @@ import {
   ADD_FEAT_PENDING,
   ADD_FEAT_SUCCESS,
   ADD_FEAT_ERROR,
+  UPDATE_FEAT_PENDING,
+  UPDATE_FEAT_SUCCESS,
+  UPDATE_FEAT_ERROR,
   DELETE_FEAT_SUCCESS,
   DELETE_FEAT_ERROR,
   DELETE_FEAT_PENDING,
@@ -95,6 +98,22 @@ function featSuccess(state, action) {
   };
 }
 
+function featSaveSuccess(state, action) {
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.payload.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function deleteSuccess(state, action) {
   return {
     ...state,
@@ -125,6 +144,9 @@ export default createReducer(initialState, {
   [ADD_FEAT_PENDING]: featPending,
   [ADD_FEAT_SUCCESS]: featSuccess,
   [ADD_FEAT_ERROR]: featError,
+  [UPDATE_FEAT_PENDING]: featPending,
+  [UPDATE_FEAT_SUCCESS]: featSaveSuccess,
+  [UPDATE_FEAT_ERROR]: featError,
   [DELETE_FEAT_SUCCESS]: deleteSuccess,
   [DELETE_FEAT_ERROR]: featError,
   [DELETE_FEAT_PENDING]: featPending,

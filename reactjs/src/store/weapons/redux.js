@@ -11,6 +11,9 @@ import {
   DELETE_WEAPON_PENDING,
   DELETE_WEAPON_SUCCESS,
   DELETE_WEAPON_ERROR,
+  UPDATE_WEAPON_PENDING,
+  UPDATE_WEAPON_SUCCESS,
+  UPDATE_WEAPON_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -103,6 +106,22 @@ function deleteSuccess(state, action) {
   };
 }
 
+function weaponSaveSuccess(state, action) {
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.payload.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function weaponError(state, action) {
   // clear loading and set error
   return {
@@ -128,4 +147,7 @@ export default createReducer(initialState, {
   [DELETE_WEAPON_PENDING]: weaponPending,
   [DELETE_WEAPON_SUCCESS]: deleteSuccess,
   [DELETE_WEAPON_ERROR]: weaponError,
+  [UPDATE_WEAPON_PENDING]: weaponPending,
+  [UPDATE_WEAPON_SUCCESS]: weaponSaveSuccess,
+  [UPDATE_WEAPON_ERROR]: weaponError,
 });

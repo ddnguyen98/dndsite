@@ -18,9 +18,7 @@ import {
 import { Tab, Tabs, TabPanel } from 'react-tabs';
 import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
-
 import container from './container';
-
 import styles from './styles.module.css';
 
 class Character extends Component {
@@ -43,17 +41,16 @@ class Character extends Component {
         savingThrowMod: [],
         weight: [],
       },
+      skills: [{}],
+      feats: [{}],
+      items: [{}],
+      spells: [{}],
+      weapons: [{}],
     };
   }
 
   componentDidMount() {
-    const { fetchSkills, fetchFeats, fetchItems, fetchSpells, fetchWeapons } = this.props;
     this.loadData();
-    fetchSkills();
-    fetchFeats();
-    fetchItems();
-    fetchSpells();
-    fetchWeapons();
   }
 
   handleInputChange = event => {
@@ -453,25 +450,125 @@ class Character extends Component {
     }
   };
 
+  handleInputChangeSkills = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { skills } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...skills[index], [newName]: value};
+    let array = skills;
+    array[index] = arrayValue;
+    this.setState({skills: array});
+  };
+
+  handleInputChangeFeats = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { feats } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...feats[index], [newName]: value};
+    let array = feats;
+    array[index] = arrayValue;
+    this.setState({feats: array});
+  };
+
+  handleInputChangeItems = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { items } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...items[index], [newName]: value};
+    let array = items;
+    array[index] = arrayValue;
+    this.setState({items: array});
+  };
+
+  handleInputChangeSpells = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { spells } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...spells[index], [newName]: value};
+    let array = spells;
+    array[index] = arrayValue;
+    this.setState({spells: array});
+  };
+
+  handleInputChangeWeapons = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { weapons } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...weapons[index], [newName]: value};
+    let array = weapons;
+    array[index] = arrayValue;
+    this.setState({weapons: array});
+  };
+
   loadData = async () => {
     const {
       match: {
         params: { id },
       },
       fetchSheet,
+      fetchSkills,
+      fetchFeats,
+      fetchItems,
+      fetchSpells,
+      fetchWeapons,
     } = this.props;
     if (!id) return;
     await fetchSheet(id);
-    const { sheet } = this.props;
+    await fetchSkills();
+    await fetchFeats();
+    await fetchItems();
+    await fetchSpells();
+    await fetchWeapons();
+    const { sheet, skills, feats, items, spells, weapons } = this.props;
     this.setState({ inputs: { ...sheet } });
+    this.setState({ skills: [...skills] });
+    this.setState({ feats: [...feats] });
+    this.setState({ items: [...items] });
+    this.setState({ spells: [...spells] });
+    this.setState({ weapons: [...weapons] });
   };
 
-  saveForm = event => {
+  saveForm = async event => {
     // make sure the form doesn't submit with the browser
     event.preventDefault();
-    const { updateSheet, match: { params: { id } }  } = this.props;
-    const { inputs } = this.state;
-    updateSheet({ id, inputs });
+    const { updateSheet, updateSkill, updateFeat, updateItem, updateSpell, updateWeapon, match: { params: { id } }  } = this.props;
+    const { inputs, skills, feats, items, spells, weapons } = this.state;
+    await updateSheet({ id, inputs });
+    skills.forEach(async data => {
+      const id = data.id;
+      await updateSkill({ id, data });
+    });
+    feats.forEach(async data => {
+      const id = data.id;
+      await updateFeat({ id, data });
+    });
+    items.forEach(async data => {
+      const id = data.id;
+      await updateItem({ id, data });
+    });
+    spells.forEach(async data => {
+      const id = data.id;
+      await updateSpell({ id, data });
+    });
+    weapons.forEach(async data => {
+      const id = data.id;
+      await updateWeapon({ id, data });
+    });
   };
 
   addSkill = event => {
@@ -529,12 +626,8 @@ class Character extends Component {
     deleteWeapon(id);
   };
 
-
   render() {
-    const { skills, feats, items, spells, weapons } = this.props;
-
-    const { inputs } = this.state;
-
+    const { inputs, skills, feats, items, spells, weapons } = this.state;
     return (
       <div>
         <Container className={styles.form}>
@@ -1164,41 +1257,46 @@ class Character extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {skills.map(skill => (
+                        {skills.map((skill, index) => (
                           <tr id={skill.id}>
                             <td>
                               <Input
-                                name="skillName"
-                                id="skillName"
+                                name={`skillName${index}`}
+                                id={`skillName${index}`}
                                 value={skill.skillName}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillModType"
-                                id="skillModType"
+                                name={`skillModType${index}`}
+                                id={`skillModType${index}`}
+                                onChange={this.handleInputChangeSkills}
                                 value={skill.skillModType}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillTotal"
-                                id="skillTotal"
+                                name={`skillTotal${index}`}
+                                id={`skillTotal${index}`}
                                 value={skill.skillTotal}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillAbilityMod"
-                                id="skillAbilityMod"
+                                name={`skillAbilityMod${index}`}
+                                id={`skillAbilityMod${index}`}
                                 value={skill.skillAbilityMod}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillRank"
-                                id="skillRank"
+                                name={`skillRank${index}`}
+                                id={`skillRank${index}`}
                                 value={skill.skillRank}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <FaTrash onClick={()=>{this.deleteSkill(skill.id)}}/>
@@ -1411,27 +1509,29 @@ class Character extends Component {
                         <Button onClick={this.addFeat}>Add</Button>
                       </div>
                       <Row xs="3">
-                        {feats.map(feat => (
+                        {feats.map((feat, index) => (
                           <Col>
                             <Card>
                               <CardBody>
                                 <FaTrash onClick={()=>{this.deleteFeat(feat.id)}}/>
                                 <FormGroup>
-                                  <Label for="featName">Name</Label>
+                                  <Label for={`featName${index}`}>Name</Label>
                                   <Input
-                                    name="featName"
-                                    id="featName"
+                                    name={`featName${index}`}
+                                    id={`featName${index}`}
                                     value={feat.featName}
+                                    onChange={this.handleInputChangeFeats}
                                   />
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="featDescription">
+                                  <Label for={`featsDescription${index}`}>
                                     Description
                                   </Label>
                                   <Input
-                                    name="featDescription"
-                                    id="featDescription"
+                                    name={`featDescription${index}`}
+                                    id={`featDescription${index}`}
                                     value={feat.featDescription}
+                                    onChange={this.handleInputChangeFeats}
                                   />
                                 </FormGroup>
                               </CardBody>
@@ -1456,27 +1556,30 @@ class Character extends Component {
                           </tr>
                         </thead>
                         <tbody>
-                          {items.map(item => (
+                          {items.map((item, index) => (
                             <tr id={item.id}>
                               <td>
                                 <Input
-                                  name="itemName"
-                                  id="itemName"
+                                  name={`itemName${index}`}
+                                  id={`itemName${index}`}
                                   value={item.itemName}
+                                  onChange={this.handleInputChangeItems}
                                 />
                               </td>
                               <td>
                                 <Input
-                                  name="itemDescription"
-                                  id="itemDescription"
+                                  name={`itemDescription${index}`}
+                                  id={`itemDescription${index}`}
                                   value={item.itemDescription}
+                                  onChange={this.handleInputChangeItems}
                                 />
                               </td>
                               <td>
                                 <Input
-                                  name="itemWeight"
-                                  id="itemWeight"
+                                  name={`itemWeight${index}`}
+                                  id={`itemWeight${index}`}
                                   value={item.itemWeight}
+                                  onChange={this.handleInputChangeItems}
                                 />
                               </td>
                               <FaTrash onClick={()=>{this.deleteItem(item.id)}}/>
@@ -1842,82 +1945,90 @@ class Character extends Component {
                         </Col>
                         <Col>
                           <Row xs="3">
-                            {spells.map(spell => (
+                            {spells.map((spell, index) => (
                               <Col>
                                 <Card>
                                   <CardBody>
                                     <FaTrash onClick={()=>{this.deleteSpell(spell.id)}} />
                                     <FormGroup>
-                                      <Label for="spellName">Name</Label>
+                                      <Label for={`spellName${index}`}>Name</Label>
                                       <Input
-                                        name="spellName"
-                                        id="spellName"
+                                        name={`spellName${index}`}
+                                        id={`spellName${index}`}
                                         value={spell.spellName}
+                                        onChange={this.handleInputChangeSpells}
                                       />
                                     </FormGroup>
                                     <div>
                                       <FormGroup>
-                                        <Label for="spellComponents">
+                                        <Label for={`spellComponents${index}`}>
                                           Components
                                         </Label>
                                         <Input
-                                          name="spellComponents"
-                                          id="spellComponents"
+                                          name={`spellComponents${index}`}
+                                          id={`spellComponents${index}`}
                                           value={spell.spellComponents}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellCastingTime">
+                                        <Label for={`spellCastingTime${index}`}>
                                           Casting Time
                                         </Label>
                                         <Input
-                                          name="spellCastingTime"
-                                          id="spellCastingTime"
+                                          name={`spellCastingTime${index}`}
+                                          id={`spellCastingTime${index}`}
                                           value={spell.spellCastingTime}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellRange">Range</Label>
+                                        <Label for={`spellRange${index}`}>Range</Label>
                                         <Input
-                                          name="spellRange"
-                                          id="spellRange"
+                                          name={`spellRange${index}`}
+                                          id={`spellRange${index}`}
                                           value={spell.spellRange}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellTarget">Target</Label>
+                                        <Label for={`spellTarget${index}`}>Target</Label>
                                         <Input
-                                          name="spellTarget"
-                                          id="spellTarget"
+                                          name={`spellTarget${index}`}
+                                          id={`spellTarget${index}`}
                                           value={spell.spellTarget}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellDuration">
+                                        <Label for={`spellDuration${index}`}>
                                           Duration
                                         </Label>
                                         <Input
-                                          name="spellDuration"
-                                          id="spellDuration"
+                                          name={`spellDuration${index}`}
+                                          id={`spellDuration${index}`}
                                           value={spell.spellDuration}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellSavingThrow">
+                                        <Label for={`spellSavingThrow${index}`}>
                                           Saving Throw
                                         </Label>
                                         <Input
-                                          name="spellSavingThrow"
-                                          id="spellSavingThrow"
+                                          name={`spellSavingThrow${index}`}
+                                          id={`spellSavingThrow${index}`}
                                           value={spell.spellSavingThrow}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="input">Description</Label>
+                                        <Label for={`spellDescription${index}`}>Description</Label>
                                         <Input
                                           type="textarea"
-                                          name="description"
-                                          id="description"
+                                          name={`spellDescription${index}`}
+                                          id={`spellDescription${index}`}
+                                          onChange={this.handleInputChangeSpells}
                                           value={spell.spellDescription}
                                         />
                                       </FormGroup>
@@ -1938,56 +2049,61 @@ class Character extends Component {
                         <Button onClick={this.addWeapon}>Add</Button>
                       </div>
                       <Row xs="1">
-                        {weapons.map(weapon => (
+                        {weapons.map((weapon, index) => (
                           <Col>
                             <Row xs="6">
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponName">Name</Label>
+                                  <Label for={`weaponName${index}`}>Name</Label>
                                   <Input
-                                    name="weaponName"
-                                    id="weaponName"
+                                    name={`weaponName${index}`}
+                                    id={`weaponName${index}`}
                                     value={weapon.weaponName}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponAttackBonus">Attack Bonus</Label>
+                                  <Label for={`weaponAttackBonus${index}`}>Attack Bonus</Label>
                                   <Input
-                                    name="weaponAttackBonus"
-                                    id="weaponAttackBonus"
+                                    name={`weaponAttackBonus${index}`}
+                                    id={`weaponAttackBonus${index}`}
                                     value={weapon.weaponAttackBonus}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponDamage"> Damage </Label>
+                                  <Label for={`weaponDamage${index}`}> Damage </Label>
                                   <Input
-                                    name="weaponDamage"
-                                    id="weaponDamage"
+                                    name={`weaponDamage${index}`}
+                                    id={`weaponDamage${index}`}
                                     value={weapon.weaponDamage}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponCritical">Critical</Label>
+                                  <Label for={`weaponCritical${index}`}>Critical</Label>
                                   <Input
-                                    name="weaponCritical"
-                                    id="weaponCritical"
+                                    name={`weaponCritical${index}`}
+                                    id={`weaponCritical${index}`}
                                     value={weapon.weaponCritical}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponRange">Range</Label>
+                                  <Label for={`weaponRange${index}`}>Range</Label>
                                   <Input
-                                    name="weaponRange"
-                                    id="weaponRange"
+                                    name={`weaponRange${index}`}
+                                    id={`weaponRange${index}`}
                                     value={weapon.weaponRange}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1995,53 +2111,58 @@ class Character extends Component {
                             </Row>
                             <Row xs="3">
                               <FormGroup>
-                                <Label for="weaponSpecial">
+                                <Label for={`weaponSpecial${index}`}>
                                   Special Properties
                                 </Label>
                                 <Input
                                   type="textarea"
-                                  name="weaponSpecial"
-                                  id="weaponSpecial"
+                                  name={`weaponSpecial${index}`}
+                                  id={`weaponSpecial${index}`}
                                   value={weapon.weaponSpecial}
+                                  onChange={this.handleInputChangeWeapons}
                                 />
                               </FormGroup>
                               <FormGroup>
-                                <Label for="weaponAmmunition">Ammunition</Label>
+                                <Label for={`weaponAmmunition${index}`}>Ammunition</Label>
                                 <Input
                                   type="textarea"
-                                  name="weaponAmmunition"
-                                  id="weaponAmmunition"
+                                  name={`weaponAmmunition${index}`}
+                                  id={`weaponAmmunition${index}`}
                                   value={weapon.weaponAmmunition}
+                                  onChange={this.handleInputChangeWeapons}
                                 />
                               </FormGroup>
                               <Row xs="1">
                                 <Col>
                                   <FormGroup>
-                                    <Label for="weaponWeight">Weight</Label>
+                                    <Label for={`weaponWeight${index}`}>Weight</Label>
                                     <Input
-                                      name="weaponWeight"
-                                      id="weaponWeight"
+                                      name={`weaponWeight${index}`}
+                                      id={`weaponWeight${index}`}
                                       value={weapon.weaponWeight}
+                                      onChange={this.handleInputChangeWeapons}
                                     />
                                   </FormGroup>
                                 </Col>
                                 <Col>
                                   <FormGroup>
-                                    <Label for="weaponSize">Size</Label>
+                                    <Label for={`weaponSize${index}`}>Size</Label>
                                     <Input
-                                      name="weaponSize"
-                                      id="weaponSize"
+                                      name={`weaponSize${index}`}
+                                      id={`weaponSize${index}`}
                                       value={weapon.weaponSize}
+                                      onChange={this.handleInputChangeWeapons}
                                     />
                                   </FormGroup>
                                 </Col>
                                 <Col>
                                   <FormGroup>
-                                    <Label for="weaponType">Type</Label>
+                                    <Label for={`weaponType${index}`}>Type</Label>
                                     <Input
-                                      name="weaponType"
-                                      id="weaponType"
+                                      name={`weaponType${index}`}
+                                      id={`weaponType${index}`}
                                       value={weapon.weaponType}
+                                      onChange={this.handleInputChangeWeapons}
                                     />
                                   </FormGroup>
                                 </Col>
@@ -2067,10 +2188,12 @@ Character.propTypes = {
   updateSheet: PropTypes.func.isRequired,
   fetchSkills: PropTypes.func.isRequired,
   createSkill: PropTypes.func.isRequired,
+  updateSkill: PropTypes.func.isRequired,
   deleteSkill: PropTypes.func.isRequired,
   fetchFeats: PropTypes.func.isRequired,
   createFeat: PropTypes.func.isRequired,
   deleteFeat: PropTypes.func.isRequired,
+  updateFeat: PropTypes.func.isRequired,
   fetchItems: PropTypes.func.isRequired,
   createItem: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
@@ -2084,19 +2207,10 @@ Character.propTypes = {
 
 Character.defaultProps = {
   sheet: {},
-
   skills: [],
-
-  feats: [
-  ],
-
-  items: [
-  ],
-
-  spells: [
-  ],
-  weapons: [
-  ],
+  feats: [],
+  items: [],
+  spells: [],
+  weapons: [],
 };
-
 export default container(Character);

@@ -11,6 +11,9 @@ import {
   DELETE_ITEM_SUCCESS,
   DELETE_ITEM_ERROR,
   DELETE_ITEM_PENDING,
+  UPDATE_ITEM_PENDING,
+  UPDATE_ITEM_SUCCESS,
+  UPDATE_ITEM_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -95,6 +98,22 @@ function itemSuccess(state, action) {
   };
 }
 
+function itemSaveSuccess(state, action) {
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.payload.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function deleteSuccess(state, action) {
   return {
     ...state,
@@ -128,4 +147,7 @@ export default createReducer(initialState, {
   [DELETE_ITEM_PENDING]: itemPending,
   [DELETE_ITEM_SUCCESS]: deleteSuccess,
   [DELETE_ITEM_ERROR]: itemError,
+  [UPDATE_ITEM_PENDING]: itemPending,
+  [UPDATE_ITEM_SUCCESS]: itemSaveSuccess,
+  [UPDATE_ITEM_ERROR]: itemError,
 });

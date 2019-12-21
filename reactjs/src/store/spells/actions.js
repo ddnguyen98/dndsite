@@ -9,6 +9,9 @@ import {
   DELETE_SPELL_PENDING,
   DELETE_SPELL_SUCCESS,
   DELETE_SPELL_ERROR,
+  UPDATE_SPELL_PENDING,
+  UPDATE_SPELL_SUCCESS,
+  UPDATE_SPELL_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -34,6 +37,12 @@ export const createSpell = spell => {
     payload: { id },
   };
 };
+
+export const updateSpell = spell => ({
+  types: [UPDATE_SPELL_PENDING, UPDATE_SPELL_SUCCESS, UPDATE_SPELL_ERROR],
+  callAPI: () => API.put(`/spells/${spell.id}`),
+  payload: { id: spell.id, data: spell.data },
+});
 
 export const deleteSpell = id => ({
   types: [DELETE_SPELL_PENDING, DELETE_SPELL_SUCCESS, DELETE_SPELL_ERROR],

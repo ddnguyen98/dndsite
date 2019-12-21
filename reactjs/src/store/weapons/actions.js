@@ -9,6 +9,9 @@ import {
   DELETE_WEAPON_PENDING,
   DELETE_WEAPON_SUCCESS,
   DELETE_WEAPON_ERROR,
+  UPDATE_WEAPON_PENDING,
+  UPDATE_WEAPON_SUCCESS,
+  UPDATE_WEAPON_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -34,6 +37,12 @@ export const createWeapon = weapon => {
     payload: { id },
   };
 };
+
+export const updateWeapon = weapon => ({
+  types: [UPDATE_WEAPON_PENDING, UPDATE_WEAPON_SUCCESS, UPDATE_WEAPON_ERROR],
+  callAPI: () => API.put(`/weapons/${weapon.id}`),
+  payload: { id: weapon.id, data: weapon.data },
+});
 
 export const deleteWeapon = id => ({
   types: [DELETE_WEAPON_PENDING, DELETE_WEAPON_SUCCESS, DELETE_WEAPON_ERROR],

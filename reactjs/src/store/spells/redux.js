@@ -11,6 +11,9 @@ import {
   DELETE_SPELL_PENDING,
   DELETE_SPELL_SUCCESS,
   DELETE_SPELL_ERROR,
+  UPDATE_SPELL_PENDING,
+  UPDATE_SPELL_SUCCESS,
+  UPDATE_SPELL_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -95,6 +98,22 @@ function spellSuccess(state, action) {
   };
 }
 
+function spellSaveSuccess(state, action) {
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.payload.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function deleteSuccess(state, action) {
   return {
     ...state,
@@ -128,4 +147,7 @@ export default createReducer(initialState, {
   [DELETE_SPELL_PENDING]: spellPending,
   [DELETE_SPELL_SUCCESS]: deleteSuccess,
   [DELETE_SPELL_ERROR]: spellError,
+  [UPDATE_SPELL_PENDING]: spellPending,
+  [UPDATE_SPELL_SUCCESS]: spellSaveSuccess,
+  [UPDATE_SPELL_ERROR]: spellError,
 });

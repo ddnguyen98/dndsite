@@ -101,6 +101,24 @@ function skillSuccess(state, action) {
   };
 }
 
+function skillSaveSuccess(state, action) {
+  console.log(state);
+  console.log(action);
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.payload.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function deleteSuccess(state, action) {
   console.log(action);
   return {
@@ -136,7 +154,7 @@ export default createReducer(initialState, {
   [REQ_SKILL_SUCCESS]: skillSuccess,
   [REQ_SKILL_ERROR]: skillError,
   [UPDATE_SKILL_PENDING]: skillPending,
-  [UPDATE_SKILL_SUCCESS]: skillSuccess,
+  [UPDATE_SKILL_SUCCESS]: skillSaveSuccess,
   [UPDATE_SKILL_ERROR]: skillError,
   [DELETE_SKILL_PENDING]: skillPending,
   [DELETE_SKILL_SUCCESS]: deleteSuccess,

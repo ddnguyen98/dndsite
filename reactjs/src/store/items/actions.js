@@ -6,6 +6,9 @@ import {
   ADD_ITEM_PENDING,
   ADD_ITEM_SUCCESS,
   ADD_ITEM_ERROR,
+  UPDATE_ITEM_PENDING,
+  UPDATE_ITEM_SUCCESS,
+  UPDATE_ITEM_ERROR,
   DELETE_ITEM_SUCCESS,
   DELETE_ITEM_ERROR,
   DELETE_ITEM_PENDING,
@@ -34,6 +37,12 @@ export const createItem = item => {
     payload: { id },
   };
 };
+
+export const updateItem = item => ({
+  types: [UPDATE_ITEM_PENDING, UPDATE_ITEM_SUCCESS, UPDATE_ITEM_ERROR],
+  callAPI: () => API.put(`/items/${item.id}`),
+  payload: { id: item.id, data: item.data },
+});
 
 export const deleteItem = id => ({
   types: [DELETE_ITEM_PENDING, DELETE_ITEM_SUCCESS, DELETE_ITEM_ERROR],

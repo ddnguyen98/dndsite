@@ -6,6 +6,9 @@ import {
   ADD_FEAT_PENDING,
   ADD_FEAT_SUCCESS,
   ADD_FEAT_ERROR,
+  UPDATE_FEAT_PENDING,
+  UPDATE_FEAT_SUCCESS,
+  UPDATE_FEAT_ERROR,
   DELETE_FEAT_SUCCESS,
   DELETE_FEAT_ERROR,
   DELETE_FEAT_PENDING,
@@ -34,6 +37,12 @@ export const createFeat = feat => {
     payload: { id },
   };
 };
+
+export const updateFeat = feat => ({
+  types: [UPDATE_FEAT_PENDING, UPDATE_FEAT_SUCCESS, UPDATE_FEAT_ERROR],
+  callAPI: () => API.put(`/feats/${feat.id}`),
+  payload: { id: feat.id, data: feat.data },
+});
 
 export const deleteFeat = id => ({
   types: [DELETE_FEAT_PENDING, DELETE_FEAT_SUCCESS, DELETE_FEAT_ERROR],

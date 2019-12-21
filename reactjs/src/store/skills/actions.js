@@ -6,9 +6,6 @@ import {
   ADD_SKILL_PENDING,
   ADD_SKILL_SUCCESS,
   ADD_SKILL_ERROR,
-  REQ_SKILL_PENDING,
-  REQ_SKILL_SUCCESS,
-  REQ_SKILL_ERROR,
   UPDATE_SKILL_PENDING,
   UPDATE_SKILL_SUCCESS,
   UPDATE_SKILL_ERROR,
@@ -40,6 +37,12 @@ export const createSkill = skill => {
     payload: { id },
   };
 };
+
+export const updateSkill = skill => ({
+  types: [UPDATE_SKILL_PENDING, UPDATE_SKILL_SUCCESS, UPDATE_SKILL_ERROR],
+  callAPI: () => API.put(`/skills/${skill.id}`),
+  payload: { id: skill.id, data: skill.data },
+});
 
 export const deleteSkill = id => ({
   types: [DELETE_SKILL_PENDING, DELETE_SKILL_SUCCESS, DELETE_SKILL_ERROR],
