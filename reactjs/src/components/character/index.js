@@ -527,6 +527,7 @@ class Character extends Component {
       fetchSpells,
       fetchWeapons,
     } = this.props;
+    console.log(id);
     if (!id) return;
     await fetchSheet(id);
     await fetchSkills();
@@ -571,59 +572,79 @@ class Character extends Component {
     });
   };
 
-  addSkill = event => {
+  addSkill = async event => {
     event.preventDefault();
     const { createSkill } = this.props;
-    createSkill();
+    await createSkill();
+    const { skills } = this.props;
+    this.setState({ skills: [...skills] });
   };
 
-  deleteSkill = id => {
+  deleteSkill = async id => {
     const { deleteSkill } = this.props;
-    deleteSkill(id);
+    await deleteSkill(id);
+    const { skills } = this.props;
+    this.setState({ skills: [...skills] });
   };
 
-  addFeat = event => {
+  addFeat = async event => {
     event.preventDefault();
     const { createFeat } = this.props;
-    createFeat();
+    await createFeat();
+    const { feats } = this.props;
+    this.setState({ feats: [...feats] });
   };
 
-  deleteFeat = id => {
+  deleteFeat = async id => {
     const { deleteFeat } = this.props;
-    deleteFeat(id);
+    await deleteFeat(id);
+    const { feats } = this.props;
+    this.setState({ feats: [...feats] });
   };
 
-  addItem = event => {
+  addItem = async event => {
     event.preventDefault();
     const { createItem } = this.props;
-    createItem();
+    await createItem();
+    const { items } = this.props;
+    this.setState({ items: [...items] });
   };
 
-  deleteItem = id => {
+  deleteItem = async id => {
     const { deleteItem } = this.props;
-    deleteItem(id);
+    await deleteItem(id);
+    const { items } = this.props;
+    this.setState({ items: [...items] });
   };
 
-  addSpell = event => {
+  addSpell = async event => {
     event.preventDefault();
     const { createSpell } = this.props;
-    createSpell();
+    await createSpell();
+    const { spells } = this.props;
+    this.setState({ spells: [...spells] });
   };
 
-  deleteSpell = id => {
+  deleteSpell = async id => {
     const { deleteSpell } = this.props;
-    deleteSpell(id);
+    await deleteSpell(id);
+    const { spells } = this.props;
+    this.setState({ spells: [...spells] });
   };
 
-  addWeapon = event => {
+  addWeapon = async event => {
     event.preventDefault();
     const { createWeapon } = this.props;
-    createWeapon();
+    await createWeapon();
+    const { weapons } = this.props;
+    this.setState({ weapons: [...weapons] });
   };
 
-  deleteWeapon = id => {
+  deleteWeapon = async id => {
     const { deleteWeapon } = this.props;
-    deleteWeapon(id);
+    await deleteWeapon(id);
+    const { weapons } = this.props;
+    this.setState({ weapons: [...weapons] });
   };
 
   render() {
@@ -2203,6 +2224,11 @@ Character.propTypes = {
   fetchWeapons: PropTypes.func.isRequired,
   createWeapon: PropTypes.func.isRequired,
   deleteWeapon: PropTypes.func.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.object),
+  feats: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
+  spells: PropTypes.arrayOf(PropTypes.object),
+  weapons: PropTypes.arrayOf(PropTypes.object),
 };
 
 Character.defaultProps = {
