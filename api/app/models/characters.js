@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     player: DataTypes.STRING,
     alignment: DataTypes.STRING,
     level: DataTypes.STRING,
-    class: DataTypes.STRING,
+    userClass: DataTypes.STRING,
     race: DataTypes.STRING,
     campaign: DataTypes.STRING,
     diety: DataTypes.STRING,

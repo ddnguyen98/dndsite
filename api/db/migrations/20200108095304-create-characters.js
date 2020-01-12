@@ -19,7 +19,7 @@ module.exports = {
     level: {
       type: Sequelize.STRING,
     },
-    class: {
+    userClass: {
       type: Sequelize.STRING,
     },
     race: {

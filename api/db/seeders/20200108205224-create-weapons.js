@@ -1,26 +1,18 @@
-'use strict';
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Weapons', [{
+    weaponName: 'Kill Death',
+    weaponAttackBonus: '3',
+    weaponDamage: 'd20',
+    weaponCritical: '15-20',
+    weaponRange: '10ft',
+    weaponSpecial: 'Its awesome',
+    weaponAmmunition: 'None',
+    weaponWeight: '5 pounds',
+    weaponSize: 'Large',
+    weaponType: 'Slashing',
+    createdAt: Sequelize.literal('NOW()'),
+    updatedAt: Sequelize.literal('NOW()'),
+  }], {}),
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
-  },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+  down: (queryInterface) => queryInterface.bulkDelete('Weapons', null, {}),
 };

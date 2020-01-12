@@ -11,7 +11,6 @@ const skillRoutes = require('./routes/skills');
 const weaponRoutes = require('./routes/weapons');
 const characterRoutes = require('./routes/characters');
 
-
 app.use(bodyParser.json());
 app.use('/api/feats', featRoutes);
 app.use('/api/items', itemRoutes);

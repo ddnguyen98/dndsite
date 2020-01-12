@@ -1,26 +1,62 @@
-'use strict';
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Characters', [{
+    name: 'Jimmy',
+    player: 'Dominic',
+    alignment: 'Chaotic Good',
+    level: '3',
+    userClass: ' Fighter',
+    race: 'Human',
+    campaign: 'Curse of dog',
+    diety: 'Jenny',
+    size: 'Medium',
+    age: '12',
+    gender: 'Male',
+    hair: 'Black',
+    height: '5"2',
+    characterWeight: '120',
+    eyes: 'Green',
+    currency: ' 10 Plat',
+    languages: 'Common',
+    description: 'He a real cool dude',
+    personality: 'Aaaaa',
+    traits: 'Awesome',
+    flaws: 'Lazy',
+    contacts: 'None',
+    enemies: 'Everyone',
+    notes: 'Dont forget the pie',
+    image: 'henry.jpg',
+    stat: ['1', '1', '1', '1', '1', '1'],
+    statMod: ['2', '2', '2', '2', '2', '2'],
+    hp: '300',
+    hpWounds: '250',
+    hpDice: '10d20',
+    dmgReduction: 'None',
+    ac: '20',
+    acArmor: '5',
+    acShield: '5',
+    acDex: '5',
+    acNatural: ' 5',
+    acMisc: '0',
+    acTouch: '10',
+    acFlat: '10',
+    init: '12',
+    initDex: '6',
+    initMisc: '6',
+    speed: '20ft',
+    attackTotal: ['3', '4'],
+    attackBase: ['3', '4'],
+    attackMod: ['3', '4'],
+    attackMisc: ['3', '4'],
+    spellsKnown: ['3', '4', '3', '4', '3', '4', '3', '4', '3', '4'],
+    spellsPerDay: ['3', '4', '3', '4', '3', '4', '3', '4', '3', '4'],
+    spellDC: ['3', '4', '3', '4', '3', '4', '3', '4', '3', '4'],
+    savingThrow: ['1', '2', '3'],
+    savingThrowBase: ['1', '2', '3'],
+    savingThrowMod: ['1', '2', '3'],
+    weight: ['1', '2', '3', '4', '5'],
+    createdAt: Sequelize.literal('NOW()'),
+    updatedAt: Sequelize.literal('NOW()'),
+  }], {}),
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
-  },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+  down: (queryInterface) => queryInterface.bulkDelete('Weapons', null, {}),
 };

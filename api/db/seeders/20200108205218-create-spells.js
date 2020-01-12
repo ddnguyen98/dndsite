@@ -1,26 +1,16 @@
-'use strict';
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Spells', [{
+    spellName: 'Fireball',
+    spellComponents: 'None',
+    spellCastingTime: '3 seconds',
+    spellRange: '30ft',
+    spellTarget: 'AOE',
+    spellDuration: 'instant',
+    spellSavingThrow: 'Con',
+    spellDescription: 'Big booma kabooma',
+    createdAt: Sequelize.literal('NOW()'),
+    updatedAt: Sequelize.literal('NOW()'),
+  }], {}),
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
-  },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
+  down: (queryInterface) => queryInterface.bulkDelete('Spells', null, {}),
 };

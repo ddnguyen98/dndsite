@@ -689,7 +689,7 @@ class Character extends Component {
                     name="class"
                     id="class"
                     onChange={this.handleInputChange}
-                    value={inputs.class}
+                    value={inputs.userClass}
                   />
                   <Label for="class">Class</Label>
                 </FormGroup>

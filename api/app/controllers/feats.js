@@ -1,5 +1,5 @@
 const { Feats, Sequelize } = require('../models');
-const { SendError, throwError, throwIf } = require('../utils/errorHandling');
+const { SendError, throwError } = require('../utils/errorHandling');
 
 exports.getAll = async (req, res) => {
   try {

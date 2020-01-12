@@ -7,5 +7,5 @@ module.exports = {
     updatedAt: Sequelize.literal('NOW()'),
   }], {}),
 
-  down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Feats', null, {}),
+  down: (queryInterface) => queryInterface.bulkDelete('Feats', null, {}),
 };
