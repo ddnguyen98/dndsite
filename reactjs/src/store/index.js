@@ -5,9 +5,19 @@ import { createLogger } from 'redux-logger';
 import callAPI from './utils/callAPIMiddleware';
 
 import sheets from './sheets/redux';
+import skills from './skills/redux';
+import feats from './feats/redux';
+import items from './items/redux';
+import spells from './spells/redux';
+import weapons from './weapons/redux';
 
 const rootReducer = combineReducers({
   sheets,
+  skills,
+  feats,
+  items,
+  spells,
+  weapons,
 });
 
 const middleware = applyMiddleware(thunkMiddleware, callAPI, createLogger());

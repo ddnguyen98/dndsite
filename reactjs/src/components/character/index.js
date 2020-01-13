@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   Container,
   Button,
@@ -15,51 +16,671 @@ import {
   CardBody,
 } from 'reactstrap';
 import { Tab, Tabs, TabPanel } from 'react-tabs';
-
+import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
+import container from './container';
 import styles from './styles.module.css';
 
 class Character extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputs: {
+        image: 'henry.jpg',
+        stat: [],
+        statMod: [],
+        attackTotal: [],
+        attackBase: [],
+        attackMod: [],
+        attackMisc: [],
+        spellsKnown: [],
+        spellsPerDay: [],
+        spellDC: [],
+        savingThrow: [],
+        savingThrowBase: [],
+        savingThrowMod: [],
+        weight: [],
+      },
+      skills: [{}],
+      feats: [{}],
+      items: [{}],
+      spells: [{}],
+      weapons: [{}],
+    };
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  handleInputChange = event => {
     const {
-      characterDetails,
-      characterStats,
-      attackBonus,
-      weightAmmount,
-      savingThrows,
-      skills,
-      feats,
-      items,
-      spells,
-      characterSpells,
-      weapons,
+      target: { value, name },
+    } = event;
+    const { inputs } = this.state;
+
+    switch (name) {
+      case 'strength': {
+        const array = inputs.stat;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'dexterity': {
+        const array = inputs.stat;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'constitution': {
+        const array = inputs.stat;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'intelligence': {
+        const array = inputs.stat;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'wisdom': {
+        const array = inputs.stat;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'charisma': {
+        const array = inputs.stat;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, stat: array } });
+        break;
+      }
+      case 'strengthMod': {
+        const array = inputs.statMod;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'dexterityMod': {
+        const array = inputs.statMod;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'constitutionMod': {
+        const array = inputs.statMod;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'intelligenceMod': {
+        const array = inputs.statMod;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'wisdomMod': {
+        const array = inputs.statMod;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'charismaMod': {
+        const array = inputs.statMod;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, statMod: array } });
+        break;
+      }
+      case 'fortitude': {
+        const array = inputs.savingThrow;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, savingThrow: array } });
+        break;
+      }
+      case 'fortitudeBase': {
+        const array = inputs.savingThrowBase;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, savingThrowBase: array } });
+        break;
+      }
+      case 'fortitudeMod': {
+        const array = inputs.savingThrowMod;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, savingThrowMod: array } });
+        break;
+      }
+      case 'reflex': {
+        const array = inputs.savingThrow;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, savingThrow: array } });
+        break;
+      }
+      case 'reflexBase': {
+        const array = inputs.savingThrowBase;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, savingThrowBase: array } });
+        break;
+      }
+      case 'reflexMod': {
+        const array = inputs.savingThrowMod;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, savingThrowMod: array } });
+        break;
+      }
+      case 'will': {
+        const array = inputs.savingThrow;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, savingThrow: array } });
+        break;
+      }
+      case 'willBase': {
+        const array = inputs.savingThrowBase;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, savingThrowBase: array } });
+        break;
+      }
+      case 'willMod': {
+        const array = inputs.savingThrowMod;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, savingThrowMod: array } });
+        break;
+      }
+      case 'attackTotalM': {
+        const array = inputs.attackTotal;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackTotal: array } });
+        break;
+      }
+      case 'attackBaseM': {
+        const array = inputs.attackBase;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackBase: array } });
+        break;
+      }
+      case 'attackModM': {
+        const array = inputs.attackMod;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackMod: array } });
+        break;
+      }
+      case 'attackMiscM': {
+        const array = inputs.attackMisc;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, attackMisc: array } });
+        break;
+      }
+      case 'attackTotalR': {
+        const array = inputs.attackTotal;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackTotal: array } });
+        break;
+      }
+      case 'attackBaseR': {
+        const array = inputs.attackBase;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackBase: array } });
+        break;
+      }
+      case 'attackModR': {
+        const array = inputs.attackMod;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackMod: array } });
+        break;
+      }
+      case 'attackMiscR': {
+        const array = inputs.attackMisc;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, attackMisc: array } });
+        break;
+      }
+      case 'weightLight': {
+        const array = inputs.weight;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightMedium': {
+        const array = inputs.weight;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightHeavy': {
+        const array = inputs.weight;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightPull': {
+        const array = inputs.weight;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'weightTotal': {
+        const array = inputs.weight;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, weight: array } });
+        break;
+      }
+      case 'spellsKnown0': {
+        const array = inputs.spellsKnown;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC0': {
+        const array = inputs.spellDC;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay0': {
+        const array = inputs.spellsPerDay;
+        array[0] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown1': {
+        const array = inputs.spellsKnown;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC1': {
+        const array = inputs.spellDC;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay1': {
+        const array = inputs.spellsPerDay;
+        array[1] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown2': {
+        const array = inputs.spellsKnown;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC2': {
+        const array = inputs.spellDC;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay2': {
+        const array = inputs.spellsPerDay;
+        array[2] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown3': {
+        const array = inputs.spellsKnown;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC3': {
+        const array = inputs.spellDC;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay3': {
+        const array = inputs.spellsPerDay;
+        array[3] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown4': {
+        const array = inputs.spellsKnown;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC4': {
+        const array = inputs.spellDC;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay4': {
+        const array = inputs.spellsPerDay;
+        array[4] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown5': {
+        const array = inputs.spellsKnown;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC5': {
+        const array = inputs.spellDC;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay5': {
+        const array = inputs.spellsPerDay;
+        array[5] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown6': {
+        const array = inputs.spellsKnown;
+        array[6] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC6': {
+        const array = inputs.spellDC;
+        array[6] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay6': {
+        const array = inputs.spellsPerDay;
+        array[6] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown7': {
+        const array = inputs.spellsKnown;
+        array[7] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC7': {
+        const array = inputs.spellDC;
+        array[7] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay7': {
+        const array = inputs.spellsPerDay;
+        array[7] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown8': {
+        const array = inputs.spellsKnown;
+        array[8] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC8': {
+        const array = inputs.spellDC;
+        array[8] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay8': {
+        const array = inputs.spellsPerDay;
+        array[8] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      case 'spellsKnown9': {
+        const array = inputs.spellsKnown;
+        array[9] = value;
+        this.setState({ inputs: { ...inputs, spellsKnown: array } });
+        break;
+      }
+      case 'spellDC9': {
+        const array = inputs.spellDC;
+        array[9] = value;
+        this.setState({ inputs: { ...inputs, spellDC: array } });
+        break;
+      }
+      case 'spellsPerDay9': {
+        const array = inputs.spellsPerDay;
+        array[9] = value;
+        this.setState({ inputs: { ...inputs, spellsPerDay: array } });
+        break;
+      }
+      default: {
+        this.setState({ inputs: { ...inputs, [name]: value } });
+      }
+    }
+  };
+
+  handleInputChangeSkills = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { skills } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...skills[index], [newName]: value};
+    let array = skills;
+    array[index] = arrayValue;
+    this.setState({skills: array});
+  };
+
+  handleInputChangeFeats = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { feats } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...feats[index], [newName]: value};
+    let array = feats;
+    array[index] = arrayValue;
+    this.setState({feats: array});
+  };
+
+  handleInputChangeItems = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { items } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...items[index], [newName]: value};
+    let array = items;
+    array[index] = arrayValue;
+    this.setState({items: array});
+  };
+
+  handleInputChangeSpells = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { spells } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...spells[index], [newName]: value};
+    let array = spells;
+    array[index] = arrayValue;
+    this.setState({spells: array});
+  };
+
+  handleInputChangeWeapons = event => {
+    const {
+      target: { value, name },
+    } = event;
+    const { weapons } = this.state;
+    const newName = name.substring(0, name.length - 1);
+    const index = parseFloat(name.charAt(name.length - 1));
+    let arrayValue = {...weapons[index], [newName]: value};
+    let array = weapons;
+    array[index] = arrayValue;
+    this.setState({weapons: array});
+  };
+
+  loadData = async () => {
+    const {
+      match: {
+        params: { id },
+      },
+      fetchSheet,
+      fetchSkills,
+      fetchFeats,
+      fetchItems,
+      fetchSpells,
+      fetchWeapons,
     } = this.props;
+    console.log(id);
+    if (!id) return;
+    await fetchSheet(id);
+    await fetchSkills();
+    await fetchFeats();
+    await fetchItems();
+    await fetchSpells();
+    await fetchWeapons();
+    const { sheet, skills, feats, items, spells, weapons } = this.props;
+    this.setState({ inputs: { ...sheet } });
+    this.setState({ skills: [...skills] });
+    this.setState({ feats: [...feats] });
+    this.setState({ items: [...items] });
+    this.setState({ spells: [...spells] });
+    this.setState({ weapons: [...weapons] });
+  };
+
+  saveForm = async event => {
+    // make sure the form doesn't submit with the browser
+    event.preventDefault();
+    const { updateSheet, updateSkill, updateFeat, updateItem, updateSpell, updateWeapon, match: { params: { id } }  } = this.props;
+    const { inputs, skills, feats, items, spells, weapons } = this.state;
+    await updateSheet({ id, inputs });
+    skills.forEach(async data => {
+      const id = data.id;
+      await updateSkill({ id, data });
+    });
+    feats.forEach(async data => {
+      const id = data.id;
+      await updateFeat({ id, data });
+    });
+    items.forEach(async data => {
+      const id = data.id;
+      await updateItem({ id, data });
+    });
+    spells.forEach(async data => {
+      const id = data.id;
+      await updateSpell({ id, data });
+    });
+    weapons.forEach(async data => {
+      const id = data.id;
+      await updateWeapon({ id, data });
+    });
+  };
+
+  addSkill = async event => {
+    event.preventDefault();
+    const { createSkill } = this.props;
+    await createSkill();
+    const { skills } = this.props;
+    this.setState({ skills: [...skills] });
+  };
+
+  deleteSkill = async id => {
+    const { deleteSkill } = this.props;
+    await deleteSkill(id);
+    const { skills } = this.props;
+    this.setState({ skills: [...skills] });
+  };
+
+  addFeat = async event => {
+    event.preventDefault();
+    const { createFeat } = this.props;
+    await createFeat();
+    const { feats } = this.props;
+    this.setState({ feats: [...feats] });
+  };
+
+  deleteFeat = async id => {
+    const { deleteFeat } = this.props;
+    await deleteFeat(id);
+    const { feats } = this.props;
+    this.setState({ feats: [...feats] });
+  };
+
+  addItem = async event => {
+    event.preventDefault();
+    const { createItem } = this.props;
+    await createItem();
+    const { items } = this.props;
+    this.setState({ items: [...items] });
+  };
+
+  deleteItem = async id => {
+    const { deleteItem } = this.props;
+    await deleteItem(id);
+    const { items } = this.props;
+    this.setState({ items: [...items] });
+  };
+
+  addSpell = async event => {
+    event.preventDefault();
+    const { createSpell } = this.props;
+    await createSpell();
+    const { spells } = this.props;
+    this.setState({ spells: [...spells] });
+  };
+
+  deleteSpell = async id => {
+    const { deleteSpell } = this.props;
+    await deleteSpell(id);
+    const { spells } = this.props;
+    this.setState({ spells: [...spells] });
+  };
+
+  addWeapon = async event => {
+    event.preventDefault();
+    const { createWeapon } = this.props;
+    await createWeapon();
+    const { weapons } = this.props;
+    this.setState({ weapons: [...weapons] });
+  };
+
+  deleteWeapon = async id => {
+    const { deleteWeapon } = this.props;
+    await deleteWeapon(id);
+    const { weapons } = this.props;
+    this.setState({ weapons: [...weapons] });
+  };
+
+  render() {
+    const { inputs, skills, feats, items, spells, weapons } = this.state;
     return (
       <div>
         <Container className={styles.form}>
-          <Form>
+          <Form onSubmit={this.saveForm}>
             {/* Header for saving */}
             <div className={styles.heading}>
-              <Button>Save</Button>
+              <Button type="submit">Save</Button>
             </div>
             <Row>
               {/* Character Image + Basic User Details */}
               <Col xs="3" className={styles.inputBasic}>
                 <img
-                  src="henry.jpg"
+                  src={`../${inputs.image}`}
                   alt="character"
                   width="100%"
                   height="250"
                 />
                 <FormGroup>
-                  <Input name="name" id="name" value={characterDetails.name} />
+                  <Input
+                    name="name"
+                    id="name"
+                    value={inputs.name}
+                    onChange={this.handleInputChange}
+                  />
                   <Label for="name">Name</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
                     name="level"
                     id="level"
-                    value={characterDetails.level}
+                    onChange={this.handleInputChange}
+                    value={inputs.level}
                   />
                   <Label for="input">Level</Label>
                 </FormGroup>
@@ -67,31 +688,44 @@ class Character extends Component {
                   <Input
                     name="class"
                     id="class"
-                    value={characterDetails.class}
+                    onChange={this.handleInputChange}
+                    value={inputs.userClass}
                   />
                   <Label for="class">Class</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Input name="race" id="race" value={characterDetails.race} />
+                  <Input
+                    name="race"
+                    id="race"
+                    onChange={this.handleInputChange}
+                    value={inputs.race}
+                  />
                   <Label for="race">Race</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
                     name="alignment"
                     id="alignment"
-                    value={characterDetails.alignment}
+                    value={inputs.alignment}
+                    onChange={this.handleInputChange}
                   />
                   <Label for="alignment">Alignment</Label>
                 </FormGroup>
                 <FormGroup>
-                  <Input name="size" id="size" value={characterDetails.size} />
+                  <Input
+                    name="size"
+                    id="size"
+                    value={inputs.size}
+                    onChange={this.handleInputChange}
+                  />
                   <Label for="size">Size</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
                     name="campaign"
                     id="campaign"
-                    value={characterDetails.campaign}
+                    value={inputs.campaign}
+                    onChange={this.handleInputChange}
                   />
                   <Label for="campaign">Campaign</Label>
                 </FormGroup>
@@ -99,7 +733,8 @@ class Character extends Component {
                   <Input
                     name="player"
                     id="player"
-                    value={characterDetails.player}
+                    value={inputs.player}
+                    onChange={this.handleInputChange}
                   />
                   <Label for="player">Player</Label>
                 </FormGroup>
@@ -113,14 +748,16 @@ class Character extends Component {
                       <Input
                         name="strength"
                         id="strength"
-                        value={characterStats.stat[0]}
+                        value={inputs.stat[0]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="strengthMod"
                         id="strengthMod"
-                        value={characterStats.statMod[0]}
+                        value={inputs.statMod[0]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -130,14 +767,16 @@ class Character extends Component {
                       <Input
                         name="dexterity"
                         id="dexterity"
-                        value={characterStats.stat[1]}
+                        value={inputs.stat[1]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="dexterityMod"
                         id="dexterityMod"
-                        value={characterStats.statMod[1]}
+                        value={inputs.statMod[1]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -147,14 +786,16 @@ class Character extends Component {
                       <Input
                         name="constitution"
                         id="constitution"
-                        value={characterStats.stat[2]}
+                        value={inputs.stat[2]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="constitutionMod"
                         id="constitutionMod"
-                        value={characterStats.statMod[2]}
+                        value={inputs.statMod[2]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -164,31 +805,30 @@ class Character extends Component {
                       <Input
                         name="intelligence"
                         id="intelligence"
-                        value={characterStats.stat[3]}
+                        value={inputs.stat[3]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="intelligenceMod"
                         id="intelligenceMod"
-                        value={characterStats.statMod[3]}
+                        value={inputs.statMod[3]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="wisdom">Wisdom</Label>
-                      <Input
-                        name="wisdom"
-                        id="wisdom"
-                        value={characterStats.stat[4]}
-                      />
+                      <Input name="wisdom" id="wisdom" value={inputs.stat[4]} />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="wisdomMod"
                         id="wisdomMod"
-                        value={characterStats.statMod[4]}
+                        value={inputs.statMod[4]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -198,14 +838,16 @@ class Character extends Component {
                       <Input
                         name="charisma"
                         id="charisma"
-                        value={characterStats.stat[5]}
+                        value={inputs.stat[5]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                     <FormGroup>
                       <Input
                         name="charismaMod"
                         id="charismaMod"
-                        value={characterStats.statMod[5]}
+                        value={inputs.statMod[5]}
+                        onChange={this.handleInputChange}
                       />
                     </FormGroup>
                   </Col>
@@ -221,20 +863,22 @@ class Character extends Component {
                           <Input
                             name="hpWounds"
                             id="hpWounds"
-                            value={characterStats.hpWounds}
+                            value={inputs.hpWounds}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                         /
                         <FormGroup>
                           <Label for="hp">Max</Label>
-                          <Input name="hp" id="hp" value={characterStats.hp} />
+                          <Input name="hp" id="hp" value={inputs.hp} />
                         </FormGroup>
                         <FormGroup>
                           <Label for="hpDice">Hie Dice</Label>
                           <Input
                             name="hpDice"
                             id="hpDice"
-                            value={characterStats.hpDice}
+                            value={inputs.hpDice}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </div>
@@ -246,7 +890,8 @@ class Character extends Component {
                             type="textarea"
                             name="dmgReduction"
                             id="inpdmgReductionut"
-                            value={characterStats.dmgReduction}
+                            value={inputs.dmgReduction}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </div>
@@ -257,7 +902,8 @@ class Character extends Component {
                           <Input
                             name="speed"
                             id="speed"
-                            value={characterStats.speed}
+                            value={inputs.speed}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                         <div>
@@ -266,7 +912,8 @@ class Character extends Component {
                             <Input
                               name="init"
                               id="init"
-                              value={characterStats.init}
+                              value={inputs.init}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -274,7 +921,8 @@ class Character extends Component {
                             <Input
                               name="initDex"
                               id="initDex"
-                              value={characterStats.initDex}
+                              value={inputs.initDex}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -282,7 +930,8 @@ class Character extends Component {
                             <Input
                               name="initMisc"
                               id="initMisc"
-                              value={characterStats.initMisc}
+                              value={inputs.initMisc}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                         </div>
@@ -300,7 +949,8 @@ class Character extends Component {
                             <Input
                               name="acTouch"
                               id="acTouch"
-                              value={characterStats.acTouch}
+                              value={inputs.acTouch}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -308,7 +958,8 @@ class Character extends Component {
                             <Input
                               name="armor"
                               id="armor"
-                              value={characterStats.ac}
+                              value={inputs.ac}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -316,7 +967,8 @@ class Character extends Component {
                             <Input
                               name="acFlat"
                               id="acFlat"
-                              value={characterStats.acFlat}
+                              value={inputs.acFlat}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -326,7 +978,8 @@ class Character extends Component {
                               <Input
                                 name="acArmor"
                                 id="acArmor"
-                                value={characterStats.acArmor}
+                                value={inputs.acArmor}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -334,7 +987,8 @@ class Character extends Component {
                               <Input
                                 name="acShield"
                                 id="acShield"
-                                value={characterStats.acShield}
+                                value={inputs.acShield}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -342,7 +996,8 @@ class Character extends Component {
                               <Input
                                 name="acDex"
                                 id="acDex"
-                                value={characterStats.acDex}
+                                value={inputs.acDex}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -350,7 +1005,8 @@ class Character extends Component {
                               <Input
                                 name="acNatural"
                                 id="acNatural"
-                                value={characterStats.acNatural}
+                                value={inputs.acNatural}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -358,7 +1014,8 @@ class Character extends Component {
                               <Input
                                 name="acMisc"
                                 id="acMisc"
-                                value={characterStats.acMisc}
+                                value={inputs.acMisc}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -373,7 +1030,8 @@ class Character extends Component {
                             <Input
                               name="fortitude"
                               id="fortitude"
-                              value={savingThrows.savingThrow[0]}
+                              value={inputs.savingThrow[0]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -382,7 +1040,8 @@ class Character extends Component {
                               <Input
                                 name="fortitudeBase"
                                 id="fortitudeBase"
-                                value={savingThrows.savingThrowBase[0]}
+                                value={inputs.savingThrowBase[0]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -390,7 +1049,8 @@ class Character extends Component {
                               <Input
                                 name="fortitudeMod"
                                 id="fortitudeMod"
-                                value={savingThrows.savingThrowMod[0]}
+                                value={inputs.savingThrowMod[0]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -401,7 +1061,8 @@ class Character extends Component {
                             <Input
                               name="reflex"
                               id="reflex"
-                              value={savingThrows.savingThrow[1]}
+                              value={inputs.savingThrow[1]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -410,7 +1071,8 @@ class Character extends Component {
                               <Input
                                 name="reflexBase"
                                 id="reflexBase"
-                                value={savingThrows.savingThrowBase[1]}
+                                value={inputs.savingThrowBase[1]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -418,7 +1080,8 @@ class Character extends Component {
                               <Input
                                 name="reflexMod"
                                 id="reflexMod"
-                                value={savingThrows.savingThrowMod[1]}
+                                value={inputs.savingThrowMod[1]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -429,7 +1092,8 @@ class Character extends Component {
                             <Input
                               name="will"
                               id="will"
-                              value={savingThrows.savingThrow[3]}
+                              value={inputs.savingThrow[2]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <div>
@@ -438,7 +1102,8 @@ class Character extends Component {
                               <Input
                                 name="willBase"
                                 id="willBase"
-                                value={savingThrows.savingThrowBase[3]}
+                                value={inputs.savingThrowBase[2]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -446,7 +1111,8 @@ class Character extends Component {
                               <Input
                                 name="willMod"
                                 id="willMod"
-                                value={savingThrows.savingThrowMod[3]}
+                                value={inputs.savingThrowMod[2]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                           </div>
@@ -466,7 +1132,8 @@ class Character extends Component {
                               <Input
                                 name="attackTotalM"
                                 id="attackTotalM"
-                                value={attackBonus.attackTotal[0]}
+                                value={inputs.attackTotal[0]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <div>
@@ -475,7 +1142,8 @@ class Character extends Component {
                                 <Input
                                   name="attackBaseM"
                                   id="attackBaseM"
-                                  value={attackBonus.attackBase[0]}
+                                  value={inputs.attackBase[0]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -483,7 +1151,8 @@ class Character extends Component {
                                 <Input
                                   name="attackModM"
                                   id="attackModM"
-                                  value={attackBonus.attackMod[0]}
+                                  value={inputs.attackMod[0]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -491,7 +1160,8 @@ class Character extends Component {
                                 <Input
                                   name="attackMiscM"
                                   id="attackMiscM"
-                                  value={attackBonus.attackMisc[0]}
+                                  value={inputs.attackMisc[0]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </div>
@@ -502,7 +1172,8 @@ class Character extends Component {
                               <Input
                                 name="attackTotalR"
                                 id="attackTotalR"
-                                value={attackBonus.attackTotal[1]}
+                                value={inputs.attackTotal[1]}
+                                onChange={this.handleInputChange}
                               />
                             </FormGroup>
                             <div>
@@ -511,7 +1182,8 @@ class Character extends Component {
                                 <Input
                                   name="attackBaseR"
                                   id="attackBaseR"
-                                  value={attackBonus.attackBase[1]}
+                                  value={inputs.attackBase[1]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -519,7 +1191,8 @@ class Character extends Component {
                                 <Input
                                   name="attackModR"
                                   id="attackModR"
-                                  value={attackBonus.attackMod[1]}
+                                  value={inputs.attackMod[1]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                               <FormGroup>
@@ -527,7 +1200,8 @@ class Character extends Component {
                                 <Input
                                   name="attackMiscR"
                                   id="attackMiscR"
-                                  value={attackBonus.attackMisc[1]}
+                                  value={inputs.attackMisc[1]}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </div>
@@ -543,7 +1217,8 @@ class Character extends Component {
                             <Input
                               name="weightLight"
                               id="weightLight"
-                              value={weightAmmount.weight[0]}
+                              value={inputs.weight[0]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -551,7 +1226,8 @@ class Character extends Component {
                             <Input
                               name="weightMedium"
                               id="weightMedium"
-                              value={weightAmmount.weight[1]}
+                              value={inputs.weight[1]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -559,7 +1235,8 @@ class Character extends Component {
                             <Input
                               name="weightHeavy"
                               id="weightHeavy"
-                              value={weightAmmount.weight[2]}
+                              value={inputs.weight[2]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -567,7 +1244,8 @@ class Character extends Component {
                             <Input
                               name="weightPull"
                               id="weightPull"
-                              value={weightAmmount.weight[3]}
+                              value={inputs.weight[3]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -575,7 +1253,8 @@ class Character extends Component {
                             <Input
                               name="weightTotal"
                               id="weightTotal"
-                              value={weightAmmount.weight[4]}
+                              value={inputs.weight[4]}
+                              onChange={this.handleInputChange}
                             />
                           </FormGroup>
                         </div>
@@ -587,7 +1266,7 @@ class Character extends Component {
                 <Row xs="1">
                   <div>
                     <h2>Skills</h2>
-                    <Button>Add</Button>
+                    <Button onClick={this.addSkill}>Add</Button>
                     <Table striped>
                       <thead>
                         <tr>
@@ -599,44 +1278,49 @@ class Character extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {skills.map(skill => (
-                          <tr>
+                        {skills.map((skill, index) => (
+                          <tr id={skill.id}>
                             <td>
                               <Input
-                                name="skillName"
-                                id="skillName"
+                                name={`skillName${index}`}
+                                id={`skillName${index}`}
                                 value={skill.skillName}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillModType"
-                                id="skillModType"
+                                name={`skillModType${index}`}
+                                id={`skillModType${index}`}
+                                onChange={this.handleInputChangeSkills}
                                 value={skill.skillModType}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillTotal"
-                                id="skillTotal"
+                                name={`skillTotal${index}`}
+                                id={`skillTotal${index}`}
                                 value={skill.skillTotal}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillAbilityMod"
-                                id="skillAbilityMod"
+                                name={`skillAbilityMod${index}`}
+                                id={`skillAbilityMod${index}`}
                                 value={skill.skillAbilityMod}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
                             <td>
                               <Input
-                                name="skillRank"
-                                id="skillRank"
+                                name={`skillRank${index}`}
+                                id={`skillRank${index}`}
                                 value={skill.skillRank}
+                                onChange={this.handleInputChangeSkills}
                               />
                             </td>
-                            <FaTrash />
+                            <FaTrash onClick={()=>{this.deleteSkill(skill.id)}}/>
                           </tr>
                         ))}
                       </tbody>
@@ -678,7 +1362,8 @@ class Character extends Component {
                                 <Input
                                   name="height"
                                   id="height"
-                                  value={characterDetails.height}
+                                  value={inputs.height}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -688,7 +1373,8 @@ class Character extends Component {
                                 <Input
                                   name="age"
                                   id="age"
-                                  value={characterDetails.age}
+                                  value={inputs.age}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -698,7 +1384,8 @@ class Character extends Component {
                                 <Input
                                   name="eyes"
                                   id="eyes"
-                                  value={characterDetails.eyes}
+                                  value={inputs.eyes}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -708,17 +1395,19 @@ class Character extends Component {
                                 <Input
                                   name="hair"
                                   id="hair"
-                                  value={characterDetails.hair}
+                                  value={inputs.hair}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
                             <Col>
                               <FormGroup>
-                                <Label for="weight">Weight</Label>
+                                <Label for="characterWeight">Weight</Label>
                                 <Input
-                                  name="weight"
-                                  id="weight"
-                                  value={characterDetails.weight}
+                                  name="characterWeight"
+                                  id="characterWeight"
+                                  value={inputs.characterWeight}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -728,7 +1417,8 @@ class Character extends Component {
                                 <Input
                                   name="diety"
                                   id="diety"
-                                  value={characterDetails.diety}
+                                  value={inputs.diety}
+                                  onChange={this.handleInputChange}
                                 />
                               </FormGroup>
                             </Col>
@@ -740,7 +1430,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="notes"
                                 id="notes"
-                                value={characterDetails.notes}
+                                value={inputs.notes}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                           </Row>
@@ -753,7 +1444,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="currency"
                                 id="currency"
-                                value={characterDetails.currency}
+                                value={inputs.currency}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -762,7 +1454,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="languages"
                                 id="languages"
-                                value={characterDetails.languages}
+                                value={inputs.languages}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -771,7 +1464,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="description"
                                 id="description"
-                                value={characterDetails.description}
+                                value={inputs.description}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -780,7 +1474,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="personality"
                                 id="personality"
-                                value={characterDetails.personality}
+                                value={inputs.personality}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -789,7 +1484,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="traits"
                                 id="traits"
-                                value={characterDetails.traits}
+                                value={inputs.traits}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -798,7 +1494,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="flaws"
                                 id="flaws"
-                                value={characterDetails.flaws}
+                                value={inputs.flaws}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -807,7 +1504,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="contacts"
                                 id="contacts"
-                                value={characterDetails.contacts}
+                                value={inputs.contacts}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                             <Col>
@@ -816,7 +1514,8 @@ class Character extends Component {
                                 type="textarea"
                                 name="enemies"
                                 id="enemies"
-                                value={characterDetails.enemies}
+                                value={inputs.enemies}
+                                onChange={this.handleInputChange}
                               />
                             </Col>
                           </Row>
@@ -828,30 +1527,32 @@ class Character extends Component {
                   <TabPanel>
                     <div>
                       <div>
-                        <Button>Add</Button>
+                        <Button onClick={this.addFeat}>Add</Button>
                       </div>
                       <Row xs="3">
-                        {feats.map(feat => (
+                        {feats.map((feat, index) => (
                           <Col>
                             <Card>
                               <CardBody>
-                                <FaTrash />
+                                <FaTrash onClick={()=>{this.deleteFeat(feat.id)}}/>
                                 <FormGroup>
-                                  <Label for="featName">Name</Label>
+                                  <Label for={`featName${index}`}>Name</Label>
                                   <Input
-                                    name="featName"
-                                    id="featName"
+                                    name={`featName${index}`}
+                                    id={`featName${index}`}
                                     value={feat.featName}
+                                    onChange={this.handleInputChangeFeats}
                                   />
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="featDescription">
+                                  <Label for={`featsDescription${index}`}>
                                     Description
                                   </Label>
                                   <Input
-                                    name="featDescription"
-                                    id="featDescription"
+                                    name={`featDescription${index}`}
+                                    id={`featDescription${index}`}
                                     value={feat.featDescription}
+                                    onChange={this.handleInputChangeFeats}
                                   />
                                 </FormGroup>
                               </CardBody>
@@ -864,7 +1565,7 @@ class Character extends Component {
                   {/* Items */}
                   <TabPanel>
                     <div>
-                      <Button>Add</Button>
+                      <Button onClick={this.addItem}>Add</Button>
                     </div>
                     <div>
                       <Table striped>
@@ -876,30 +1577,33 @@ class Character extends Component {
                           </tr>
                         </thead>
                         <tbody>
-                          {items.map(item => (
-                            <tr>
+                          {items.map((item, index) => (
+                            <tr id={item.id}>
                               <td>
                                 <Input
-                                  name="itemName"
-                                  id="itemName"
+                                  name={`itemName${index}`}
+                                  id={`itemName${index}`}
                                   value={item.itemName}
+                                  onChange={this.handleInputChangeItems}
                                 />
                               </td>
                               <td>
                                 <Input
-                                  name="itemDescription"
-                                  id="itemDescription"
+                                  name={`itemDescription${index}`}
+                                  id={`itemDescription${index}`}
                                   value={item.itemDescription}
+                                  onChange={this.handleInputChangeItems}
                                 />
                               </td>
                               <td>
                                 <Input
-                                  name="itemWeight"
-                                  id="itemWeight"
+                                  name={`itemWeight${index}`}
+                                  id={`itemWeight${index}`}
                                   value={item.itemWeight}
+                                  onChange={this.handleInputChangeItems}
                                 />
                               </td>
-                              <FaTrash />
+                              <FaTrash onClick={()=>{this.deleteItem(item.id)}}/>
                             </tr>
                           ))}
                         </tbody>
@@ -910,7 +1614,7 @@ class Character extends Component {
                   <TabPanel>
                     <div>
                       <div>
-                        <Button>Add</Button>
+                        <Button onClick={this.addSpell}>Add</Button>
                       </div>
                       <Row xs="2">
                         <Col>
@@ -923,7 +1627,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown0"
                                     id="spellsKnown0"
-                                    value={spells.spellsKnown[0]}
+                                    value={inputs.spellsKnown[0]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -933,7 +1638,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown1"
                                     id="spellsKnown1"
-                                    value={spells.spellsKnown[1]}
+                                    value={inputs.spellsKnown[1]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -943,7 +1649,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown2"
                                     id="spellsKnown2"
-                                    value={spells.spellsKnown[2]}
+                                    value={inputs.spellsKnown[2]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -953,7 +1660,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown3"
                                     id="spellsKnown3"
-                                    value={spells.spellsKnown[3]}
+                                    value={inputs.spellsKnown[3]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -963,7 +1671,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown4"
                                     id="spellsKnown4"
-                                    value={spells.spellsKnown[4]}
+                                    value={inputs.spellsKnown[4]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -973,7 +1682,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown5"
                                     id="spellsKnown5"
-                                    value={spells.spellsKnown[5]}
+                                    value={inputs.spellsKnown[5]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -983,7 +1693,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown6"
                                     id="spellsKnown6"
-                                    value={spells.spellsKnown[6]}
+                                    value={inputs.spellsKnown[6]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -993,7 +1704,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown7"
                                     id="spellsKnown7"
-                                    value={spells.spellsKnown[7]}
+                                    value={inputs.spellsKnown[7]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1003,7 +1715,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown8"
                                     id="spellsKnown8"
-                                    value={spells.spellsKnown[8]}
+                                    value={inputs.spellsKnown[8]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1013,7 +1726,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsKnown9"
                                     id="spellsKnown9"
-                                    value={spells.spellsKnown[9]}
+                                    value={inputs.spellsKnown[9]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1028,7 +1742,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC0"
                                     id="spellDC0"
-                                    value={spells.spellDC[0]}
+                                    value={inputs.spellDC[0]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1038,7 +1753,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC1"
                                     id="spellDC1"
-                                    value={spells.spellDC[1]}
+                                    value={inputs.spellDC[1]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1048,7 +1764,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC2"
                                     id="spellDC2"
-                                    value={spells.spellDC[2]}
+                                    value={inputs.spellDC[2]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1058,7 +1775,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC3"
                                     id="spellDC3"
-                                    value={spells.spellDC[3]}
+                                    value={inputs.spellDC[3]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1068,7 +1786,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC4"
                                     id="spellDC4"
-                                    value={spells.spellDC[4]}
+                                    value={inputs.spellDC[4]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1078,7 +1797,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC5"
                                     id="spellDC5"
-                                    value={spells.spellDC[5]}
+                                    value={inputs.spellDC[5]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1088,7 +1808,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC6"
                                     id="spellDC6"
-                                    value={spells.spellDC[6]}
+                                    value={inputs.spellDC[6]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1098,7 +1819,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC7"
                                     id="spellDC7"
-                                    value={spells.spellDC[7]}
+                                    value={inputs.spellDC[7]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1108,7 +1830,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC8"
                                     id="spellDC8"
-                                    value={spells.spellDC[8]}
+                                    value={inputs.spellDC[8]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1118,7 +1841,8 @@ class Character extends Component {
                                   <Input
                                     name="spellDC9"
                                     id="spellDC9"
-                                    value={spells.spellDC[9]}
+                                    value={inputs.spellDC[9]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1133,7 +1857,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay0"
                                     id="spellsPerDay0"
-                                    value={spells.spellsPerDay[0]}
+                                    value={inputs.spellsPerDay[0]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1143,7 +1868,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay1"
                                     id="spellsPerDay1"
-                                    value={spells.spellsPerDay[1]}
+                                    value={inputs.spellsPerDay[1]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1153,7 +1879,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay2"
                                     id="spellsPerDay2"
-                                    value={spells.spellsPerDay[2]}
+                                    value={inputs.spellsPerDay[2]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1163,7 +1890,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay3"
                                     id="spellsPerDay3"
-                                    value={spells.spellsPerDay[3]}
+                                    value={inputs.spellsPerDay[3]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1173,7 +1901,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay4"
                                     id="spellsPerDay4"
-                                    value={spells.spellsPerDay[4]}
+                                    value={inputs.spellsPerDay[4]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1183,7 +1912,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay5"
                                     id="spellsPerDay5"
-                                    value={spells.spellsPerDay[5]}
+                                    value={inputs.spellsPerDay[5]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1193,7 +1923,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay6"
                                     id="spellsPerDay6"
-                                    value={spells.spellsPerDay[6]}
+                                    value={inputs.spellsPerDay[6]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1203,7 +1934,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay7"
                                     id="spellsPerDay7"
-                                    value={spells.spellsPerDay[7]}
+                                    value={inputs.spellsPerDay[7]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1213,7 +1945,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay8"
                                     id="spellsPerDay8"
-                                    value={spells.spellsPerDay[8]}
+                                    value={inputs.spellsPerDay[8]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1223,7 +1956,8 @@ class Character extends Component {
                                   <Input
                                     name="spellsPerDay9"
                                     id="spellsPerDay9"
-                                    value={spells.spellsPerDay[9]}
+                                    value={inputs.spellsPerDay[9]}
+                                    onChange={this.handleInputChange}
                                   />
                                 </FormGroup>
                               </Col>
@@ -1232,82 +1966,90 @@ class Character extends Component {
                         </Col>
                         <Col>
                           <Row xs="3">
-                            {characterSpells.map(spell => (
+                            {spells.map((spell, index) => (
                               <Col>
                                 <Card>
                                   <CardBody>
-                                    <FaTrash />
+                                    <FaTrash onClick={()=>{this.deleteSpell(spell.id)}} />
                                     <FormGroup>
-                                      <Label for="spellName">Name</Label>
+                                      <Label for={`spellName${index}`}>Name</Label>
                                       <Input
-                                        name="spellName"
-                                        id="spellName"
+                                        name={`spellName${index}`}
+                                        id={`spellName${index}`}
                                         value={spell.spellName}
+                                        onChange={this.handleInputChangeSpells}
                                       />
                                     </FormGroup>
                                     <div>
                                       <FormGroup>
-                                        <Label for="spellComponents">
+                                        <Label for={`spellComponents${index}`}>
                                           Components
                                         </Label>
                                         <Input
-                                          name="spellComponents"
-                                          id="spellComponents"
+                                          name={`spellComponents${index}`}
+                                          id={`spellComponents${index}`}
                                           value={spell.spellComponents}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellCastingTime">
+                                        <Label for={`spellCastingTime${index}`}>
                                           Casting Time
                                         </Label>
                                         <Input
-                                          name="spellCastingTime"
-                                          id="spellCastingTime"
+                                          name={`spellCastingTime${index}`}
+                                          id={`spellCastingTime${index}`}
                                           value={spell.spellCastingTime}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellRange">Range</Label>
+                                        <Label for={`spellRange${index}`}>Range</Label>
                                         <Input
-                                          name="spellRange"
-                                          id="spellRange"
+                                          name={`spellRange${index}`}
+                                          id={`spellRange${index}`}
                                           value={spell.spellRange}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellTarget">Target</Label>
+                                        <Label for={`spellTarget${index}`}>Target</Label>
                                         <Input
-                                          name="spellTarget"
-                                          id="spellTarget"
+                                          name={`spellTarget${index}`}
+                                          id={`spellTarget${index}`}
                                           value={spell.spellTarget}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellDuration">
+                                        <Label for={`spellDuration${index}`}>
                                           Duration
                                         </Label>
                                         <Input
-                                          name="spellDuration"
-                                          id="spellDuration"
+                                          name={`spellDuration${index}`}
+                                          id={`spellDuration${index}`}
                                           value={spell.spellDuration}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="spellSavingThrow">
+                                        <Label for={`spellSavingThrow${index}`}>
                                           Saving Throw
                                         </Label>
                                         <Input
-                                          name="spellSavingThrow"
-                                          id="spellSavingThrow"
+                                          name={`spellSavingThrow${index}`}
+                                          id={`spellSavingThrow${index}`}
                                           value={spell.spellSavingThrow}
+                                          onChange={this.handleInputChangeSpells}
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for="input">Description</Label>
+                                        <Label for={`spellDescription${index}`}>Description</Label>
                                         <Input
                                           type="textarea"
-                                          name="description"
-                                          id="description"
+                                          name={`spellDescription${index}`}
+                                          id={`spellDescription${index}`}
+                                          onChange={this.handleInputChangeSpells}
                                           value={spell.spellDescription}
                                         />
                                       </FormGroup>
@@ -1325,115 +2067,123 @@ class Character extends Component {
                   <TabPanel>
                     <div>
                       <div>
-                        <Button>Add</Button>
+                        <Button onClick={this.addWeapon}>Add</Button>
                       </div>
                       <Row xs="1">
-                        {weapons.map(weapon => (
+                        {weapons.map((weapon, index) => (
                           <Col>
                             <Row xs="6">
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponName">Name</Label>
+                                  <Label for={`weaponName${index}`}>Name</Label>
                                   <Input
-                                    name="weaponName"
-                                    id="weaponName"
+                                    name={`weaponName${index}`}
+                                    id={`weaponName${index}`}
                                     value={weapon.weaponName}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponAttackBonus">
-                                    Attack Bonus
-                                  </Label>
+                                  <Label for={`weaponAttackBonus${index}`}>Attack Bonus</Label>
                                   <Input
-                                    name="weaponAttackBonus"
-                                    id="weaponAttackBonus"
+                                    name={`weaponAttackBonus${index}`}
+                                    id={`weaponAttackBonus${index}`}
                                     value={weapon.weaponAttackBonus}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponDamage"> Damage </Label>
+                                  <Label for={`weaponDamage${index}`}> Damage </Label>
                                   <Input
-                                    name="weaponDamage"
-                                    id="weaponDamage"
+                                    name={`weaponDamage${index}`}
+                                    id={`weaponDamage${index}`}
                                     value={weapon.weaponDamage}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponCritical">Critical</Label>
+                                  <Label for={`weaponCritical${index}`}>Critical</Label>
                                   <Input
-                                    name="weaponCritical"
-                                    id="weaponCritical"
+                                    name={`weaponCritical${index}`}
+                                    id={`weaponCritical${index}`}
                                     value={weapon.weaponCritical}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for="weaponRange">Range</Label>
+                                  <Label for={`weaponRange${index}`}>Range</Label>
                                   <Input
-                                    name="weaponRange"
-                                    id="weaponRange"
+                                    name={`weaponRange${index}`}
+                                    id={`weaponRange${index}`}
                                     value={weapon.weaponRange}
+                                    onChange={this.handleInputChangeWeapons}
                                   />
                                 </FormGroup>
                               </Col>
-                              <FaTrash />
+                              <FaTrash onClick={()=>{this.deleteWeapon(weapon.id)}} />
                             </Row>
                             <Row xs="3">
                               <FormGroup>
-                                <Label for="weaponSpecial">
+                                <Label for={`weaponSpecial${index}`}>
                                   Special Properties
                                 </Label>
                                 <Input
                                   type="textarea"
-                                  name="weaponSpecial"
-                                  id="weaponSpecial"
+                                  name={`weaponSpecial${index}`}
+                                  id={`weaponSpecial${index}`}
                                   value={weapon.weaponSpecial}
+                                  onChange={this.handleInputChangeWeapons}
                                 />
                               </FormGroup>
                               <FormGroup>
-                                <Label for="weaponAmmunition">Ammunition</Label>
+                                <Label for={`weaponAmmunition${index}`}>Ammunition</Label>
                                 <Input
                                   type="textarea"
-                                  name="weaponAmmunition"
-                                  id="weaponAmmunition"
+                                  name={`weaponAmmunition${index}`}
+                                  id={`weaponAmmunition${index}`}
                                   value={weapon.weaponAmmunition}
+                                  onChange={this.handleInputChangeWeapons}
                                 />
                               </FormGroup>
                               <Row xs="1">
                                 <Col>
                                   <FormGroup>
-                                    <Label for="weaponWeight">Weight</Label>
+                                    <Label for={`weaponWeight${index}`}>Weight</Label>
                                     <Input
-                                      name="weaponWeight"
-                                      id="weaponWeight"
+                                      name={`weaponWeight${index}`}
+                                      id={`weaponWeight${index}`}
                                       value={weapon.weaponWeight}
+                                      onChange={this.handleInputChangeWeapons}
                                     />
                                   </FormGroup>
                                 </Col>
                                 <Col>
                                   <FormGroup>
-                                    <Label for="weaponSize">Size</Label>
+                                    <Label for={`weaponSize${index}`}>Size</Label>
                                     <Input
-                                      name="weaponSize"
-                                      id="weaponSize"
+                                      name={`weaponSize${index}`}
+                                      id={`weaponSize${index}`}
                                       value={weapon.weaponSize}
+                                      onChange={this.handleInputChangeWeapons}
                                     />
                                   </FormGroup>
                                 </Col>
                                 <Col>
                                   <FormGroup>
-                                    <Label for="weaponType">Type</Label>
+                                    <Label for={`weaponType${index}`}>Type</Label>
                                     <Input
-                                      name="weaponType"
-                                      id="weaponType"
+                                      name={`weaponType${index}`}
+                                      id={`weaponType${index}`}
                                       value={weapon.weaponType}
+                                      onChange={this.handleInputChangeWeapons}
                                     />
                                   </FormGroup>
                                 </Col>
@@ -1454,214 +2204,39 @@ class Character extends Component {
   }
 }
 
-Character.defaultProps = {
-  characterDetails: {
-    name: 'Sir Henry',
-    level: 6,
-    class: 'figter',
-    race: 'dog',
-    alignment: 'Chaotic Good',
-    gender: 'Male',
-    size: 'medium',
-    campaign: 'Barrel Of Doom',
-    player: 'Dominic Nguyen',
-    height: "3'11",
-    weight: 300,
-    eyes: 'Brown',
-    hair: 'Dark Brown',
-    diety: 'Korn',
-    age: 12,
-    notes: 'Wowzdsadas asdsadjaslkda jklasjdkasld',
-    currency: '3gp 4sp 11c',
-    languages: 'English, Common, Dog',
-    description: 'Tall cool dog that dances',
-    personality: 'Friendly',
-    traits: 'Likes to be pet',
-    flaws: 'Real stinky',
-    contacts: 'Sir dog line',
-    enemies: 'cats',
-  },
-
-  feats: [
-    {
-      featName: 'ageelity',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-    {
-      featName: 'Amazing Saw',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-    {
-      featName: 'One Punch',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-    {
-      featName: 'Die',
-      featDescription: 'Woww jaksdjaskldjaskldaj',
-    },
-  ],
-
-  items: [
-    {
-      itemName: 'ageelity',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-    {
-      itemName: 'Amazing Saw',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-    {
-      itemName: 'One Punch',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-    {
-      itemName: 'Die',
-      itemDescription: 'Woww jaksdjaskldjaskldaj',
-      itemWeight: 12,
-    },
-  ],
-
-  characterStats: {
-    stat: [11, 12, 13, 14, 15, 16],
-    statMod: [2, 3, 4, 5, 6, 7],
-    hp: 123,
-    hpWounds: 100,
-    hpDice: '3d12',
-    dmgReduction: 'Blunt, Fire',
-    speed: '30ft',
-    init: 6,
-    initDex: 3,
-    initMisc: 3,
-    ac: 17,
-    acArmor: 2,
-    acShield: 5,
-    acDex: 0,
-    acNatural: 0,
-    acMisc: 0,
-    acTouch: 10,
-    acFlat: 17,
-  },
-
-  attackBonus: {
-    attackTotal: [11, 12],
-    attackBase: [3, 4],
-    attackMod: [8, 9],
-    attackMisc: [0, 0],
-  },
-
-  weightAmmount: {
-    weight: [20, 40, 80, 80, 30],
-  },
-
-  savingThrows: {
-    savingThrow: [6, 6, 6],
-    savingThrowBase: [3, 3, 3],
-    savingThrowMod: [3, 3, 3],
-  },
-
-  skills: [
-    {
-      skillName: 'Riding',
-      skillModType: 'Dex',
-      skillTotal: 6,
-      skillAbilityMod: 3,
-      skillRank: 3,
-    },
-    {
-      skillName: 'Climbing',
-      skillModType: 'Dex',
-      skillTotal: 6,
-      skillAbilityMod: 3,
-      skillRank: 3,
-    },
-    {
-      skillName: 'Sleeping',
-      skillModType: 'Dex',
-      skillTotal: 6,
-      skillAbilityMod: 3,
-      skillRank: 3,
-    },
-  ],
-
-  spells: {
-    spellsKnown: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
-    spellDC: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-    spellsPerDay: [7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-  },
-
-  characterSpells: [
-    {
-      spellName: 'Ackavar',
-      spellComponents: 'VS, CH',
-      spellCastingTime: 'Instant',
-      spellRange: '3ft',
-      spellTarget: '1 person',
-      spellDuration: 'instantaneous',
-      spellSavingThrow: 'Dex',
-      spellDescription: 'Ackavar',
-    },
-    {
-      spellName: 'asddadasda',
-      spellComponents: 'VS, CH',
-      spellCastingTime: 'Instant',
-      spellRange: '3ft',
-      spellTarget: '1 person',
-      spellDuration: 'instantaneous',
-      spellSavingThrow: 'Dex',
-      spellDescription: 'Ackavar',
-    },
-    {
-      spellName: '3321312ff',
-      spellComponents: 'VS, CH',
-      spellCastingTime: 'Instant',
-      spellRange: '3ft',
-      spellTarget: '1 person',
-      spellDuration: 'instantaneous',
-      spellSavingThrow: 'Dex',
-      spellDescription: 'Ackavar',
-    },
-  ],
-  weapons: [
-    {
-      weaponName: 'arbok',
-      weaponAttackBonus: 1,
-      weaponDamage: '3d12',
-      weaponCritical: '15-20',
-      weaponRange: '5ft',
-      weaponSpecial: 'Can be used as a butter knife',
-      weaponAmmunition: 'None',
-      weaponWeight: 5,
-      weaponSize: 'medium',
-      weaponType: 'slashing',
-    },
-    {
-      weaponName: 'Jamer',
-      weaponAttackBonus: 1,
-      weaponDamage: '3d12',
-      weaponCritical: '15-20',
-      weaponRange: '5ft',
-      weaponSpecial: 'Can be used as a butter knife',
-      weaponAmmunition: 'None',
-      weaponWeight: 5,
-      weaponSize: 'medium',
-      weaponType: 'slashing',
-    },
-    {
-      weaponName: 'Broink',
-      weaponAttackBonus: 1,
-      weaponDamage: '3d12',
-      weaponCritical: '15-20',
-      weaponRange: '5ft',
-      weaponSpecial: 'Can be used as a butter knife',
-      weaponAmmunition: 'None',
-      weaponWeight: 5,
-      weaponSize: 'medium',
-      weaponType: 'slashing',
-    },
-  ],
+Character.propTypes = {
+  fetchSheet: PropTypes.func.isRequired,
+  updateSheet: PropTypes.func.isRequired,
+  fetchSkills: PropTypes.func.isRequired,
+  createSkill: PropTypes.func.isRequired,
+  updateSkill: PropTypes.func.isRequired,
+  deleteSkill: PropTypes.func.isRequired,
+  fetchFeats: PropTypes.func.isRequired,
+  createFeat: PropTypes.func.isRequired,
+  deleteFeat: PropTypes.func.isRequired,
+  updateFeat: PropTypes.func.isRequired,
+  fetchItems: PropTypes.func.isRequired,
+  createItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  fetchSpells: PropTypes.func.isRequired,
+  createSpell: PropTypes.func.isRequired,
+  deleteSpell: PropTypes.func.isRequired,
+  fetchWeapons: PropTypes.func.isRequired,
+  createWeapon: PropTypes.func.isRequired,
+  deleteWeapon: PropTypes.func.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.object),
+  feats: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
+  spells: PropTypes.arrayOf(PropTypes.object),
+  weapons: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default Character;
+Character.defaultProps = {
+  sheet: {},
+  skills: [],
+  feats: [],
+  items: [],
+  spells: [],
+  weapons: [],
+};
+export default container(Character);

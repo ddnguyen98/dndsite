@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "root",
+    "database": "capstone",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  },
+  "staging": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}

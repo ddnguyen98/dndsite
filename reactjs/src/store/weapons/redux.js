@@ -2,21 +2,18 @@ import createReducer from '../utils/createReducer';
 import { removeIdFromArray, removeIdFromObject } from '../utils/utils';
 
 import {
-  REQ_SHEETS_SUCCESS,
-  REQ_SHEETS_ERROR,
-  REQ_SHEETS_PENDING,
-  ADD_SHEET_PENDING,
-  ADD_SHEET_SUCCESS,
-  ADD_SHEET_ERROR,
-  REQ_SHEET_PENDING,
-  REQ_SHEET_SUCCESS,
-  REQ_SHEET_ERROR,
-  UPDATE_SHEET_PENDING,
-  UPDATE_SHEET_SUCCESS,
-  UPDATE_SHEET_ERROR,
-  DELETE_SHEET_PENDING,
-  DELETE_SHEET_SUCCESS,
-  DELETE_SHEET_ERROR,
+  REQ_WEAPONS_PENDING,
+  REQ_WEAPONS_SUCCESS,
+  REQ_WEAPONS_ERROR,
+  ADD_WEAPON_PENDING,
+  ADD_WEAPON_SUCCESS,
+  ADD_WEAPON_ERROR,
+  DELETE_WEAPON_PENDING,
+  DELETE_WEAPON_SUCCESS,
+  DELETE_WEAPON_ERROR,
+  UPDATE_WEAPON_PENDING,
+  UPDATE_WEAPON_SUCCESS,
+  UPDATE_WEAPON_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -27,7 +24,7 @@ const initialState = {
   error: null,
 };
 
-const sheetsPending = state => {
+const weaponsPending = state => {
   return {
     ...state,
     isLoading: true,
@@ -35,7 +32,7 @@ const sheetsPending = state => {
   };
 };
 
-const sheetsSuccess = (state, action) => {
+const weaponsSuccess = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -43,11 +40,11 @@ const sheetsSuccess = (state, action) => {
     loadedAt: Date.now(),
     byId: {
       ...state.byId,
-      ...action.data.reduce((obj, sheet) => {
+      ...action.data.reduce((obj, weapon) => {
         return {
           ...obj,
-          [sheet.id]: {
-            data: sheet,
+          [weapon.id]: {
+            data: weapon,
             isLoading: false,
             loadedAt: Date.now(),
             error: null,
@@ -56,12 +53,12 @@ const sheetsSuccess = (state, action) => {
       }, {}),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(sheet => sheet.id)]),
+      ...new Set([...state.allIds, ...action.data.map(weapon => weapon.id)]),
     ],
   };
 };
 
-const sheetsError = (state, action) => {
+const weaponsError = (state, action) => {
   return {
     ...state,
     isLoading: false,
@@ -69,7 +66,7 @@ const sheetsError = (state, action) => {
   };
 };
 
-function sheetPending(state, action) {
+function weaponPending(state, action) {
   // set loading state and clear error
   return {
     ...state,
@@ -84,6 +81,23 @@ function sheetPending(state, action) {
   };
 }
 
+function weaponSuccess(state, action) {
+  // clear loading and error, update cache time, add weapons
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function deleteSuccess(state, action) {
   return {
     ...state,
@@ -92,8 +106,7 @@ function deleteSuccess(state, action) {
   };
 }
 
-function sheetSuccess(state, action) {
-  // clear loading and error, update cache time, add sheets
+function weaponSaveSuccess(state, action) {
   return {
     ...state,
     byId: {
@@ -109,7 +122,7 @@ function sheetSuccess(state, action) {
   };
 }
 
-function sheetError(state, action) {
+function weaponError(state, action) {
   // clear loading and set error
   return {
     ...state,
@@ -125,19 +138,16 @@ function sheetError(state, action) {
 }
 
 export default createReducer(initialState, {
-  [REQ_SHEETS_PENDING]: sheetsPending,
-  [REQ_SHEETS_SUCCESS]: sheetsSuccess,
-  [REQ_SHEETS_ERROR]: sheetsError,
-  [ADD_SHEET_PENDING]: sheetPending,
-  [ADD_SHEET_SUCCESS]: sheetSuccess,
-  [ADD_SHEET_ERROR]: sheetError,
-  [REQ_SHEET_PENDING]: sheetPending,
-  [REQ_SHEET_SUCCESS]: sheetSuccess,
-  [REQ_SHEET_ERROR]: sheetError,
-  [UPDATE_SHEET_PENDING]: sheetPending,
-  [UPDATE_SHEET_SUCCESS]: sheetSuccess,
-  [UPDATE_SHEET_ERROR]: sheetError,
-  [DELETE_SHEET_PENDING]: sheetPending,
-  [DELETE_SHEET_SUCCESS]: deleteSuccess,
-  [DELETE_SHEET_ERROR]: sheetError,
+  [REQ_WEAPONS_PENDING]: weaponsPending,
+  [REQ_WEAPONS_SUCCESS]: weaponsSuccess,
+  [REQ_WEAPONS_ERROR]: weaponsError,
+  [ADD_WEAPON_PENDING]: weaponPending,
+  [ADD_WEAPON_SUCCESS]: weaponSuccess,
+  [ADD_WEAPON_ERROR]: weaponError,
+  [DELETE_WEAPON_PENDING]: weaponPending,
+  [DELETE_WEAPON_SUCCESS]: deleteSuccess,
+  [DELETE_WEAPON_ERROR]: weaponError,
+  [UPDATE_WEAPON_PENDING]: weaponPending,
+  [UPDATE_WEAPON_SUCCESS]: weaponSaveSuccess,
+  [UPDATE_WEAPON_ERROR]: weaponError,
 });

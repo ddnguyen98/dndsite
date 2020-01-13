@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { fetchSheets } from '../../store/sheets/actions';
+import {
+  fetchSheets,
+  createSheet,
+  deleteSheet,
+} from '../../store/sheets/actions';
 
 function mapStateToProps(state) {
   const {
@@ -10,6 +14,6 @@ function mapStateToProps(state) {
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchSheets };
+const mapDispatchToProps = { fetchSheets, createSheet, deleteSheet };
 
 export default connect(mapStateToProps, mapDispatchToProps);
