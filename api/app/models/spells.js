@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     spellDescription: DataTypes.STRING,
   }, {});
   Spells.associate = (models) => {
-    // associations can be defined here
+    Spells.belongsTo(models.Characters, { foreignKey: 'characterId' });
   };
   return Spells;
 };

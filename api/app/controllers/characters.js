@@ -151,20 +151,20 @@ exports.createCharacter = async (req, res) => {
   }
 };
 
-exports.updateFeat = async (req, res) => {
+exports.updateCharacter = async (req, res) => {
   const { id } = req.params;
   try {
-    const [, [updatedFeat]] = await Characters.update(req.body, {
+    const [, [updatedCharacter]] = await Characters.update(req.body, {
       where: { id },
       returning: true,
     });
-    res.json(updatedFeat);
+    res.json(updatedCharacter);
   } catch (e) {
     SendError(res, e);
   }
 };
 
-exports.removeFeat = async (req, res) => {
+exports.removeCharacter = async (req, res) => {
   try {
     const { id } = req.params;
     await Characters.destroy({ where: { id } });

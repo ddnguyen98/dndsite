@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     featDescription: DataTypes.STRING,
   }, {});
   Feats.associate = (models) => {
-    // associations can be defined here
+    Feats.belongsTo(models.Characters, { foreignKey: 'characterId' });
   };
   return Feats;
 };

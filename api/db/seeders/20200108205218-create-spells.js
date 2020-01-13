@@ -1,5 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Spells', [{
+    id: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
+    characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
     spellName: 'Fireball',
     spellComponents: 'None',
     spellCastingTime: '3 seconds',

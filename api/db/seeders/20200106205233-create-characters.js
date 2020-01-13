@@ -1,5 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Characters', [{
+    id: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
+    userId: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
     name: 'Jimmy',
     player: 'Dominic',
     alignment: 'Chaotic Good',

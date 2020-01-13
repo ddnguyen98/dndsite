@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     itemWeight: DataTypes.STRING,
   }, {});
   Items.associate = (models) => {
-    // associations can be defined here
+    Items.belongsTo(models.Characters, { foreignKey: 'characterId' });
   };
   return Items;
 };

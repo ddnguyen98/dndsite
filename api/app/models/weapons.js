@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     weaponType: DataTypes.STRING,
   }, {});
   Weapons.associate = (models) => {
-    // associations can be defined here
+    Weapons.belongsTo(models.Characters, { foreignKey: 'characterId' });
   };
   return Weapons;
 };

@@ -1,5 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Weapons', [{
+    id: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
+    characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
     weaponName: 'Kill Death',
     weaponAttackBonus: '3',
     weaponDamage: 'd20',
