@@ -2,8 +2,9 @@ const { Skills, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
 exports.getAll = async (req, res) => {
+  const { characterId } = req.query;
   try {
-    const skills = await Skills.findAll();
+    const skills = await Skills.findAll({ where: { characterId } });
     res.json(skills || []);
   } catch (e) {
     SendError(res, e);

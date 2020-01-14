@@ -17,7 +17,7 @@ exports.getOneById = async (req, res) => {
 };
 exports.getAll = async (req, res) => {
   try {
-    const characters = await Characters.findAll();
+    const characters = await Characters.findAll({ where: { userId: req.userId } });
     res.json(characters || []);
   } catch (e) {
     SendError(res, e);
