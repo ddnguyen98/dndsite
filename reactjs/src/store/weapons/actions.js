@@ -18,9 +18,9 @@ import API from '../../API';
 
 const CACHE_TIME = 1000 * 60 * 5;
 
-export const fetchWeapons = () => ({
+export const fetchWeapons = id => ({
   types: [REQ_WEAPONS_PENDING, REQ_WEAPONS_SUCCESS, REQ_WEAPONS_ERROR],
-  callAPI: () => API.get('/weapons'),
+  callAPI: () => API.get(`/weapons?characterId=${id}`),
   shouldCallAPI: state => {
     const { loadedAt, isLoading } = state.weapons;
     if (isLoading) return false;

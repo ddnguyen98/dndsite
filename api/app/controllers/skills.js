@@ -12,6 +12,7 @@ exports.getAll = async (req, res) => {
 };
 
 exports.createSkill = async (req, res) => {
+  const { id } = req.body;
   const {
     skillName,
     skillModType,
@@ -26,6 +27,7 @@ exports.createSkill = async (req, res) => {
       skillTotal,
       skillAbilityMod,
       skillRank,
+      characterId: id,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));

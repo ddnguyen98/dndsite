@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import HeaderContainer from './container';
 
 import styles from './styles.module.css';
 
@@ -23,13 +24,6 @@ class Header extends Component {
               <div className={styles.nav__logo} />
               Three Headed Dragon
             </NavbarBrand>
-            {loggedIn && (
-              <>
-                <NavbarText className={styles.nav__loggedIn}>
-                  Chadster
-                </NavbarText>
-              </>
-            )}
           </Container>
         </Navbar>
         <Navbar className={styles.nav__navbar2} expand="md">
@@ -71,7 +65,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  loggedIn: true,
+  loggedIn: false,
 };
 
-export default Header;
+export default HeaderContainer(Header);

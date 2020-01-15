@@ -142,6 +142,7 @@ exports.createCharacter = async (req, res) => {
       initDex,
       initMisc,
       speed,
+      userId: req.userId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));

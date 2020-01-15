@@ -12,6 +12,7 @@ exports.getAll = async (req, res) => {
 };
 
 exports.createWeapon = async (req, res) => {
+  const { id } = req.body;
   const {
     weaponName,
     weaponAttackBonus,
@@ -36,6 +37,7 @@ exports.createWeapon = async (req, res) => {
       weaponWeight,
       weaponSize,
       weaponType,
+      characterId: id,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));

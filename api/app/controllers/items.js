@@ -13,8 +13,11 @@ exports.getAll = async (req, res) => {
 
 exports.createItem = async (req, res) => {
   const { itemName, itemDescription, itemWeight } = '';
+  const { id } = req.body;
   try {
-    const item = await Items.create({ itemName, itemDescription, itemWeight })
+    const item = await Items.create({
+      itemName, itemDescription, itemWeight, characterId: id,
+    })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
     res.status(200).json(item);

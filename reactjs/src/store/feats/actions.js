@@ -18,9 +18,9 @@ import API from '../../API';
 
 const CACHE_TIME = 1000 * 60 * 5;
 
-export const fetchFeats = () => ({
+export const fetchFeats = id => ({
   types: [REQ_FEATS_PENDING, REQ_FEATS_SUCCESS, REQ_FEATS_ERROR],
-  callAPI: () => API.get('/feats'),
+  callAPI: () => API.get(`/feats?characterId=${id}`),
   shouldCallAPI: state => {
     const { loadedAt, isLoading } = state.feats;
     if (isLoading) return false;
@@ -29,18 +29,18 @@ export const fetchFeats = () => ({
   },
 });
 
-export const createFeat = feat => {
+export const createFeat = characterId => {
   const id = uuid();
   return {
     types: [ADD_FEAT_PENDING, ADD_FEAT_SUCCESS, ADD_FEAT_ERROR],
-    callAPI: () => API.post('/feats', { id, ...feat }),
+    callAPI: () => API.post('/feats', { id, characterId }),
     payload: { id },
   };
 };
 
 export const updateFeat = feat => ({
   types: [UPDATE_FEAT_PENDING, UPDATE_FEAT_SUCCESS, UPDATE_FEAT_ERROR],
-  callAPI: () => API.put(`/feats/${feat.id}`),
+  callAPI: () => API.put(`/feats/${feat.id}`, feat.data),
   payload: { id: feat.id, data: feat.data },
 });
 

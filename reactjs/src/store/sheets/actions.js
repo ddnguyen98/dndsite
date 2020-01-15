@@ -32,11 +32,11 @@ export const fetchSheets = () => ({
   },
 });
 
-export const createSheet = sheet => {
+export const createSheet = () => {
   const id = uuid();
   return {
     types: [ADD_SHEET_PENDING, ADD_SHEET_SUCCESS, ADD_SHEET_ERROR],
-    callAPI: () => API.post('/characters', { id, ...sheet }),
+    callAPI: () => API.post('/characters', { id }),
     payload: { id },
   };
 };

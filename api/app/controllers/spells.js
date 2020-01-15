@@ -12,6 +12,7 @@ exports.getAll = async (req, res) => {
 };
 
 exports.createSpell = async (req, res) => {
+  const { id } = req.body;
   const {
     spellName,
     spellComponents,
@@ -32,6 +33,7 @@ exports.createSpell = async (req, res) => {
       spellDuration,
       spellSavingThrow,
       spellDescription,
+      characterId: id,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));

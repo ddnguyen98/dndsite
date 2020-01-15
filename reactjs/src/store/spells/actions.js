@@ -18,9 +18,9 @@ import API from '../../API';
 
 const CACHE_TIME = 1000 * 60 * 5;
 
-export const fetchSpells = () => ({
+export const fetchSpells = id => ({
   types: [REQ_SPELLS_PENDING, REQ_SPELLS_SUCCESS, REQ_SPELLS_ERROR],
-  callAPI: () => API.get('/spells'),
+  callAPI: () => API.get(`/spells?characterId=${id}`),
   shouldCallAPI: state => {
     const { loadedAt, isLoading } = state.spells;
     if (isLoading) return false;

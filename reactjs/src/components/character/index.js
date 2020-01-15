@@ -530,11 +530,11 @@ class Character extends Component {
     console.log(id);
     if (!id) return;
     await fetchSheet(id);
-    await fetchSkills();
-    await fetchFeats();
-    await fetchItems();
-    await fetchSpells();
-    await fetchWeapons();
+    await fetchSkills(id);
+    await fetchFeats(id);
+    await fetchItems(id);
+    await fetchSpells(id);
+    await fetchWeapons(id);
     const { sheet, skills, feats, items, spells, weapons } = this.props;
     this.setState({ inputs: { ...sheet } });
     this.setState({ skills: [...skills] });
@@ -583,9 +583,14 @@ class Character extends Component {
   };
 
   addSkill = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createSkill } = this.props;
-    await createSkill();
+    await createSkill(characterId);
     const { skills } = this.props;
     this.setState({ skills: [...skills] });
   };
@@ -598,9 +603,14 @@ class Character extends Component {
   };
 
   addFeat = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createFeat } = this.props;
-    await createFeat();
+    await createFeat(characterId);
     const { feats } = this.props;
     this.setState({ feats: [...feats] });
   };
@@ -613,9 +623,14 @@ class Character extends Component {
   };
 
   addItem = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createItem } = this.props;
-    await createItem();
+    await createItem(characterId);
     const { items } = this.props;
     this.setState({ items: [...items] });
   };
@@ -628,9 +643,14 @@ class Character extends Component {
   };
 
   addSpell = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createSpell } = this.props;
-    await createSpell();
+    await createSpell(characterId);
     const { spells } = this.props;
     this.setState({ spells: [...spells] });
   };
@@ -643,9 +663,14 @@ class Character extends Component {
   };
 
   addWeapon = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createWeapon } = this.props;
-    await createWeapon();
+    await createWeapon(characterId);
     const { weapons } = this.props;
     this.setState({ weapons: [...weapons] });
   };

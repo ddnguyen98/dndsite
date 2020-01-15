@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL:
-    process.env.API_URL ||
-    'https://private-11d10b-threeheadeddragon.apiary-mock.com',
+  baseURL: process.env.API_URL || 'http://localhost:4000/api',
 });
 
 API.interceptors.response.use(
