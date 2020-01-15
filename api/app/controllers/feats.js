@@ -5,7 +5,7 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const feats = await Feats.findAll({ where: { characterId } });
-    res.json(feats || []);
+    res.json({ data: [feats] });
   } catch (e) {
     SendError(res, e);
   }
@@ -21,7 +21,7 @@ exports.createFeat = async (req, res) => {
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json(feat);
+    res.status(200).json({ data: { feat } });
   } catch (e) {
     SendError(res, e);
   }
@@ -34,7 +34,7 @@ exports.updateFeat = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json(updatedFeat);
+    res.json({ data: { updatedFeat } });
   } catch (e) {
     SendError(res, e);
   }

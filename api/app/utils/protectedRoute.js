@@ -5,7 +5,7 @@ const protectedRoute = (req, res, next) => {
   const { token } = req.headers;
   try {
     // pull the id out of the token using the secret
-    const { id } = jwt.verify(token, process.env.SECRET);
+    const { id } = jwt.verify(token, process.env.secret);
     // set the userId so that we can use it later
     req.userId = id;
     // if the user is logged in go to the next middleware

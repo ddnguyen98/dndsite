@@ -5,7 +5,7 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const skills = await Skills.findAll({ where: { characterId } });
-    res.json(skills || []);
+    res.json({ data: [skills] });
   } catch (e) {
     SendError(res, e);
   }
@@ -31,7 +31,7 @@ exports.createSkill = async (req, res) => {
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json(skill);
+    res.status(200).json({ data: { skill } });
   } catch (e) {
     SendError(res, e);
   }
@@ -44,7 +44,7 @@ exports.updateSkill = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json(updatedSkill);
+    res.json({ data: { updatedSkill } });
   } catch (e) {
     SendError(res, e);
   }

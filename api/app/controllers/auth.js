@@ -3,22 +3,22 @@ const jwt = require('jsonwebtoken');
 const { Users } = require('../models');
 
 exports.signup = async (req, res) => {
-  const { name, username, password } = req.body;
+  const { email, username, password } = req.body;
   const userTest = await Users.findAll({ where: { username } });
   if (userTest.length === 0) {
     try {
       const [user] = await Users.upsert({
         username,
-        name,
+        email,
         password,
       }, { returning: true });
-      const token = jwt.sign({ id: user.id }, process.env.SECRET);
-      res.json({ token, loggedIn: true });
+      const token = jwt.sign({ id: user.id }, process.env.secret);
+      res.json({ data: { token, loggedInState: true } });
     } catch (e) {
-      res.json({ loggedIn: false });
+      res.json({ data: { loggedInState: false } });
     }
   } else {
-    res.json({ loggedIn: false });
+    res.json({ data: { loggedInState: false } });
   }
 };
 
@@ -26,9 +26,9 @@ exports.login = async (req, res) => {
   const { username, password } = req.body;
   const user = await Users.findAll({ where: { username, password } });
   if (user.length === 0) {
-    res.json({ loggedIn: false });
+    res.json({ data: { loggedInState: false } });
   } else {
-    const token = jwt.sign({ id: user[0].dataValues.id }, process.env.SECRET);
-    res.json({ token, loggedIn: true });
+    const token = jwt.sign({ id: user[0].dataValues.id }, process.env.secret);
+    res.json({ data: { token, loggedInState: true } });
   }
 };

@@ -5,7 +5,7 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const spells = await Spells.findAll({ where: { characterId } });
-    res.json(spells || []);
+    res.json({ data: [spells] });
   } catch (e) {
     SendError(res, e);
   }
@@ -37,7 +37,7 @@ exports.createSpell = async (req, res) => {
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json(spell);
+    res.status(200).json({ data: { spell } });
   } catch (e) {
     SendError(res, e);
   }
@@ -50,7 +50,7 @@ exports.updateSpell = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json(updatedSpell);
+    res.json({ data: { updatedSpell } });
   } catch (e) {
     SendError(res, e);
   }
