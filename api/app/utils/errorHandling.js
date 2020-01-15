@@ -1,5 +1,5 @@
-exports.sendError = (res, error) => {
-  res.stats(error.code || 500).json({
+exports.SendError = (res, error) => {
+  res.status(error.code || 500).json({
     message: error.message,
     error,
   });

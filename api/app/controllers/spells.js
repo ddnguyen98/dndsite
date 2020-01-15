@@ -2,15 +2,17 @@ const { Spells, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
 exports.getAll = async (req, res) => {
+  const { characterId } = req.query;
   try {
-    const spells = await Spells.findAll();
-    res.json(spells || []);
+    const spells = await Spells.findAll({ where: { characterId } });
+    res.json({ data: [spells] });
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createSpell = async (req, res) => {
+  const { id } = req.body;
   const {
     spellName,
     spellComponents,
@@ -31,10 +33,11 @@ exports.createSpell = async (req, res) => {
       spellDuration,
       spellSavingThrow,
       spellDescription,
+      characterId: id,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json(spell);
+    res.status(200).json({ data: { spell } });
   } catch (e) {
     SendError(res, e);
   }
@@ -47,7 +50,7 @@ exports.updateSpell = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json(updatedSpell);
+    res.json({ data: { updatedSpell } });
   } catch (e) {
     SendError(res, e);
   }

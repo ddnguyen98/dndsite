@@ -457,10 +457,10 @@ class Character extends Component {
     const { skills } = this.state;
     const newName = name.substring(0, name.length - 1);
     const index = parseFloat(name.charAt(name.length - 1));
-    let arrayValue = {...skills[index], [newName]: value};
-    let array = skills;
+    const arrayValue = { ...skills[index], [newName]: value };
+    const array = skills;
     array[index] = arrayValue;
-    this.setState({skills: array});
+    this.setState({ skills: array });
   };
 
   handleInputChangeFeats = event => {
@@ -470,10 +470,10 @@ class Character extends Component {
     const { feats } = this.state;
     const newName = name.substring(0, name.length - 1);
     const index = parseFloat(name.charAt(name.length - 1));
-    let arrayValue = {...feats[index], [newName]: value};
-    let array = feats;
+    const arrayValue = { ...feats[index], [newName]: value };
+    const array = feats;
     array[index] = arrayValue;
-    this.setState({feats: array});
+    this.setState({ feats: array });
   };
 
   handleInputChangeItems = event => {
@@ -483,10 +483,10 @@ class Character extends Component {
     const { items } = this.state;
     const newName = name.substring(0, name.length - 1);
     const index = parseFloat(name.charAt(name.length - 1));
-    let arrayValue = {...items[index], [newName]: value};
-    let array = items;
+    const arrayValue = { ...items[index], [newName]: value };
+    const array = items;
     array[index] = arrayValue;
-    this.setState({items: array});
+    this.setState({ items: array });
   };
 
   handleInputChangeSpells = event => {
@@ -496,10 +496,10 @@ class Character extends Component {
     const { spells } = this.state;
     const newName = name.substring(0, name.length - 1);
     const index = parseFloat(name.charAt(name.length - 1));
-    let arrayValue = {...spells[index], [newName]: value};
-    let array = spells;
+    const arrayValue = { ...spells[index], [newName]: value };
+    const array = spells;
     array[index] = arrayValue;
-    this.setState({spells: array});
+    this.setState({ spells: array });
   };
 
   handleInputChangeWeapons = event => {
@@ -509,10 +509,10 @@ class Character extends Component {
     const { weapons } = this.state;
     const newName = name.substring(0, name.length - 1);
     const index = parseFloat(name.charAt(name.length - 1));
-    let arrayValue = {...weapons[index], [newName]: value};
-    let array = weapons;
+    const arrayValue = { ...weapons[index], [newName]: value };
+    const array = weapons;
     array[index] = arrayValue;
-    this.setState({weapons: array});
+    this.setState({ weapons: array });
   };
 
   loadData = async () => {
@@ -530,11 +530,11 @@ class Character extends Component {
     console.log(id);
     if (!id) return;
     await fetchSheet(id);
-    await fetchSkills();
-    await fetchFeats();
-    await fetchItems();
-    await fetchSpells();
-    await fetchWeapons();
+    await fetchSkills(id);
+    await fetchFeats(id);
+    await fetchItems(id);
+    await fetchSpells(id);
+    await fetchWeapons(id);
     const { sheet, skills, feats, items, spells, weapons } = this.props;
     this.setState({ inputs: { ...sheet } });
     this.setState({ skills: [...skills] });
@@ -547,7 +547,17 @@ class Character extends Component {
   saveForm = async event => {
     // make sure the form doesn't submit with the browser
     event.preventDefault();
-    const { updateSheet, updateSkill, updateFeat, updateItem, updateSpell, updateWeapon, match: { params: { id } }  } = this.props;
+    const {
+      updateSheet,
+      updateSkill,
+      updateFeat,
+      updateItem,
+      updateSpell,
+      updateWeapon,
+      match: {
+        params: { id },
+      },
+    } = this.props;
     const { inputs, skills, feats, items, spells, weapons } = this.state;
     await updateSheet({ id, inputs });
     skills.forEach(async data => {
@@ -573,9 +583,14 @@ class Character extends Component {
   };
 
   addSkill = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createSkill } = this.props;
-    await createSkill();
+    await createSkill(characterId);
     const { skills } = this.props;
     this.setState({ skills: [...skills] });
   };
@@ -588,9 +603,14 @@ class Character extends Component {
   };
 
   addFeat = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createFeat } = this.props;
-    await createFeat();
+    await createFeat(characterId);
     const { feats } = this.props;
     this.setState({ feats: [...feats] });
   };
@@ -603,9 +623,14 @@ class Character extends Component {
   };
 
   addItem = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createItem } = this.props;
-    await createItem();
+    await createItem(characterId);
     const { items } = this.props;
     this.setState({ items: [...items] });
   };
@@ -618,9 +643,14 @@ class Character extends Component {
   };
 
   addSpell = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createSpell } = this.props;
-    await createSpell();
+    await createSpell(characterId);
     const { spells } = this.props;
     this.setState({ spells: [...spells] });
   };
@@ -633,9 +663,14 @@ class Character extends Component {
   };
 
   addWeapon = async event => {
+    const {
+      match: {
+      params: { id },
+    }} = this.props;
+    const characterId = id;
     event.preventDefault();
     const { createWeapon } = this.props;
-    await createWeapon();
+    await createWeapon(characterId);
     const { weapons } = this.props;
     this.setState({ weapons: [...weapons] });
   };
@@ -1320,7 +1355,11 @@ class Character extends Component {
                                 onChange={this.handleInputChangeSkills}
                               />
                             </td>
-                            <FaTrash onClick={()=>{this.deleteSkill(skill.id)}}/>
+                            <FaTrash
+                              onClick={() => {
+                                this.deleteSkill(skill.id);
+                              }}
+                            />
                           </tr>
                         ))}
                       </tbody>
@@ -1534,7 +1573,11 @@ class Character extends Component {
                           <Col>
                             <Card>
                               <CardBody>
-                                <FaTrash onClick={()=>{this.deleteFeat(feat.id)}}/>
+                                <FaTrash
+                                  onClick={() => {
+                                    this.deleteFeat(feat.id);
+                                  }}
+                                />
                                 <FormGroup>
                                   <Label for={`featName${index}`}>Name</Label>
                                   <Input
@@ -1970,9 +2013,15 @@ class Character extends Component {
                               <Col>
                                 <Card>
                                   <CardBody>
-                                    <FaTrash onClick={()=>{this.deleteSpell(spell.id)}} />
+                                    <FaTrash
+                                      onClick={() => {
+                                        this.deleteSpell(spell.id);
+                                      }}
+                                    />
                                     <FormGroup>
-                                      <Label for={`spellName${index}`}>Name</Label>
+                                      <Label for={`spellName${index}`}>
+                                        Name
+                                      </Label>
                                       <Input
                                         name={`spellName${index}`}
                                         id={`spellName${index}`}
@@ -1989,7 +2038,9 @@ class Character extends Component {
                                           name={`spellComponents${index}`}
                                           id={`spellComponents${index}`}
                                           value={spell.spellComponents}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                         />
                                       </FormGroup>
                                       <FormGroup>
@@ -2000,25 +2051,35 @@ class Character extends Component {
                                           name={`spellCastingTime${index}`}
                                           id={`spellCastingTime${index}`}
                                           value={spell.spellCastingTime}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for={`spellRange${index}`}>Range</Label>
+                                        <Label for={`spellRange${index}`}>
+                                          Range
+                                        </Label>
                                         <Input
                                           name={`spellRange${index}`}
                                           id={`spellRange${index}`}
                                           value={spell.spellRange}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for={`spellTarget${index}`}>Target</Label>
+                                        <Label for={`spellTarget${index}`}>
+                                          Target
+                                        </Label>
                                         <Input
                                           name={`spellTarget${index}`}
                                           id={`spellTarget${index}`}
                                           value={spell.spellTarget}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                         />
                                       </FormGroup>
                                       <FormGroup>
@@ -2029,7 +2090,9 @@ class Character extends Component {
                                           name={`spellDuration${index}`}
                                           id={`spellDuration${index}`}
                                           value={spell.spellDuration}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                         />
                                       </FormGroup>
                                       <FormGroup>
@@ -2040,16 +2103,22 @@ class Character extends Component {
                                           name={`spellSavingThrow${index}`}
                                           id={`spellSavingThrow${index}`}
                                           value={spell.spellSavingThrow}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                         />
                                       </FormGroup>
                                       <FormGroup>
-                                        <Label for={`spellDescription${index}`}>Description</Label>
+                                        <Label for={`spellDescription${index}`}>
+                                          Description
+                                        </Label>
                                         <Input
                                           type="textarea"
                                           name={`spellDescription${index}`}
                                           id={`spellDescription${index}`}
-                                          onChange={this.handleInputChangeSpells}
+                                          onChange={
+                                            this.handleInputChangeSpells
+                                          }
                                           value={spell.spellDescription}
                                         />
                                       </FormGroup>
@@ -2218,12 +2287,71 @@ Character.propTypes = {
   fetchItems: PropTypes.func.isRequired,
   createItem: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
+  updateItem: PropTypes.func.isRequired,
   fetchSpells: PropTypes.func.isRequired,
   createSpell: PropTypes.func.isRequired,
   deleteSpell: PropTypes.func.isRequired,
+  updateSpell: PropTypes.func.isRequired,
   fetchWeapons: PropTypes.func.isRequired,
   createWeapon: PropTypes.func.isRequired,
   deleteWeapon: PropTypes.func.isRequired,
+  updateWeapon: PropTypes.func.isRequired,
+  sheet: PropTypes.shape({
+    name: PropTypes.string,
+    player: PropTypes.string,
+    alignment: PropTypes.string,
+    level: PropTypes.string,
+    userClass: PropTypes.string,
+    race: PropTypes.string,
+    campaign: PropTypes.string,
+    diety: PropTypes.string,
+    size: PropTypes.string,
+    age: PropTypes.string,
+    gender: PropTypes.string,
+    hair: PropTypes.string,
+    height: PropTypes.string,
+    characterWeight: PropTypes.string,
+    eyes: PropTypes.string,
+    currency: PropTypes.string,
+    languages: PropTypes.string,
+    description: PropTypes.string,
+    personality: PropTypes.string,
+    traits: PropTypes.string,
+    flaws: PropTypes.string,
+    contacts: PropTypes.string,
+    enemies: PropTypes.string,
+    notes: PropTypes.string,
+    image: PropTypes.string,
+    stat: PropTypes.arrayOf(PropTypes.string),
+    statMod: PropTypes.arrayOf(PropTypes.string),
+    hp: PropTypes.string,
+    hpWounds: PropTypes.string,
+    hpDice: PropTypes.string,
+    dmgReduction: PropTypes.string,
+    ac: PropTypes.string,
+    acArmor: PropTypes.string,
+    acShield: PropTypes.string,
+    acDex: PropTypes.string,
+    acNatural: PropTypes.string,
+    acMisc: PropTypes.string,
+    acTouch: PropTypes.string,
+    acFlat: PropTypes.string,
+    init: PropTypes.string,
+    initDex: PropTypes.string,
+    initMisc: PropTypes.string,
+    speed: PropTypes.string,
+    attackTotal: PropTypes.arrayOf(PropTypes.string),
+    attackBase: PropTypes.arrayOf(PropTypes.string),
+    attackMod: PropTypes.arrayOf(PropTypes.string),
+    attackMisc: PropTypes.arrayOf(PropTypes.string),
+    spellsKnown: PropTypes.arrayOf(PropTypes.string),
+    spellsPerDay: PropTypes.arrayOf(PropTypes.string),
+    spellDC: PropTypes.arrayOf(PropTypes.string),
+    savingThrow: PropTypes.arrayOf(PropTypes.string),
+    savingThrowBase: PropTypes.arrayOf(PropTypes.string),
+    savingThrowMod: PropTypes.arrayOf(PropTypes.string),
+    weight: PropTypes.arrayOf(PropTypes.string),
+  }),
   skills: PropTypes.arrayOf(PropTypes.object),
   feats: PropTypes.arrayOf(PropTypes.object),
   items: PropTypes.arrayOf(PropTypes.object),

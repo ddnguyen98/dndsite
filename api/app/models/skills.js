@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     skillRank: DataTypes.STRING,
   }, {});
   Skills.associate = (models) => {
-    // associations can be defined here
+    Skills.belongsTo(models.Characters, { foreignKey: 'characterId' });
   };
   return Skills;
 };

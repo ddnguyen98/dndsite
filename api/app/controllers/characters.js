@@ -10,15 +10,15 @@ exports.getOneById = async (req, res) => {
       // fail
       throwError(500, 'Sequelize Error'),
     );
-    res.json(character);
+    res.json({ data: { character } });
   } catch (e) {
     SendError(res, e);
   }
 };
 exports.getAll = async (req, res) => {
   try {
-    const characters = await Characters.findAll();
-    res.json(characters || []);
+    const characters = await Characters.findAll({ where: { userId: req.userId } });
+    res.json({ data: [characters] });
   } catch (e) {
     SendError(res, e);
   }
@@ -87,7 +87,7 @@ exports.createCharacter = async (req, res) => {
   } = ['', '', ''];
   const { weight } = ['', '', '', '', ''];
   try {
-    const feat = await Characters.create({
+    const character = await Characters.create({
       stat,
       statMod,
       attackTotal,
@@ -142,29 +142,30 @@ exports.createCharacter = async (req, res) => {
       initDex,
       initMisc,
       speed,
+      userId: req.userId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json(feat);
+    res.status(200).json({ data: { character } });
   } catch (e) {
     SendError(res, e);
   }
 };
 
-exports.updateFeat = async (req, res) => {
+exports.updateCharacter = async (req, res) => {
   const { id } = req.params;
   try {
-    const [, [updatedFeat]] = await Characters.update(req.body, {
+    const [, [updatedCharacter]] = await Characters.update(req.body, {
       where: { id },
       returning: true,
     });
-    res.json(updatedFeat);
+    res.json({ data: { updatedCharacter } });
   } catch (e) {
     SendError(res, e);
   }
 };
 
-exports.removeFeat = async (req, res) => {
+exports.removeCharacter = async (req, res) => {
   try {
     const { id } = req.params;
     await Characters.destroy({ where: { id } });

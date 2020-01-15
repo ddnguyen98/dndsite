@@ -14,163 +14,200 @@ Three Headed dragon is an api for managing users and their character data
 
 ### Character (Base Model)
 + Include Id
-+ name: Sir Henry (string, required)
-+ player: Dominic (string, required)
-+ alignment: Chaotic Neutral (string, required)
-+ level: 6 (number, required)
-+ class: Fighter (string, required)
-+ race: Dog (string, required)
-+ campaign: Barktastic (string, required)
-+ diety: Korn (string, required)
-+ size: Medium (string, required)
-+ age: 12 (number, required)
-+ gender: Male (string, required)
-+ hair: Brown (string, required)
-+ height: 6"11 (string, required)
-+ gender: Male (string, required)
-+ weight: 32 (number, required)
-+ eyes: red (string, required)
-+ gender: Male (string, required)
-+ currency: 32g (string, required)
-+ languages: Comon (string, required)
-+ description: Male (string, required)
-+ personality: Male (string, required)
-+ traits: Male (string, required)
-+ flaws: Male (string, required)
-+ contacts: Male (string, required)
-+ enemies: Male (string, required)
-+ notes: Male (string, required)
++ name: Sir Henry (string)
++ player: Dominic (string)
++ alignment: Chaotic Neutral (string)
++ level: 6 (number)
++ class: Fighter (string)
++ race: Dog (string)
++ campaign: Barktastic (string)
++ diety: Korn (string)
++ size: Medium (string)
++ age: 12 (number)
++ gender: Male (string)
++ hair: Brown (string)
++ height: 6"11 (string)
++ gender: Male (string)
++ characterWeight: 32 (number)
++ eyes: red (string)
++ gender: Male (string)
++ currency: 32g (string)
++ languages: Comon (string)
++ description: Male (string)
++ personality: Male (string)
++ traits: Male (string)
++ flaws: Male (string)
++ contacts: Male (string)
++ enemies: Male (string)
++ notes: Male (string)    
++ image: henry.jpg (string)
 
-+ stat (array, required)
-  + 11
-  + 11
-  + 11
-  + 11
-  + 11
-  + 11
-+ statMod (array, required)
-  + +2
-  + +2
-  + +2
-  + +2
-  + +2
-  + +2
-
-+ hp: 122 (number, required)
-+ hpWounds: 52 (number, required)
-+ hpDice: 3d12 (string, required)
-+ dmgReduction: Blunt (string, required)
-
-+ ac: 122 (number, required)
-+ acArmor: 52 (number, required)
-+ acShield: 122 (number, required)
-+ acDex: 52 (number, required)
-+ acNatural: 122 (number, required)
-+ acMisc: 52 (number, required)
-+ acTouch: 122 (number, required)
-+ acFlat: 52 (number, required)
-
-+ init: 1 (number, required)
-+ initDex: 2 (number, required)
-+ initMisc: 3 (number, required)
-
-+ speed: 3 (number, required)
-
-+ statMod (array, required)
-  + +2
-  + +2
-+ statMod (array, required)
-  + +2
-  + +2
-
-+ skillName (array, required)
-  + Riding
-  + Running
-+ skillModType (array, required)
-  + Dex
-  + Dex
-+ skillTotal (array, required)
-  + 5
-  + 5
-+ skillAbilityMod (array, required)
-  + +2
-  + +2
-+ skillRank (array, required)
-  + 3
-  + 3
++ stat (array)
+  + 11 (number)
+  + 11 (number)
+  + 11 (number)
+  + 11 (number)
+  + 11 (number)
+  + 11 (number)
   
-+ savingThrow (array, required)
++ statMod (array)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+
++ hp: 122 (number)
++ hpWounds: 52 (number)
++ hpDice: 3d12 (string)
++ dmgReduction: Blunt (string)
+
++ ac: 122 (number)
++ acArmor: 52 (number)
++ acShield: 122 (number)
++ acDex: 52 (number)
++ acNatural: 122 (number)
++ acMisc: 52 (number)
++ acTouch: 122 (number)
++ acFlat: 52 (number)
+
++ init: 1 (number)
++ initDex: 2 (number)
++ initMisc: 3 (number)
+
++ speed: 3 (number)
+
++ attackTotal (array)
+  + 12 (number)
+  + 11 (number)
+
++ attackBase (array)
+  + 3 (number)
+  + 4 (number)
+
++ attackMod (array)
+  + 8 (number)
+  + 9 (number)
+  
++ attackMisc (array)
+  + 2 (number)
+  + 2 (number)  
+
++ spellsKnown (array)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  
++ spellsPerDay (array)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+
++ spellDC (array)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  + 2 (number)
+  
++ savingThrow (array)
   + 5
   + 5
-+ savingThrowBase (array, required)
+  + 5
+  
++ savingThrowBase (array)
   + 3
   + 3
-+ savingThrowMod (array, required)
+  + 5
+  
++ savingThrowMod (array)
   + 2
   + 2
+  + 5
   
-+ weight (array, required)
++ weight (array)
   + 20
   + 60
   + 180
   + 180
   + 30
-  
-+ savingThrow (array, required)
-  + 5
-  + 5
-+ savingThrowBase (array, required)
-  + 3
-  + 3
-+ savingThrowMod (array, required)
-  + 2
-  + 2
 
-+ user_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ userId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string)
 
 ### Spell (Base Model)
 + Include Id
-+ title: shock (string, required)
-+ components: V,S (string, required)
-+ castingTime: 3 seconds (string, required)
-+ range: 2ft (string, required)
-+ target: 1 person (string, required)
-+ duration: instant (string, required)
-+ savingThrow: dex (string, required)
-+ description: it hurt! (string, required)
++ spellName: shock (string, required)
++ spellComponents: V,S (string, required)
++ spellCastingTime: 3 seconds (string, required)
++ spellRange: 2ft (string, required)
++ spellTarget: 1 person (string, required)
++ spellDuration: instant (string, required)
++ spellSavingThrow: dex (string, required)
++ spellDescription: it hurt! (string, required)
 
-+ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
 
 
 ### Feat (Base Model)
 + Include Id
-+ title: Big boomb (string, required)
-+ description: it go explode! (string, required)
++ featName: Big boomb (string, required)
++ featDescription: it go explode! (string, required)
 
-+ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
 
 ### Weapon (Base Model)
 + Include Id
-+ title: Sword of killing (string, required)
-+ attackBonus: 3 (number, required)
-+ damage: 3d12 (string, required)
-+ critical: 17-20 (string, required)
-+ range: 3ft (string, required)
-+ specialProps: It burns them for 2 damage (string)
-+ ammunition: "" (string)
-+ weight: 3 (number, required)
-+ size: medium (string, required)
-+ type: slash (string, required)
++ weaponName: Sword of killing (string, required)
++ weaponAttackBonus: 3 (number, required)
++ weaponDamage: 3d12 (string, required)
++ weaponCritical: 17-20 (string, required)
++ weaponRange: 3ft (string, required)
++ weaponSpecial: It burns them for 2 damage (string)
++ weaponAmmunition: "" (string)
++ weaponWeight: 3 (number, required)
++ weaponSize: medium (string, required)
++ weaponType: slash (string, required)
 
-+ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
 
 ### Item (Base Model)
 + Include Id
-+ title: apple (string, required)
-+ description: it taste good (string, required)
-+ weight: 3 (number, required)
++ itemName: apple (string, required)
++ itemDescription: it taste good (string, required)
++ itemWeight: 3 (number, required)
 
-+ character_Id: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
++ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
+
+### Skill (Base Model)
++ Include Id
++ skillName: Walking (string, required)
++ skillModType: Dex (string, required)
++ skillTotal: 6 (number, required)
++ skillAbilityMod: 3 (number, required)
++ skillRank: 3 (number, required)
+
+
++ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
 
 ### Base Model (object)
 + createdAt: `2019-08-05T08:40:51.620Z` (string, required) - Date resource was create
@@ -205,7 +242,7 @@ Create a new user
 
 + Parameters
     + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-    
+   
 ### GET
 Get one user by id
 
@@ -243,11 +280,11 @@ Create a new character
 ## /characters/{id}
 + Parameters
     + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-    
+
 ### GET
 Get one character by id
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Character)
 
 ### PUT
@@ -255,10 +292,11 @@ Update a character by id
 
 + Response 202
     + Attributes (Character)
+
 ### DELETE
 Delete a character
 
-+ Response 202
++ Response 204
 
 # Group Feat Collection
 ## /feats
@@ -283,7 +321,7 @@ Create a new feat
 ### GET
 Get one feat by id
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Feat)
 
 ### PUT
@@ -319,7 +357,7 @@ Create a new character
 ### GET
 Get one item by id
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Item)
 
 ### PUT
@@ -333,53 +371,114 @@ Delete a item
 
 + Response 202
 
-
 # Group Spell Collection
-## /characters
+## /spells
 ### GET
-Get all the characters
+Get all the spells
 
 + Response 200 (application/json)
-    + Attributes (array[Character])
+    + Attributes (array[Spell])
 
 ### POST
-Create a new character
+Create a new spell
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Character)
+    + Attributes (Spell)
     
-## /characters/{id}
+## /spells/{id}
 + Parameters
     + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-    
+
 ### GET
-Get one character by id
+Get one spell by id
++ Response 200 (application/json)
+    + Attributes (Item)
+
+### PUT
+Update a spell by id
+
++ Response 202
+    + Attributes (Spell)
+
+### DELETE
+Delete a item
+
++ Response 202
 
 # Group Weapon Collection
-## /characters
+## /weapons
 ### GET
-Get all the characters
+Get all the weapons
 
 + Response 200 (application/json)
-    + Attributes (array[Character])
+    + Attributes (array[Weapon])
 
 ### POST
-Create a new character
+Create a new weapon
 + Request (application/json)
     + Attributes (object)
         + title: WAI (string, required)
 + Response 201 (application/json)
-    + Attributes (Character)
+    + Attributes (Weapon)
     
-## /characters/{id}
+## /weapons/{id}
 + Parameters
     + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-    
+
 ### GET
-Get one character by id
+Get one weapon by id
++ Response 200 (application/json)
+    + Attributes (Weapon)
+
+### PUT
+Update a weapon by id
+
++ Response 202
+    + Attributes (Weapon)
+
+### DELETE
+Delete a Weapon
+
++ Response 202
+
+# Group Skill Collection
+## /skills
+### GET
+Get all the skill
+
++ Response 200 (application/json)
+    + Attributes (array[Skill])
+
+### POST
+Create a new skill
++ Request (application/json)
+    + Attributes (object)
+        + title: WAI (string, required)
++ Response 201 (application/json)
+    + Attributes (Skill)
     
+## /skills/{id}
++ Parameters
+    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+
+### GET
+Get one skill by id
++ Response 200 (application/json)
+    + Attributes (Skill)
+
+### PUT
+Update a skill by id
+
++ Response 202
+    + Attributes (Skill)
+
+### DELETE
+Delete a skill
+
++ Response 202
+
 # Group Authentication
 
 ## /auth/signup

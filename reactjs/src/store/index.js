@@ -10,6 +10,7 @@ import feats from './feats/redux';
 import items from './items/redux';
 import spells from './spells/redux';
 import weapons from './weapons/redux';
+import auth from './auth/redux';
 
 const rootReducer = combineReducers({
   sheets,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   items,
   spells,
   weapons,
+  auth,
 });
 
 const middleware = applyMiddleware(thunkMiddleware, callAPI, createLogger());

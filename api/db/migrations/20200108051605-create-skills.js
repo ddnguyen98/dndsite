@@ -7,6 +7,14 @@ module.exports = {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
     },
+    characterId: {
+      type: Sequelize.UUID,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Characters',
+        key: 'id',
+      },
+    },
     skillName: {
       type: Sequelize.STRING,
     },

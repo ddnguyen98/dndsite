@@ -40,6 +40,7 @@ export default function callAPIMiddleware({ dispatch, getState }) {
     });
     try {
       const resp = await callAPI();
+      console.log(callAPI);
       // success, dispatch `REQ_ITEM_SUCCESS`
       dispatch({
         ...props,

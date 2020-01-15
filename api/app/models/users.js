@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     access_token: DataTypes.STRING,
   }, {});
   Users.associate = (models) => {
-    // associations can be defined here
+    Users.hasMany(models.Characters, { foreignKey: 'userId' });
   };
   return Users;
 };

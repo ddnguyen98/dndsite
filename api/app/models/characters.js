@@ -63,7 +63,12 @@ module.exports = (sequelize, DataTypes) => {
     weight: DataTypes.ARRAY(DataTypes.STRING),
   }, {});
   Characters.associate = (models) => {
-    // associations can be defined here
+    Characters.hasMany(models.Feats, { foreignKey: 'characterId' });
+    Characters.hasMany(models.Items, { foreignKey: 'characterId' });
+    Characters.hasMany(models.Skills, { foreignKey: 'characterId' });
+    Characters.hasMany(models.Spells, { foreignKey: 'characterId' });
+    Characters.hasMany(models.Weapons, { foreignKey: 'characterId' });
+    Characters.belongsTo(models.Users, { foreignKey: 'userId' });
   };
   return Characters;
 };

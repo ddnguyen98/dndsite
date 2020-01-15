@@ -18,9 +18,9 @@ import API from '../../API';
 
 const CACHE_TIME = 1000 * 60 * 5;
 
-export const fetchSkills = () => ({
+export const fetchSkills = id => ({
   types: [REQ_SKILLS_PENDING, REQ_SKILLS_SUCCESS, REQ_SKILLS_ERROR],
-  callAPI: () => API.get('/skills'),
+  callAPI: () => API.get(`/skills?characterId=${id}`),
   shouldCallAPI: state => {
     const { loadedAt, isLoading } = state.skills;
     if (isLoading) return false;

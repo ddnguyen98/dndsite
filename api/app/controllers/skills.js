@@ -2,15 +2,17 @@ const { Skills, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
 exports.getAll = async (req, res) => {
+  const { characterId } = req.query;
   try {
-    const skills = await Skills.findAll();
-    res.json(skills || []);
+    const skills = await Skills.findAll({ where: { characterId } });
+    res.json({ data: [skills] });
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createSkill = async (req, res) => {
+  const { id } = req.body;
   const {
     skillName,
     skillModType,
@@ -25,10 +27,11 @@ exports.createSkill = async (req, res) => {
       skillTotal,
       skillAbilityMod,
       skillRank,
+      characterId: id,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json(skill);
+    res.status(200).json({ data: { skill } });
   } catch (e) {
     SendError(res, e);
   }
@@ -41,7 +44,7 @@ exports.updateSkill = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json(updatedSkill);
+    res.json({ data: { updatedSkill } });
   } catch (e) {
     SendError(res, e);
   }
