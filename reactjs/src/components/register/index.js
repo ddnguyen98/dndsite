@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -11,9 +12,46 @@ import {
   InputGroupText,
 } from 'reactstrap';
 import styles from './styles.module.css';
+import container from './container';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      username: '',
+      password: '',
+    };
+  }
+
+  handleInputChange = event => {
+    // pull the name of the input and value of input out of the event object
+    const {
+      target: { name, value },
+    } = event;
+    // update the state to a key of the name of the input and value of the value of the input
+    // ex: type: 'private'
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  save = async event => {
+    // don't actually submit the form through the browser
+    event.preventDefault();
+    const { saveUser, history } = this.props;
+    const { email, username, password } = this.state;
+    const signup = await saveUser({ email, username, password });
+    if (signup) {
+      history.push('/');
+    } else {
+      window.location.reload();
+    }
+  };
+
   render() {
+    const { loggedIn } = this.props;
+    if (loggedIn) return <Redirect to="/" />;
     return (
       <div className={styles.wrapper}>
         <Container className={styles.login}>
@@ -26,7 +64,7 @@ class Register extends Component {
               page{' '}
             </p>
           </div>
-          <Form className={styles.form}>
+          <Form className={styles.form} onSubmit={this.save}>
             <FormGroup>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -37,6 +75,7 @@ class Register extends Component {
                   name="email"
                   id="email"
                   placeholder="Email"
+                  onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
@@ -45,7 +84,12 @@ class Register extends Component {
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>U</InputGroupText>
                 </InputGroupAddon>
-                <Input name="username" id="username" placeholder="Username" />
+                <Input
+                  name="username"
+                  id="username"
+                  placeholder="Username"
+                  onChange={this.handleInputChange}
+                />
               </InputGroup>
             </FormGroup>
             <FormGroup>
@@ -58,6 +102,7 @@ class Register extends Component {
                   name="password"
                   id="password"
                   placeholder="Password"
+                  onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
@@ -69,4 +114,13 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  saveUser: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool,
+};
+
+Register.defaultProps = {
+  loggedIn: false,
+};
+
+export default container(Register);

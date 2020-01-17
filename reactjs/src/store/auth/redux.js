@@ -23,6 +23,8 @@ function loginPending(state, action) {
 function loginSuccess(state, action) {
   if (action.data.token) {
     localStorage.setItem('token', action.data.token);
+  } else {
+    localStorage.removeItem('token');
   }
   // clear loading and error, update cache time, add feats
   return {

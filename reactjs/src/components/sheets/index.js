@@ -23,10 +23,10 @@ class Sheets extends Component {
     fetchSheets();
   }
 
-  addSheet = event => {
+  addSheet = async event => {
     event.preventDefault();
     const { createSheet } = this.props;
-    createSheet();
+    await createSheet();
   };
 
   delete = id => {

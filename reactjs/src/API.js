@@ -4,13 +4,6 @@ const API = axios.create({
   baseURL: process.env.API_URL || 'http://localhost:4000/api',
 });
 
-API.interceptors.response.use(
-  response => (response ? response.data : {}),
-  error => {
-    console.log(error);
-  }
-);
-
 // for each api request going out
 API.interceptors.request.use(async config => {
   // pull the token out of local storage

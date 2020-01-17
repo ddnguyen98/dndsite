@@ -14,12 +14,19 @@ export const loginAccount = login => {
   };
 };
 
-export const saveUser = id => ({
-  types: [REQ_LOGGEDIN_PENDING, REQ_LOGGEDIN_SUCCESS, REQ_LOGGEDIN_ERROR],
-  callAPI: () => API.get(`/feats?characterId=${id}`),
-});
+export const saveUser = signup => {
+  const { username, password, email } = signup;
+  return {
+    types: [REQ_LOGGEDIN_PENDING, REQ_LOGGEDIN_SUCCESS, REQ_LOGGEDIN_ERROR],
+    callAPI: () => API.post('/signup', { username, password, email }),
+  };
+};
 
-export const logout = id => ({
-  types: [REQ_LOGGEDIN_PENDING, REQ_LOGGEDIN_SUCCESS, REQ_LOGGEDIN_ERROR],
-  callAPI: () => API.get(`/feats?characterId=${id}`),
-});
+export const logout = () => {
+  return {
+    types: [REQ_LOGGEDIN_PENDING, REQ_LOGGEDIN_SUCCESS, REQ_LOGGEDIN_ERROR],
+    callAPI: () => {
+      return { data: { loggedIn: false } };
+    },
+  };
+};

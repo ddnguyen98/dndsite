@@ -102,7 +102,7 @@ function sheetSuccess(state, action) {
         isLoading: false,
         error: null,
         loadedAt: Date.now(),
-        data: action.payload.data,
+        data: action.data,
       },
     },
     allIds: [...new Set([...state.allIds, action.payload.id])],

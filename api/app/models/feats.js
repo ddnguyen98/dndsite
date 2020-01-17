@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
-      defaultValue: DataTypes,
+      defaultValue: DataTypes.UUIDV4,
     },
     featName: DataTypes.STRING,
     featDescription: DataTypes.STRING,

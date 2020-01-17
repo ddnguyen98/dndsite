@@ -10,7 +10,7 @@ exports.getOneById = async (req, res) => {
       // fail
       throwError(500, 'Sequelize Error'),
     );
-    res.json({ data: { character } });
+    res.json(character);
   } catch (e) {
     SendError(res, e);
   }
@@ -18,135 +18,75 @@ exports.getOneById = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     const characters = await Characters.findAll({ where: { userId: req.userId } });
-    res.json({ data: [characters] });
+    res.json(characters || []);
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createCharacter = async (req, res) => {
-  const {
-    name,
-    player,
-    alignment,
-    level,
-    userClass,
-    race,
-    campaign,
-    diety,
-    size,
-    age,
-    gender,
-    hair,
-    height,
-    characterWeight,
-    eyes,
-    currency,
-    languages,
-    description,
-    personality,
-    traits,
-    flaws,
-    contacts,
-    enemies,
-    notes,
-    image,
-    hp,
-    hpWounds,
-    hpDice,
-    dmgReduction,
-    ac,
-    acArmor,
-    acShield,
-    acDex,
-    acNatural,
-    acMisc,
-    acTouch,
-    acFlat,
-    init,
-    initDex,
-    initMisc,
-    speed,
-  } = '';
-  const { stat, statMod } = ['', '', '', '', '', ''];
-  const {
-    attackTotal,
-    attackBase,
-    attackMod,
-    attackMisc,
-  } = ['', ''];
-  const {
-    spellsKnown,
-    spellsPerDay,
-    spellDC,
-  } = ['', '', '', '', '', '', '', '', '', ''];
-  const {
-    savingThrow,
-    savingThrowBase,
-    savingThrowMod,
-  } = ['', '', ''];
-  const { weight } = ['', '', '', '', ''];
   try {
     const character = await Characters.create({
-      stat,
-      statMod,
-      attackTotal,
-      attackBase,
-      attackMod,
-      attackMisc,
-      spellsKnown,
-      spellsPerDay,
-      spellDC,
-      savingThrow,
-      savingThrowBase,
-      savingThrowMod,
-      weight,
-      name,
-      player,
-      alignment,
-      level,
-      userClass,
-      race,
-      campaign,
-      diety,
-      size,
-      age,
-      gender,
-      hair,
-      height,
-      characterWeight,
-      eyes,
-      currency,
-      languages,
-      description,
-      personality,
-      traits,
-      flaws,
-      contacts,
-      enemies,
-      notes,
-      image,
-      hp,
-      hpWounds,
-      hpDice,
-      dmgReduction,
-      ac,
-      acArmor,
-      acShield,
-      acDex,
-      acNatural,
-      acMisc,
-      acTouch,
-      acFlat,
-      init,
-      initDex,
-      initMisc,
-      speed,
+      id: req.body.id,
+      stat: [' ', ' ', ' ', ' ', ' ', ' '],
+      statMod: [' ', ' ', ' ', ' ', ' ', ' '],
+      attackTotal: [' ', ' '],
+      attackBase: [' ', ' '],
+      attackMod: [' ', ' '],
+      attackMisc: [' ', ' '],
+      spellsKnown: [' ', ' ', ' ', ' ', ' ', ' ', '', ' ', ' ', ' '],
+      spellsPerDay: [' ', ' ', ' ', ' ', ' ', ' ', '', ' ', ' ', ' '],
+      spellDC: [' ', ' ', ' ', ' ', ' ', ' ', '', ' ', ' ', ' '],
+      savingThrow: [' ', ' ', ' '],
+      savingThrowBase: [' ', ' ', ' '],
+      savingThrowMod: [' ', ' ', ' '],
+      weight: [' ', ' ', ' ', ' ', ' '],
+      name: 'Character Name',
+      player: ' ',
+      alignment: ' ',
+      level: ' ',
+      userClass: ' ',
+      race: ' ',
+      campaign: 'Character campaign',
+      diety: ' ',
+      size: ' ',
+      age: ' ',
+      gender: ' ',
+      hair: ' ',
+      height: ' ',
+      characterWeight: ' ',
+      eyes: ' ',
+      currency: ' ',
+      languages: ' ',
+      description: ' ',
+      personality: ' ',
+      traits: ' ',
+      flaws: ' ',
+      contacts: ' ',
+      enemies: ' ',
+      notes: ' ',
+      image: 'henry.jpg',
+      hp: ' ',
+      hpWounds: ' ',
+      hpDice: ' ',
+      dmgReduction: ' ',
+      ac: ' ',
+      acArmor: ' ',
+      acShield: ' ',
+      acDex: ' ',
+      acNatural: ' ',
+      acMisc: ' ',
+      acTouch: ' ',
+      acFlat: ' ',
+      init: ' ',
+      initDex: ' ',
+      initMisc: ' ',
+      speed: ' ',
       userId: req.userId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json({ data: { character } });
+    res.json(character);
   } catch (e) {
     SendError(res, e);
   }

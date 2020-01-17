@@ -14,6 +14,12 @@ import HeaderContainer from './container';
 import styles from './styles.module.css';
 
 class Header extends Component {
+  logUserOut = () => {
+    const { logout, history } = this.props;
+    logout();
+    history.push('/');
+  };
+
   render() {
     const { loggedIn } = this.props;
     return (
@@ -39,7 +45,7 @@ class Header extends Component {
             {loggedIn && (
               <>
                 <Link to="/">
-                  <NavbarText>Logout</NavbarText>
+                  <NavbarText onClick={this.logUserOut}>Logout</NavbarText>
                 </Link>
               </>
             )}
