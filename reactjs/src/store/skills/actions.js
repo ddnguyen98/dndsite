@@ -29,18 +29,18 @@ export const fetchSkills = id => ({
   },
 });
 
-export const createSkill = skill => {
+export const createSkill = characterId => {
   const id = uuid();
   return {
     types: [ADD_SKILL_PENDING, ADD_SKILL_SUCCESS, ADD_SKILL_ERROR],
-    callAPI: () => API.post('/skills', { id, ...skill }),
+    callAPI: () => API.post('/skills', { id, characterId }),
     payload: { id },
   };
 };
 
 export const updateSkill = skill => ({
   types: [UPDATE_SKILL_PENDING, UPDATE_SKILL_SUCCESS, UPDATE_SKILL_ERROR],
-  callAPI: () => API.put(`/skills/${skill.id}`),
+  callAPI: () => API.put(`/skills/${skill.id}`, skill.data),
   payload: { id: skill.id, data: skill.data },
 });
 

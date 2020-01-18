@@ -29,18 +29,18 @@ export const fetchSpells = id => ({
   },
 });
 
-export const createSpell = spell => {
+export const createSpell = characterId => {
   const id = uuid();
   return {
     types: [ADD_SPELL_PENDING, ADD_SPELL_SUCCESS, ADD_SPELL_ERROR],
-    callAPI: () => API.post('/spells', { id, ...spell }),
+    callAPI: () => API.post('/spells', { id, characterId }),
     payload: { id },
   };
 };
 
 export const updateSpell = spell => ({
   types: [UPDATE_SPELL_PENDING, UPDATE_SPELL_SUCCESS, UPDATE_SPELL_ERROR],
-  callAPI: () => API.put(`/spells/${spell.id}`),
+  callAPI: () => API.put(`/spells/${spell.id}`, spell.data),
   payload: { id: spell.id, data: spell.data },
 });
 

@@ -5,43 +5,32 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const weapons = await Weapons.findAll({ where: { characterId } });
-    res.json({ data: [weapons] });
+    res.json(weapons || []);
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createWeapon = async (req, res) => {
-  const { id } = req.body;
-  const {
-    weaponName,
-    weaponAttackBonus,
-    weaponDamage,
-    weaponCritical,
-    weaponRange,
-    weaponSpecial,
-    weaponAmmunition,
-    weaponWeight,
-    weaponSize,
-    weaponType,
-  } = '';
+  const { id, characterId } = req.body;
   try {
     const weapon = await Weapons.create({
-      weaponName,
-      weaponAttackBonus,
-      weaponDamage,
-      weaponCritical,
-      weaponRange,
-      weaponSpecial,
-      weaponAmmunition,
-      weaponWeight,
-      weaponSize,
-      weaponType,
-      characterId: id,
+      id,
+      weaponName: ' ',
+      weaponAttackBonus: ' ',
+      weaponDamage: ' ',
+      weaponCritical: ' ',
+      weaponRange: ' ',
+      weaponSpecial: ' ',
+      weaponAmmunition: ' ',
+      weaponWeight: ' ',
+      weaponSize: ' ',
+      weaponType: ' ',
+      characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json({ data: { weapon } });
+    res.status(200).json(weapon);
   } catch (e) {
     SendError(res, e);
   }
@@ -54,7 +43,7 @@ exports.updateWeapon = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json({ data: { updatedWeapon } });
+    res.json(updatedWeapon);
   } catch (e) {
     SendError(res, e);
   }

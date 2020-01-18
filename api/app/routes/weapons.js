@@ -3,8 +3,8 @@ const weaponsCtrl = require('../controllers/weapons');
 
 router.get('/', weaponsCtrl.getAll);
 router.post('/', weaponsCtrl.createWeapon);
-router.delete('/', weaponsCtrl.removeWeapon);
-router.put('/', weaponsCtrl.updateWeapon);
+router.delete('/:id', weaponsCtrl.removeWeapon);
+router.put('/:id', weaponsCtrl.updateWeapon);
 
 
 module.exports = router;

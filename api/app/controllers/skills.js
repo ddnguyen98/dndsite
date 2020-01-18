@@ -5,33 +5,27 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const skills = await Skills.findAll({ where: { characterId } });
-    res.json({ data: [skills] });
+    res.json(skills || []);
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createSkill = async (req, res) => {
-  const { id } = req.body;
-  const {
-    skillName,
-    skillModType,
-    skillTotal,
-    skillAbilityMod,
-    skillRank,
-  } = '';
+  const { id, characterId } = req.body;
   try {
     const skill = await Skills.create({
-      skillName,
-      skillModType,
-      skillTotal,
-      skillAbilityMod,
-      skillRank,
-      characterId: id,
+      id,
+      skillName: ' ',
+      skillModType: ' ',
+      skillTotal: ' ',
+      skillAbilityMod: ' ',
+      skillRank: ' ',
+      characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json({ data: { skill } });
+    res.status(200).json(skill);
   } catch (e) {
     SendError(res, e);
   }
@@ -44,7 +38,7 @@ exports.updateSkill = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json({ data: { updatedSkill } });
+    res.json(updatedSkill);
   } catch (e) {
     SendError(res, e);
   }

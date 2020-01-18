@@ -29,18 +29,18 @@ export const fetchItems = id => ({
   },
 });
 
-export const createItem = item => {
+export const createItem = characterId => {
   const id = uuid();
   return {
     types: [ADD_ITEM_PENDING, ADD_ITEM_SUCCESS, ADD_ITEM_ERROR],
-    callAPI: () => API.post('/items', { id, ...item }),
+    callAPI: () => API.post('/items', { id, characterId }),
     payload: { id },
   };
 };
 
 export const updateItem = item => ({
   types: [UPDATE_ITEM_PENDING, UPDATE_ITEM_SUCCESS, UPDATE_ITEM_ERROR],
-  callAPI: () => API.put(`/items/${item.id}`),
+  callAPI: () => API.put(`/items/${item.id}`, item.data),
   payload: { id: item.id, data: item.data },
 });
 

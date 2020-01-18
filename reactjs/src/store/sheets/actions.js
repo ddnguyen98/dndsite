@@ -56,7 +56,7 @@ export const fetchSheet = id => ({
 
 export const updateSheet = sheet => ({
   types: [UPDATE_SHEET_PENDING, UPDATE_SHEET_SUCCESS, UPDATE_SHEET_ERROR],
-  callAPI: () => API.put(`/characters/${sheet.id}`),
+  callAPI: () => API.put(`/characters/${sheet.id}`, sheet),
   payload: { id: sheet.id, data: sheet.inputs },
 });
 

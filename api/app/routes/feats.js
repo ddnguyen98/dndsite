@@ -3,8 +3,8 @@ const featsCtrl = require('../controllers/feats');
 
 router.get('/', featsCtrl.getAll);
 router.post('/', featsCtrl.createFeat);
-router.delete('/', featsCtrl.removeFeat);
-router.put('/', featsCtrl.updateFeat);
+router.delete('/:id', featsCtrl.removeFeat);
+router.put('/:id', featsCtrl.updateFeat);
 
 
 module.exports = router;

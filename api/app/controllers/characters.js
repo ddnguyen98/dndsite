@@ -25,9 +25,10 @@ exports.getAll = async (req, res) => {
 };
 
 exports.createCharacter = async (req, res) => {
+  const { id } = req.body;
   try {
     const character = await Characters.create({
-      id: req.body.id,
+      id,
       stat: [' ', ' ', ' ', ' ', ' ', ' '],
       statMod: [' ', ' ', ' ', ' ', ' ', ' '],
       attackTotal: [' ', ' '],
@@ -95,11 +96,11 @@ exports.createCharacter = async (req, res) => {
 exports.updateCharacter = async (req, res) => {
   const { id } = req.params;
   try {
-    const [, [updatedCharacter]] = await Characters.update(req.body, {
+    const [, [updatedCharacter]] = await Characters.update(req.body.inputs, {
       where: { id },
       returning: true,
     });
-    res.json({ data: { updatedCharacter } });
+    res.json(updatedCharacter);
   } catch (e) {
     SendError(res, e);
   }

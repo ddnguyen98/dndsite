@@ -29,18 +29,18 @@ export const fetchWeapons = id => ({
   },
 });
 
-export const createWeapon = weapon => {
+export const createWeapon = characterId => {
   const id = uuid();
   return {
     types: [ADD_WEAPON_PENDING, ADD_WEAPON_SUCCESS, ADD_WEAPON_ERROR],
-    callAPI: () => API.post('/weapons', { id, ...weapon }),
+    callAPI: () => API.post('/weapons', { id, characterId }),
     payload: { id },
   };
 };
 
 export const updateWeapon = weapon => ({
   types: [UPDATE_WEAPON_PENDING, UPDATE_WEAPON_SUCCESS, UPDATE_WEAPON_ERROR],
-  callAPI: () => API.put(`/weapons/${weapon.id}`),
+  callAPI: () => API.put(`/weapons/${weapon.id}`, weapon.data),
   payload: { id: weapon.id, data: weapon.data },
 });
 

@@ -67,6 +67,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+  logout: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool,
 };
 

@@ -3,8 +3,8 @@ const spellsCtrl = require('../controllers/spells');
 
 router.get('/', spellsCtrl.getAll);
 router.post('/', spellsCtrl.createSpell);
-router.delete('/', spellsCtrl.removeSpell);
-router.put('/', spellsCtrl.updateSpell);
+router.delete('/:id', spellsCtrl.removeSpell);
+router.put('/:id', spellsCtrl.updateSpell);
 
 
 module.exports = router;

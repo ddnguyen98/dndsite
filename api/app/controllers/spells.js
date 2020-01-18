@@ -5,39 +5,30 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const spells = await Spells.findAll({ where: { characterId } });
-    res.json({ data: [spells] });
+    res.json(spells || []);
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createSpell = async (req, res) => {
-  const { id } = req.body;
-  const {
-    spellName,
-    spellComponents,
-    spellCastingTime,
-    spellRange,
-    spellTarget,
-    spellDuration,
-    spellSavingThrow,
-    spellDescription,
-  } = '';
+  const { id, characterId } = req.body;
   try {
     const spell = await Spells.create({
-      spellName,
-      spellComponents,
-      spellCastingTime,
-      spellRange,
-      spellTarget,
-      spellDuration,
-      spellSavingThrow,
-      spellDescription,
-      characterId: id,
+      id,
+      spellName: ' ',
+      spellComponents: ' ',
+      spellCastingTime: ' ',
+      spellRange: ' ',
+      spellTarget: ' ',
+      spellDuration: ' ',
+      spellSavingThrow: ' ',
+      spellDescription: ' ',
+      characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json({ data: { spell } });
+    res.status(200).json(spell);
   } catch (e) {
     SendError(res, e);
   }
@@ -50,7 +41,7 @@ exports.updateSpell = async (req, res) => {
       where: { id },
       returning: true,
     });
-    res.json({ data: { updatedSpell } });
+    res.json(updatedSpell);
   } catch (e) {
     SendError(res, e);
   }

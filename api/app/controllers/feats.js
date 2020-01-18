@@ -5,36 +5,34 @@ exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
     const feats = await Feats.findAll({ where: { characterId } });
-    res.json({ data: [feats] });
+    res.json(feats || []);
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.createFeat = async (req, res) => {
-  const { featName, featDescription } = '';
   const { id, characterId } = req.body;
-
   try {
     const feat = await Feats.create({
-      id, featName, featDescription, characterId,
+      id, featName: ' ', featDescription: ' ', characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.status(200).json({ data: { feat } });
+    res.status(200).json(feat);
   } catch (e) {
     SendError(res, e);
   }
 };
 
 exports.updateFeat = async (req, res) => {
-  const { id, featName, featDescription } = req.body;
+  const { id } = req.params;
   try {
-    const [, [updatedFeat]] = await Feats.update(featName, featDescription, {
+    const [, [updatedFeat]] = await Feats.update(req.body, {
       where: { id },
       returning: true,
     });
-    res.json({ data: { updatedFeat } });
+    res.json(updatedFeat);
   } catch (e) {
     SendError(res, e);
   }

@@ -6,6 +6,6 @@ router.get('/:id', charactersCtrl.getOneById);
 router.get('/', protectedRoute, charactersCtrl.getAll);
 router.post('/', protectedRoute, charactersCtrl.createCharacter);
 router.delete('/:id', charactersCtrl.removeCharacter);
-router.put('/', charactersCtrl.updateCharacter);
+router.put('/:id', charactersCtrl.updateCharacter);
 
 module.exports = router;
