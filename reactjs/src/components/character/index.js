@@ -527,7 +527,6 @@ class Character extends Component {
       fetchSpells,
       fetchWeapons,
     } = this.props;
-    console.log(id);
     if (!id) return;
     await fetchSheet(id);
     await fetchSkills(id);
@@ -592,13 +591,18 @@ class Character extends Component {
     const { createSkill } = this.props;
     await createSkill(characterId);
     const { skills } = this.props;
-    this.setState({ skills: [...skills] });
+    const { skills: stateSkills } = this.state;
+    stateSkills.push(skills[skills.length - 1]);
+    this.setState({ skills: [...stateSkills] });
   };
 
   deleteSkill = async id => {
     const { deleteSkill } = this.props;
     await deleteSkill(id);
-    const { skills } = this.props;
+    let { skills } = this.state;
+    skills = skills.filter(value => {
+      return value.id !== id;
+    });
     this.setState({ skills: [...skills] });
   };
 
@@ -612,13 +616,18 @@ class Character extends Component {
     const { createFeat } = this.props;
     await createFeat(characterId);
     const { feats } = this.props;
-    this.setState({ feats: [...feats] });
+    const { feats: stateFeats } = this.state;
+    stateFeats.push(feats[feats.length - 1]);
+    this.setState({ feats: [...stateFeats] });
   };
 
   deleteFeat = async id => {
     const { deleteFeat } = this.props;
     await deleteFeat(id);
-    const { feats } = this.props;
+    let { feats } = this.state;
+    feats = feats.filter(value => {
+      return value.id !== id;
+    });
     this.setState({ feats: [...feats] });
   };
 
@@ -632,13 +641,18 @@ class Character extends Component {
     const { createItem } = this.props;
     await createItem(characterId);
     const { items } = this.props;
-    this.setState({ items: [...items] });
+    const { items: stateItems } = this.state;
+    stateItems.push(items[items.length - 1]);
+    this.setState({ items: [...stateItems] });
   };
 
   deleteItem = async id => {
     const { deleteItem } = this.props;
     await deleteItem(id);
-    const { items } = this.props;
+    let { items } = this.state;
+    items = items.filter(value => {
+      return value.id !== id;
+    });
     this.setState({ items: [...items] });
   };
 
@@ -652,13 +666,18 @@ class Character extends Component {
     const { createSpell } = this.props;
     await createSpell(characterId);
     const { spells } = this.props;
-    this.setState({ spells: [...spells] });
+    const { spells: stateSpells } = this.state;
+    stateSpells.push(spells[spells.length - 1]);
+    this.setState({ spells: [...stateSpells] });
   };
 
   deleteSpell = async id => {
     const { deleteSpell } = this.props;
     await deleteSpell(id);
-    const { spells } = this.props;
+    let { spells } = this.state;
+    spells = spells.filter(value => {
+      return value.id !== id;
+    });
     this.setState({ spells: [...spells] });
   };
 
@@ -672,13 +691,18 @@ class Character extends Component {
     const { createWeapon } = this.props;
     await createWeapon(characterId);
     const { weapons } = this.props;
-    this.setState({ weapons: [...weapons] });
+    const { weapons: stateWeapons } = this.state;
+    stateWeapons.push(weapons[weapons.length - 1]);
+    this.setState({ weapons: [...stateWeapons] });
   };
 
   deleteWeapon = async id => {
     const { deleteWeapon } = this.props;
     await deleteWeapon(id);
-    const { weapons } = this.props;
+    let { weapons } = this.state;
+    weapons = weapons.filter(value => {
+      return value.id !== id;
+    });
     this.setState({ weapons: [...weapons] });
   };
 
@@ -856,7 +880,12 @@ class Character extends Component {
                   <Col>
                     <FormGroup>
                       <Label for="wisdom">Wisdom</Label>
-                      <Input name="wisdom" id="wisdom" value={inputs.stat[4]} />
+                      <Input
+                        name="wisdom"
+                        id="wisdom"
+                        value={inputs.stat[4]}
+                        onChange={this.handleInputChange}
+                      />
                     </FormGroup>
                     <FormGroup>
                       <Input
@@ -1646,7 +1675,11 @@ class Character extends Component {
                                   onChange={this.handleInputChangeItems}
                                 />
                               </td>
-                              <FaTrash onClick={()=>{this.deleteItem(item.id)}}/>
+                              <FaTrash
+                                onClick={() => {
+                                  this.deleteItem(item.id);
+                                }}
+                              />
                             </tr>
                           ))}
                         </tbody>

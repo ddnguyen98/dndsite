@@ -15,7 +15,7 @@ exports.createFeat = async (req, res) => {
   const { id, characterId } = req.body;
   try {
     const feat = await Feats.create({
-      id, featName: ' ', featDescription: ' ', characterId,
+      id, featName: '', featDescription: '', characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));

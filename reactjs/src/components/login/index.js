@@ -41,6 +41,7 @@ class Login extends Component {
     const { loginAccount, history } = this.props;
     const { username, password } = this.state;
     const login = await loginAccount({ username, password });
+    console.log(login);
     if (login) {
       history.push('/');
     } else {

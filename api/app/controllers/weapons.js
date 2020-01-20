@@ -16,16 +16,16 @@ exports.createWeapon = async (req, res) => {
   try {
     const weapon = await Weapons.create({
       id,
-      weaponName: ' ',
-      weaponAttackBonus: ' ',
-      weaponDamage: ' ',
-      weaponCritical: ' ',
-      weaponRange: ' ',
-      weaponSpecial: ' ',
-      weaponAmmunition: ' ',
-      weaponWeight: ' ',
-      weaponSize: ' ',
-      weaponType: ' ',
+      weaponName: '',
+      weaponAttackBonus: '',
+      weaponDamage: '',
+      weaponCritical: '',
+      weaponRange: '',
+      weaponSpecial: '',
+      weaponAmmunition: '',
+      weaponWeight: '',
+      weaponSize: '',
+      weaponType: '',
       characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))

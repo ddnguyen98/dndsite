@@ -16,11 +16,11 @@ exports.createSkill = async (req, res) => {
   try {
     const skill = await Skills.create({
       id,
-      skillName: ' ',
-      skillModType: ' ',
-      skillTotal: ' ',
-      skillAbilityMod: ' ',
-      skillRank: ' ',
+      skillName: '',
+      skillModType: '',
+      skillTotal: '',
+      skillAbilityMod: '',
+      skillRank: '',
       characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))

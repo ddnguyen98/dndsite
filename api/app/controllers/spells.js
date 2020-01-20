@@ -16,14 +16,14 @@ exports.createSpell = async (req, res) => {
   try {
     const spell = await Spells.create({
       id,
-      spellName: ' ',
-      spellComponents: ' ',
-      spellCastingTime: ' ',
-      spellRange: ' ',
-      spellTarget: ' ',
-      spellDuration: ' ',
-      spellSavingThrow: ' ',
-      spellDescription: ' ',
+      spellName: '',
+      spellComponents: '',
+      spellCastingTime: '',
+      spellRange: '',
+      spellTarget: '',
+      spellDuration: '',
+      spellSavingThrow: '',
+      spellDescription: '',
       characterId,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))

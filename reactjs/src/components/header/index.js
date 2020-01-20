@@ -38,9 +38,13 @@ class Header extends Component {
               <NavItem>
                 <Link to="/">Home</Link>
               </NavItem>
-              <NavItem>
-                <Link to="/sheets">Sheets</Link>
-              </NavItem>
+              {loggedIn && (
+                <>
+                  <NavItem>
+                    <Link to="/sheets">Sheets</Link>
+                  </NavItem>
+                </>
+              )}
             </Nav>
             {loggedIn && (
               <>
