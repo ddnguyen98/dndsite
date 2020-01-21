@@ -41,12 +41,9 @@ function mapStateToProps(state, props) {
       params: { id },
     },
   } = props;
-
   const {
     sheets: {
-      byId: {
-        [id]: { data: sheet },
-      },
+      byId: { [id]: sheet },
     },
   } = state;
 

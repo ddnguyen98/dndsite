@@ -534,7 +534,15 @@ class Character extends Component {
     await fetchItems(id);
     await fetchSpells(id);
     await fetchWeapons(id);
-    const { sheet, skills, feats, items, spells, weapons } = this.props;
+    console.log(this.props);
+    const {
+      sheet: { data: sheet },
+      skills,
+      feats,
+      items,
+      spells,
+      weapons,
+    } = this.props;
     this.setState({ inputs: { ...sheet } });
     this.setState({ skills: [...skills] });
     this.setState({ feats: [...feats] });
@@ -745,12 +753,12 @@ class Character extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Input
-                    name="class"
-                    id="class"
+                    name="userClass"
+                    id="userClass"
                     onChange={this.handleInputChange}
                     value={inputs.userClass}
                   />
-                  <Label for="class">Class</Label>
+                  <Label for="userClass">Class</Label>
                 </FormGroup>
                 <FormGroup>
                   <Input
@@ -934,7 +942,12 @@ class Character extends Component {
                         /
                         <FormGroup>
                           <Label for="hp">Max</Label>
-                          <Input name="hp" id="hp" value={inputs.hp} />
+                          <Input
+                            name="hp"
+                            id="hp"
+                            value={inputs.hp}
+                            onChange={this.handleInputChange}
+                          />
                         </FormGroup>
                         <FormGroup>
                           <Label for="hpDice">Hie Dice</Label>
@@ -1018,10 +1031,10 @@ class Character extends Component {
                             />
                           </FormGroup>
                           <FormGroup>
-                            <Label for="armor">Total</Label>
+                            <Label for="ac">Total</Label>
                             <Input
-                              name="armor"
-                              id="armor"
+                              name="ac"
+                              id="ac"
                               value={inputs.ac}
                               onChange={this.handleInputChange}
                             />
