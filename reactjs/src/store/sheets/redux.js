@@ -93,6 +93,7 @@ function deleteSuccess(state, action) {
 }
 
 function sheetSuccess(state, action) {
+  console.log(action);
   // clear loading and error, update cache time, add sheets
   return {
     ...state,

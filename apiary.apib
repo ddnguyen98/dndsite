@@ -4,530 +4,860 @@ FORMAT: 1A
     
 Three Headed dragon is an api for managing users and their character data
 
-## Data Structures
-### User (Base Model)
-+ Include Id
-+ email: test@test.com (string, required)
-+ username: CoolKid (string, required)
-+ password: applessauce (string, required)
-
-
-### Character (Base Model)
-+ Include Id
-+ name: Sir Henry (string)
-+ player: Dominic (string)
-+ alignment: Chaotic Neutral (string)
-+ level: 6 (string)
-+ class: Fighter (string)
-+ race: Dog (string)
-+ campaign: Barktastic (string)
-+ diety: Korn (string)
-+ size: Medium (string)
-+ age: 12 (string)
-+ gender: Male (string)
-+ hair: Brown (string)
-+ height: 6"11 (string)
-+ gender: Male (string)
-+ characterWeight: 32 (string)
-+ eyes: red (string)
-+ gender: Male (string)
-+ currency: 32g (string)
-+ languages: Comon (string)
-+ description: Male (string)
-+ personality: Male (string)
-+ traits: Male (string)
-+ flaws: Male (string)
-+ contacts: Male (string)
-+ enemies: Male (string)
-+ notes: Male (string)    
-+ image: henry.jpg (string)
-
-+ stat (array)
-  + 11 (string)
-  + 11 (string)
-  + 11 (string)
-  + 11 (string)
-  + 11 (string)
-  + 11 (string)
-  
-+ statMod (array)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-
-+ hp: 122 (string)
-+ hpWounds: 52 (string)
-+ hpDice: 3d12 (string)
-+ dmgReduction: Blunt (string)
-
-+ ac: 122 (string)
-+ acArmor: 52 (string)
-+ acShield: 122 (string)
-+ acDex: 52 (string)
-+ acNatural: 122 (string)
-+ acMisc: 52 (string)
-+ acTouch: 122 (string)
-+ acFlat: 52 (string)
-
-+ init: 1 (string)
-+ initDex: 2 (string)
-+ initMisc: 3 (string)
-
-+ speed: 3 (string)
-
-+ attackTotal (array)
-  + 12 (string)
-  + 11 (string)
-
-+ attackBase (array)
-  + 3 (string)
-  + 4 (string)
-
-+ attackMod (array)
-  + 8 (string)
-  + 9 (string)
-  
-+ attackMisc (array)
-  + 2 (string)
-  + 2 (string)  
-
-+ spellsKnown (array)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  
-+ spellsPerDay (array)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-
-+ spellDC (array)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  + 2 (string)
-  
-+ savingThrow (array)
-  + 5
-  + 5
-  + 5
-  
-+ savingThrowBase (array)
-  + 3
-  + 3
-  + 5
-  
-+ savingThrowMod (array)
-  + 2
-  + 2
-  + 5
-  
-+ weight (array)
-  + 20
-  + 60
-  + 180
-  + 180
-  + 30
-
-+ userId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string)
-
-### Spell (Base Model)
-+ Include Id
-+ spellName: shock (string, required)
-+ spellComponents: V,S (string, required)
-+ spellCastingTime: 3 seconds (string, required)
-+ spellRange: 2ft (string, required)
-+ spellTarget: 1 person (string, required)
-+ spellDuration: instant (string, required)
-+ spellSavingThrow: dex (string, required)
-+ spellDescription: it hurt! (string, required)
-
-+ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-
-
-### Feat (Base Model)
-+ Include Id
-+ featName: Big boomb (string, required)
-+ featDescription: it go explode! (string, required)
-
-+ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-
-### Weapon (Base Model)
-+ Include Id
-+ weaponName: Sword of killing (string, required)
-+ weaponAttackBonus: 3 (string, required)
-+ weaponDamage: 3d12 (string, required)
-+ weaponCritical: 17-20 (string, required)
-+ weaponRange: 3ft (string, required)
-+ weaponSpecial: It burns them for 2 damage (string)
-+ weaponAmmunition: "" (string)
-+ weaponWeight: 3 (string, required)
-+ weaponSize: medium (string, required)
-+ weaponType: slash (string, required)
-
-+ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-
-### Item (Base Model)
-+ Include Id
-+ itemName: apple (string, required)
-+ itemDescription: it taste good (string, required)
-+ itemWeight: 3 (string, required)
-
-+ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-
-### Skill (Base Model)
-+ Include Id
-+ skillName: Walking (string, required)
-+ skillModType: Dex (string, required)
-+ skillTotal: 6 (string, required)
-+ skillAbilityMod: 3 (string, required)
-+ skillRank: 3 (string, required)
-
-
-+ characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d' (string, required)
-
-### Base Model (object)
-+ createdAt: `2019-08-05T08:40:51.620Z` (string, required) - Date resource was create
-+ updatedAt: `2019-08-05T08:40:51.620Z` (string, required) - Date resource was last updated
-
-### Id
-+ id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string, required) - Unique Identifier (uuid)
-
-
-# Group User Collection
-
-
-## /users
-### GET
-Get all the users
-
-+ Response 200 (text/html; charset=utf-8)
-    + Attributes (array[User])
-
-### POST
-Create a new user
-+ Request (text/html; charset=utf-8)
-    + Attributes (object)
-        + email: test@test.com (string, required)
-        + username: CoolKid (string, required)
-        + password: applessauce (string, required)
-+ Response 201 (text/html; charset=utf-8)
-    + Attributes (User)
-    
-
-## /users/{id}
+# Group Feat Collection
+## /feats{?characterId}
+A Feats array with objects
 
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-   
-### GET
-Get one user by id
+    + characterId (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
 
-+ Response 200
-    + Attributes (User)
-
-### PUT
-Update a user by id
-
-+ Response 202
-    + Attributes (User)
-
-### DELETE
-Delete a character
-
-+ Response 202
-
-# Group Character Collection
-
-## /characters
-### GET
-Get all the characters
+### Retrieve Feats[GET]
+Get all the feats from character
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes (array[Character])
 
-### POST
-Create a new character
+        [
+            {
+                "id": "1421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+                "featName": "Feat Name",
+                "featDescription": "Feat Description",
+                "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+            }
+        ]
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /feats
+### Create Feat[POST]
+Create a new feat
 + Request (application/json; charset=utf-8)
-    + Attributes (object)
-        + title: WAI (string, required)
-+ Response 201 (application/json; charset=utf-8)
-    + Attributes (Character)
-    
-## /characters/{id}
-+ Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
 
-### GET
-Get one character by id
+        {
+            "id": "4421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+            "id": "4421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "featName": "",
+            "featDescription": "",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
+## /feats/{id}
+
++ Parameters
+    + id (required, string, `1421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
+
+### Update Feat[PUT]
+Update a Feat
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "1421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "featName": "Feat Name",
+            "featDescription": "Feat Desc",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes (Character)
 
-### PUT
-Update a character by id
+        {
+            "id": "1421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "featName": "Feat Name",
+            "featDescription": "Feat Desc",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
 
-+ Response 202
-    + Attributes (Character)
++ Response 401 (application/json; charset=utf-8)
 
-### DELETE
-Delete a character
+        {
+            "error": "error.unauthorized"
+        }
+
+## /feats/{id}
+
++ Parameters
+    + id (required, string, `4421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
+
+### Delete Feat[DELETE]
+Delete a Feat
 
 + Response 204
 
-# Group Feat Collection
-## /feats
-### GET
-Get all the feats
++ Response 401 (application/json; charset=utf-8)
 
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (array[Feat])
-
-### POST
-Create a new feat
-+ Request (application/json; charset=utf-8)
-    + Attributes (object)
-        + title: WAI (string, required)
-+ Response 201 (application/json; charset=utf-8)
-    + Attributes (Feat)
-    
-## /feats/{id}
-+ Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-
-### GET
-Get one feat by id
-
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (Feat)
-
-### PUT
-Update a Feat
-
-+ Response 202
-    + Attributes (Feat)
-### DELETE
-Delete a Feat
-
-+ Response 202
+        {
+            "error": "error.unauthorized"
+        }
 
 # Group Item Collection
+## /items{?characterId}
+A Items array with objects
+
++ Parameters
+    + characterId (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
+
+### Retrieve Items[GET]
+Get all the Items from character
+
++ Response 200 (application/json; charset=utf-8)
+
+        [
+            {
+                "id": "ae835445-5f86-4a9a-a27b-17e71b60317d",
+                "itemName": "John Doe",
+                "itemDescription": "It work oh so well",
+                "itemWeight": "3",
+                "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"                
+            }
+        ]
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
 ## /items
-### GET
-Get all the items
-
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (array[Item])
-
-### POST
-Create a new character
+### Create Items[POST]
+Create a new Item
 + Request (application/json; charset=utf-8)
-    + Attributes (object)
-        + title: WAI (string, required)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
 + Response 201 (application/json; charset=utf-8)
-    + Attributes (Item)
-    
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "itemName": "",
+            "itemDescription": "",
+            "itemWeight": "",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
 ## /items/{id}
+
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+    + id (required, string, `ae835445-5f86-4a9a-a27b-17e71b60317d`) - Character id
 
-### GET
-Get one item by id
+### Update Item[PUT]
+Update a Item
 
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (Item)
-
-### PUT
-Update a item by id
-
-+ Response 202
-    + Attributes (Item)
-
-### DELETE
-Delete a item
-
-+ Response 202
-
-# Group Spell Collection
-## /spells
-### GET
-Get all the spells
-
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (array[Spell])
-
-### POST
-Create a new spell
 + Request (application/json; charset=utf-8)
-    + Attributes (object)
-        + title: WAI (string, required)
-+ Response 201 (application/json; charset=utf-8)
-    + Attributes (Spell)
-    
-## /spells/{id}
+
+        {
+            "id": "ae835445-5f86-4a9a-a27b-17e71b60317d",
+            "itemName": "John Doe",
+            "itemDescription": "It work oh so well",
+            "itemWeight": "3",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "id": "ae835445-5f86-4a9a-a27b-17e71b60317d",
+            "itemName": "John Doe",
+            "itemDescription": "It work oh so well",
+            "itemWeight": "3",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /items/{id}
+
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+    + id (required, string, `5421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
 
-### GET
-Get one spell by id
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (Item)
+### Delete Item[DELETE]
+Delete a Item
 
-### PUT
-Update a spell by id
++ Response 204
 
-+ Response 202
-    + Attributes (Spell)
++ Response 401 (application/json; charset=utf-8)
 
-### DELETE
-Delete a item
-
-+ Response 202
-
-# Group Weapon Collection
-## /weapons
-### GET
-Get all the weapons
-
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (array[Weapon])
-
-### POST
-Create a new weapon
-+ Request (application/json; charset=utf-8)
-    + Attributes (object)
-        + title: WAI (string, required)
-+ Response 201 (application/json; charset=utf-8)
-    + Attributes (Weapon)
-    
-## /weapons/{id}
-+ Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
-
-### GET
-Get one weapon by id
-+ Response 200 (application/json; charset=utf-8)
-    + Attributes (Weapon)
-
-### PUT
-Update a weapon by id
-
-+ Response 202
-    + Attributes (Weapon)
-
-### DELETE
-Delete a Weapon
-
-+ Response 202
+        {
+            "error": "error.unauthorized"
+        }
 
 # Group Skill Collection
-## /skills
-### GET
-Get all the skill
+## /skills{?characterId}
+A Skills array with objects
 
-+ Response 200 (application/json)
-    + Attributes (array[Skill])
-
-### POST
-Create a new skill
-+ Request (application/json)
-    + Attributes (object)
-        + title: WAI (string, required)
-+ Response 201 (application/json)
-    + Attributes (Skill)
-    
-## /skills/{id}
 + Parameters
-    + id: `3e836f45-5f86-4a9a-a27b-17e71b60317d` (string) - User id
+    + characterId (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
 
-### GET
-Get one skill by id
-+ Response 200 (application/json)
-    + Attributes (Skill)
+### Retrieve Skills[GET]
+Get all the Skills from character
 
-### PUT
-Update a skill by id
++ Response 200 (application/json; charset=utf-8)
 
-+ Response 202
-    + Attributes (Skill)
+        [
+            {
+                "id": "3e836f45-6f21-4a9a-a27b-17e71b60317d",
+                "skillName": "Run",
+                "skillModType": "Dex",
+                "skillTotal": "6",
+                "skillAbilityMod": "3",
+                "skillRank": "3",
+                "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"             
+            }
+        ]
 
-### DELETE
-Delete a skill
++ Response 401 (application/json; charset=utf-8)
 
-+ Response 202
+        {
+            "error": "error.unauthorized"
+        }
+
+## /skills
+### Create Skill[POST]
+Create a new Skill
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "skillName": "",
+            "skillModType": "",
+            "skillTotal": "",
+            "skillAbilityMod": "",
+            "skillRank": "",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974" 
+        }
+
+## /skills/{id}
+
++ Parameters
+    + id (required, string, `3e836f45-6f21-4a9a-a27b-17e71b60317d`) - Character id
+
+### Update Skill[PUT]
+Update a Skill
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "3e836f45-6f21-4a9a-a27b-17e71b60317d",
+            "skillName": "Run",
+            "skillModType": "Dex",
+            "skillTotal": "6",
+            "skillAbilityMod": "3",
+            "skillRank": "3",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"  
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "id": "3e836f45-6f21-4a9a-a27b-17e71b60317d",
+            "skillName": "Run",
+            "skillModType": "Dex",
+            "skillTotal": "6",
+            "skillAbilityMod": "3",
+            "skillRank": "3",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"  
+        }
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /skills/{id}
+
++ Parameters
+    + id (required, string, `5421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
+
+### Delete Skill[DELETE]
+Delete a Skill
+
++ Response 204
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+# Group Spells Collection
+## /spells{?characterId}
+A Spells array with objects
+
++ Parameters
+    + characterId (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
+
+### Retrieve Skills[GET]
+Get all the Skills from character
+
++ Response 200 (application/json; charset=utf-8)
+
+        [
+            {
+                "id": "62136f45-5f86-229a-a27b-17e71b60317d",
+                "spellName": "Fireball",
+                "spellComponents": "None",
+                "spellCastingTime": "3 seconds",
+                "spellRange": "30ft",
+                "spellTarget": "AOE",
+                "spellDuration": "instant",
+                "spellSavingThrow": "Con",
+                "spellDescription": "Big booma kabooma",
+                "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"      
+            }
+        ]
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /spells
+### Create Spells[POST]
+Create a new Spells
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "spellName": "",
+            "spellComponents": "",
+            "spellCastingTime": "",
+            "spellRange": "",
+            "spellTarget": "",
+            "spellDuration": "",
+            "spellSavingThrow": "",
+            "spellDescription": "",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"  
+        }
+
+## /spells/{id}
+
++ Parameters
+    + id (required, string, `62136f45-5f86-229a-a27b-17e71b60317d`) - Character id
+
+### Update Spell[PUT]
+Update a Spell
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "62136f45-5f86-229a-a27b-17e71b60317d",
+            "spellName": "Fireball",
+            "spellComponents": "None",
+            "spellCastingTime": "3 seconds",
+            "spellRange": "30ft",
+            "spellTarget": "AOE",
+            "spellDuration": "instant",
+            "spellSavingThrow": "Con",
+            "spellDescription": "Big booma kabooma",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"  
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "id": "62136f45-5f86-229a-a27b-17e71b60317d",
+            "spellName": "Fireball",
+            "spellComponents": "None",
+            "spellCastingTime": "3 seconds",
+            "spellRange": "30ft",
+            "spellTarget": "AOE",
+            "spellDuration": "instant",
+            "spellSavingThrow": "Con",
+            "spellDescription": "Big booma kabooma",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"  
+        }
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /spells/{id}
+
++ Parameters
+    + id (required, string, `5421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
+
+### Delete Spell[DELETE]
+Delete a Spell
+
++ Response 204
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+
+# Group Weapons Collection
+## /weapons{?characterId}
+A Weapons array with objects
+
++ Parameters
+    + characterId (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
+
+### Retrieve Weapons[GET]
+Get all the Weapons from character
+
++ Response 200 (application/json; charset=utf-8)
+
+        [
+            {
+                "id": "5e836f4a-5f86-4a9a-a27b-17e71b60317d",
+                "weaponName": "Kill Death",
+                "weaponAttackBonus": "3",
+                "weaponDamage": "d20",
+                "weaponCritical": "15-20",
+                "weaponRange": "10ft",
+                "weaponSpecial": "Its awesome",
+                "weaponAmmunition": "None",
+                "weaponWeight": "5 pounds",
+                "weaponSize": "Large",
+                "weaponType": "Slashing",
+                "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+            }
+        ]
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /weapons
+### Create Weapons[POST]
+Create a new Weapons
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "weaponName": "",
+            "weaponAttackBonus": "",
+            "weaponDamage": "",
+            "weaponCritical": "",
+            "weaponRange": "",
+            "weaponSpecial": "",
+            "weaponAmmunition": "",
+            "weaponWeight": "",
+            "weaponSize": "",
+            "weaponType": "",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
+## /weapons/{id}
+
++ Parameters
+    + id (required, string, `5e836f4a-5f86-4a9a-a27b-17e71b60317d`) - Character id
+
+### Update Weapon[PUT]
+Update a Weapon
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "5e836f4a-5f86-4a9a-a27b-17e71b60317d",
+            "weaponName": "Kill Death",
+            "weaponAttackBonus": "3",
+            "weaponDamage": "d20",
+            "weaponCritical": "15-20",
+            "weaponRange": "10ft",
+            "weaponSpecial": "Its awesome",
+            "weaponAmmunition": "None",
+            "weaponWeight": "5 pounds",
+            "weaponSize": "Large",
+            "weaponType": "Slashing",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "id": "5e836f4a-5f86-4a9a-a27b-17e71b60317d",
+            "weaponName": "Kill Death",
+            "weaponAttackBonus": "3",
+            "weaponDamage": "d20",
+            "weaponCritical": "15-20",
+            "weaponRange": "10ft",
+            "weaponSpecial": "Its awesome",
+            "weaponAmmunition": "None",
+            "weaponWeight": "5 pounds",
+            "weaponSize": "Large",
+            "weaponType": "Slashing",
+            "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
+        }
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /weapons/{id}
+
++ Parameters
+    + id (required, string, `5421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
+
+### Delete Weapon[DELETE]
+Delete a Weapon
+
++ Response 204
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
 
 # Group Authentication
 
-## /auth/signup
-
-### POST 
-Sign a user up
-+ Request (application/json)
-    + Attributes (object)
-        + email: rhigley@fullsail.com (string, required)
-        + username: rhigley (string, required)
-        + password: pwd123 (string, required)
-+ Response 200 (application/json)
-    + Attributes (object)
-      + loggedIn: true (boolean, required)
-      + token: JSONWEBTOKEN (string, required)
-
-## /auth/login
+## /login
 ### POST
 Log a user in
-+ Request (application/json)
-    + Attributes (object)
-        + username: rhigley (string, required)
-        + password: pwd123 (string, required)
-+ Response 200 (application/json)
-    + Attributes (object)
-      + loggedIn: true (boolean, required)
-      + token: JSONWEBTOKEN (string, required)
++ Request (application/json; charset=utf-8)
+
+        {
+            "username": "test",
+            "password": "test"
+        }
+
++ Response 200 (application/json; charset=utf-8)
+        {
+            "loggedInState": true
+        }
     
-## /auth/forgot
+# Group Characters Collection
+## /characters
+A Characters array with objects
 
-### POST
-Send a reset password email when a user forgets their password
-+ Request (application/json)
-    + Attributes (object)
-        + email: rhigley@fullsail.com (string, required)
-+ Response 200 (application/json)
-    + Attributes (object)
-      + message: 'Check your email for further instructions'
-      
-## /auth/reset
+### Retrieve Characters[GET]
+Get all the Characters from character
 
-### POST 
-Update the user's password with a new one and log them in
-+ Request (application/json)
-    + Attributes (object)
-        + token: RESETTOKEN (string, required)
-        + password: pwd123 (string, required)
-        + rePassword: pwd123 (string, required)
-+ Response 200 (application/json)
-    + Attributes (object)
-      + loggedIn: true (boolean, required)
-      + token: JSONWEBTOKEN (string, required)
++ Response 200 (application/json; charset=utf-8)
+
+        [
+            {
+            "id": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974",
+            "name": "Jimmy",
+            "player": "Dominic",
+            "alignment": "Chaotic Good",
+            "level": "3",
+            "userClass": " Fighter",
+            "race": "Human",
+            "campaign": "Curse of dog",
+            "diety": "Jenny",
+            "size": "Medium",
+            "age": "12",
+            "gender": "Male",
+            "hair": "Black",
+            "height": "5'2",
+            "characterWeight": "120",
+            "eyes": "Green",
+            "currency": " 10 Plat",
+            "languages": "Common",
+            "description": "He a real cool dude",
+            "personality": "Aaaaa",
+            "traits": "Awesome",
+            "flaws": "Lazy",
+            "contacts": "None",
+            "enemies": "Everyone",
+            "notes": "Dont forget the pie",
+            "image": "henry.jpg",
+            "stat": ["1", "1", "1", "1", "1", "1"],
+            "statMod": ["2", "2", "2", "2", "2", "2"],
+            "hp": "300",
+            "hpWounds": "250",
+            "hpDice": "10d20",
+            "dmgReduction": "None",
+            "ac": "20",
+            "acArmor": "5",
+            "acShield": "5",
+            "acDex": "5",
+            "acNatural": " 5",
+            "acMisc": "0",
+            "acTouch": "10",
+            "acFlat": "10",
+            "init": "12",
+            "initDex": "6",
+            "initMisc": "6",
+            "speed": "20ft",
+            "attackTotal": ["3","4"],
+            "attackBase": ["3","4"],
+            "attackMod": ["3","4"],
+            "attackMisc": ["3","4"],
+            "spellsKnown": ["3","4","3","4","3","4","3","4","3","4"],
+            "spellsPerDay": ["3","4","3","4","3","4","3","4","3","4"],
+            "spellDC": ["3","4","3","4","3","4","3","4","3","4"],
+            "savingThrow": ["1","2","3"],
+            "savingThrowBase": ["1","2","3"],
+            "savingThrowMod": ["1","2","3"],
+            "weight": ["1","2","3","4","5"],
+            "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
+            }
+        ]
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /characters
+### Create Character[POST]
+Create a new Character
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555"
+        }
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+            "id": "5421ed80-3ed7-11ea-a1d6-6bfe258ce555",
+            "name": "",
+            "player": "",
+            "alignment": "",
+            "level": "",
+            "userClass": " ",
+            "race": "",
+            "campaign": "",
+            "diety": "",
+            "size": "",
+            "age": "",
+            "gender": "",
+            "hair": "",
+            "height": "",
+            "characterWeight": "",
+            "eyes": "",
+            "currency": "",
+            "languages": "",
+            "description": "",
+            "personality": "",
+            "traits": "",
+            "flaws": "",
+            "contacts": "",
+            "enemies": "",
+            "notes": "",
+            "image": "henry.jpg",
+            "stat": ["", "", "", "", "", ""],
+            "statMod": ["", "", "", "", "", ""],
+            "hp": "",
+            "hpWounds": "",
+            "hpDice": "",
+            "dmgReduction": "",
+            "ac": "",
+            "acArmor": "",
+            "acShield": "",
+            "acDex": "",
+            "acNatural": "",
+            "acMisc": "",
+            "acTouch": "",
+            "acFlat": "",
+            "init": "",
+            "initDex": "",
+            "initMisc": "",
+            "speed": "",
+            "attackTotal": ["", ""],
+            "attackBase": ["", ""],
+            "attackMod": ["", ""],
+            "attackMisc": ["", ""],
+            "spellsKnown": ["", "", "", "", "", "", "", "", "", ""],
+            "spellsPerDay": ["", "", "", "", "", "", "", "", "", ""],
+            "spellDC": ["", "", "", "", "", "", "", "", "", ""],
+            "savingThrow": ["", "", ""],
+            "savingThrowBase": ["", "", ""],
+            "savingThrowMod": ["", "", ""],
+            "weight": ["", "", "", "", ""],
+            "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
+        }
+
+## /characters/{id}
+
++ Parameters
+    + id (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
+
+### Update Character[PUT]
+Update a Character
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "id": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974",
+            "name": "Jimmy",
+            "player": "Dominic",
+            "alignment": "Chaotic Good",
+            "level": "3",
+            "userClass": " Fighter",
+            "race": "Human",
+            "campaign": "Curse of dog",
+            "diety": "Jenny",
+            "size": "Medium",
+            "age": "12",
+            "gender": "Male",
+            "hair": "Black",
+            "height": "5'2",
+            "characterWeight": "120",
+            "eyes": "Green",
+            "currency": " 10 Plat",
+            "languages": "Common",
+            "description": "He a real cool dude",
+            "personality": "Aaaaa",
+            "traits": "Awesome",
+            "flaws": "Lazy",
+            "contacts": "None",
+            "enemies": "Everyone",
+            "notes": "Dont forget the pie",
+            "image": "henry.jpg",
+            "stat": ["1", "1", "1", "1", "1", "1"],
+            "statMod": ["2", "2", "2", "2", "2", "2"],
+            "hp": "300",
+            "hpWounds": "250",
+            "hpDice": "10d20",
+            "dmgReduction": "None",
+            "ac": "20",
+            "acArmor": "5",
+            "acShield": "5",
+            "acDex": "5",
+            "acNatural": " 5",
+            "acMisc": "0",
+            "acTouch": "10",
+            "acFlat": "10",
+            "init": "12",
+            "initDex": "6",
+            "initMisc": "6",
+            "speed": "20ft",
+            "attackTotal": ["3","4"],
+            "attackBase": ["3","4"],
+            "attackMod": ["3","4"],
+            "attackMisc": ["3","4"],
+            "spellsKnown": ["3","4","3","4","3","4","3","4","3","4"],
+            "spellsPerDay": ["3","4","3","4","3","4","3","4","3","4"],
+            "spellDC": ["3","4","3","4","3","4","3","4","3","4"],
+            "savingThrow": ["1","2","3"],
+            "savingThrowBase": ["1","2","3"],
+            "savingThrowMod": ["1","2","3"],
+            "weight": ["1","2","3","4","5"],
+            "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "id": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974",
+            "name": "Jimmy",
+            "player": "Dominic",
+            "alignment": "Chaotic Good",
+            "level": "3",
+            "userClass": " Fighter",
+            "race": "Human",
+            "campaign": "Curse of dog",
+            "diety": "Jenny",
+            "size": "Medium",
+            "age": "12",
+            "gender": "Male",
+            "hair": "Black",
+            "height": "5'2",
+            "characterWeight": "120",
+            "eyes": "Green",
+            "currency": " 10 Plat",
+            "languages": "Common",
+            "description": "He a real cool dude",
+            "personality": "Aaaaa",
+            "traits": "Awesome",
+            "flaws": "Lazy",
+            "contacts": "None",
+            "enemies": "Everyone",
+            "notes": "Dont forget the pie",
+            "image": "henry.jpg",
+            "stat": ["1", "1", "1", "1", "1", "1"],
+            "statMod": ["2", "2", "2", "2", "2", "2"],
+            "hp": "300",
+            "hpWounds": "250",
+            "hpDice": "10d20",
+            "dmgReduction": "None",
+            "ac": "20",
+            "acArmor": "5",
+            "acShield": "5",
+            "acDex": "5",
+            "acNatural": " 5",
+            "acMisc": "0",
+            "acTouch": "10",
+            "acFlat": "10",
+            "init": "12",
+            "initDex": "6",
+            "initMisc": "6",
+            "speed": "20ft",
+            "attackTotal": ["3","4"],
+            "attackBase": ["3","4"],
+            "attackMod": ["3","4"],
+            "attackMisc": ["3","4"],
+            "spellsKnown": ["3","4","3","4","3","4","3","4","3","4"],
+            "spellsPerDay": ["3","4","3","4","3","4","3","4","3","4"],
+            "spellDC": ["3","4","3","4","3","4","3","4","3","4"],
+            "savingThrow": ["1","2","3"],
+            "savingThrowBase": ["1","2","3"],
+            "savingThrowMod": ["1","2","3"],
+            "weight": ["1","2","3","4","5"],
+            "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
+        }
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
+
+## /characters/{id}
+
++ Parameters
+    + id (required, string, `5421ed80-3ed7-11ea-a1d6-6bfe258ce555`) - Character id
+
+### Delete Character[DELETE]
+Delete a Character
+
++ Response 204
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }

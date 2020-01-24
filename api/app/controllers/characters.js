@@ -8,7 +8,7 @@ exports.getOneById = async (req, res) => {
       throwIf((row) => !row, 404, 'Project not found'),
       throwError(500, 'Sequelize Error'),
     );
-    res.json(character);
+    res.status(200).json(character);
   } catch (e) {
     SendError(res, e);
   }
@@ -16,7 +16,7 @@ exports.getOneById = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     const characters = await Characters.findAll({ where: { userId: req.userId } });
-    res.json(characters || []);
+    res.status(200).json(characters || []);
   } catch (e) {
     SendError(res, e);
   }
@@ -85,7 +85,7 @@ exports.createCharacter = async (req, res) => {
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.json(character);
+    res.status(201).json(character);
   } catch (e) {
     SendError(res, e);
   }
@@ -93,14 +93,15 @@ exports.createCharacter = async (req, res) => {
 
 exports.updateCharacter = async (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
   try {
-    const [, [updatedCharacter]] = await Characters.update(req.body.inputs, {
+    const [, [updatedCharacter]] = await Characters.update(req.body, {
       where: { id },
       returning: true,
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
-    res.json(updatedCharacter);
+    res.status(200).json(updatedCharacter);
   } catch (e) {
     SendError(res, e);
   }
@@ -110,7 +111,7 @@ exports.removeCharacter = async (req, res) => {
   try {
     const { id } = req.params;
     await Characters.destroy({ where: { id } });
-    res.sendStatus(200);
+    res.sendStatus(204);
   } catch (e) {
     SendError(res, e);
   }

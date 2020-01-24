@@ -14,6 +14,7 @@ import {
   NavLink,
   Card,
   CardBody,
+  Spinner,
 } from 'reactstrap';
 import { Tab, Tabs, TabPanel } from 'react-tabs';
 import PropTypes from 'prop-types';
@@ -2403,6 +2404,7 @@ Character.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   spells: PropTypes.arrayOf(PropTypes.object),
   weapons: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool,
 };
 
 Character.defaultProps = {
@@ -2412,5 +2414,6 @@ Character.defaultProps = {
   items: [],
   spells: [],
   weapons: [],
+  isLoading: {},
 };
 export default container(Character);

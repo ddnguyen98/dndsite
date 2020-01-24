@@ -17,7 +17,7 @@ exports.signup = async (req, res) => {
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
     const token = jwt.sign({ id: user.id }, process.env.secret);
-    res.json({ token, loggedInState: true });
+    res.status(201).json({ token, loggedInState: true });
   } catch (e) {
     SendError(res, e);
   }
@@ -95,7 +95,7 @@ exports.login = async (req, res) => {
     const user = await Users.findOne({ where: { username, password } })
       .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
     const token = jwt.sign({ id: user.dataValues.id }, process.env.secret);
-    res.json({ token, loggedInState: true });
+    res.status(200).json({ token, loggedInState: true });
   } catch (e) {
     e.message = 'Invalid username or password';
     SendError(res, e);

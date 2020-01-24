@@ -43,7 +43,7 @@ function mapStateToProps(state, props) {
   } = props;
   const {
     sheets: {
-      byId: { [id]: sheet },
+      byId: { [id]: sheet, isLoading },
     },
   } = state;
 
@@ -62,6 +62,7 @@ function mapStateToProps(state, props) {
     items: allIds2.map(id2 => byId2[id2].data),
     spells: allIds3.map(id3 => byId3[id3].data),
     weapons: allIds4.map(id4 => byId4[id4].data),
+    isLoading,
   };
 }
 

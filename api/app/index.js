@@ -26,7 +26,7 @@ app.use('/api/weapons', weaponRoutes);
 app.use('/api/characters', characterRoutes);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
-app.use('/api/auth/forgot', forgotRouter);
+app.use('/api/auth/', forgotRouter);
 
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
