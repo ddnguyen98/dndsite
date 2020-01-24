@@ -5,11 +5,11 @@ exports.SendError = (res, error) => {
   });
 };
 
-exports.throwError = (code, errorMessage) => () => {
+exports.throwError = (code, errorMessage) => (err) => {
   const error = new Error(errorMessage || 'Something has gone wrong');
   error.code = code;
-  if (error.errors) {
-    error.message = error.errors.map((err) => err.message).join('\n');
+  if (err.errors) {
+    error.message = err.errors.map((e) => e.message).join('\n');
   }
   throw error;
 };

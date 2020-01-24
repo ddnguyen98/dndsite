@@ -40,13 +40,7 @@ class Login extends Component {
     event.preventDefault();
     const { loginAccount, history } = this.props;
     const { username, password } = this.state;
-    const login = await loginAccount({ username, password });
-    console.log(login);
-    if (login) {
-      history.push('/');
-    } else {
-      window.location.reload();
-    }
+    await loginAccount({ username, password });
   };
 
   render() {
@@ -84,7 +78,9 @@ class Login extends Component {
                 />
               </InputGroup>
             </FormGroup>
-            <Button className={styles.button}>Login</Button>
+            <Button name="submit" className={styles.button}>
+              Login
+            </Button>
           </Form>
         </Container>
       </div>

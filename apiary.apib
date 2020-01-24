@@ -224,17 +224,17 @@ Three Headed dragon is an api for managing users and their character data
 ### GET
 Get all the users
 
-+ Response 200 (application/json)
++ Response 200 (text/html; charset=utf-8)
     + Attributes (array[User])
 
 ### POST
 Create a new user
-+ Request (application/json)
++ Request (text/html; charset=utf-8)
     + Attributes (object)
         + email: test@test.com (string, required)
         + username: CoolKid (string, required)
         + password: applessauce (string, required)
-+ Response 201 (application/json)
++ Response 201 (text/html; charset=utf-8)
     + Attributes (User)
     
 
@@ -266,15 +266,15 @@ Delete a character
 ### GET
 Get all the characters
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (array[Character])
 
 ### POST
 Create a new character
-+ Request (application/json)
++ Request (application/json; charset=utf-8)
     + Attributes (object)
         + title: WAI (string, required)
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
     + Attributes (Character)
     
 ## /characters/{id}
@@ -284,7 +284,7 @@ Create a new character
 ### GET
 Get one character by id
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (Character)
 
 ### PUT
@@ -303,15 +303,15 @@ Delete a character
 ### GET
 Get all the feats
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (array[Feat])
 
 ### POST
 Create a new feat
-+ Request (application/json)
++ Request (application/json; charset=utf-8)
     + Attributes (object)
         + title: WAI (string, required)
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
     + Attributes (Feat)
     
 ## /feats/{id}
@@ -321,7 +321,7 @@ Create a new feat
 ### GET
 Get one feat by id
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (Feat)
 
 ### PUT
@@ -339,15 +339,15 @@ Delete a Feat
 ### GET
 Get all the items
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (array[Item])
 
 ### POST
 Create a new character
-+ Request (application/json)
++ Request (application/json; charset=utf-8)
     + Attributes (object)
         + title: WAI (string, required)
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
     + Attributes (Item)
     
 ## /items/{id}
@@ -357,7 +357,7 @@ Create a new character
 ### GET
 Get one item by id
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (Item)
 
 ### PUT
@@ -376,15 +376,15 @@ Delete a item
 ### GET
 Get all the spells
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (array[Spell])
 
 ### POST
 Create a new spell
-+ Request (application/json)
++ Request (application/json; charset=utf-8)
     + Attributes (object)
         + title: WAI (string, required)
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
     + Attributes (Spell)
     
 ## /spells/{id}
@@ -393,7 +393,7 @@ Create a new spell
 
 ### GET
 Get one spell by id
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (Item)
 
 ### PUT
@@ -412,15 +412,15 @@ Delete a item
 ### GET
 Get all the weapons
 
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (array[Weapon])
 
 ### POST
 Create a new weapon
-+ Request (application/json)
++ Request (application/json; charset=utf-8)
     + Attributes (object)
         + title: WAI (string, required)
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
     + Attributes (Weapon)
     
 ## /weapons/{id}
@@ -429,7 +429,7 @@ Create a new weapon
 
 ### GET
 Get one weapon by id
-+ Response 200 (application/json)
++ Response 200 (application/json; charset=utf-8)
     + Attributes (Weapon)
 
 ### PUT

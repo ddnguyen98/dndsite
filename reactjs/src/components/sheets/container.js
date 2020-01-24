@@ -7,10 +7,10 @@ import {
 
 function mapStateToProps(state) {
   const {
-    sheets: { byId, allIds },
+    sheets: { byId, allIds, isLoading },
   } = state;
   // turn the array of ids into an array of objects
-  return { sheets: allIds.map(id => byId[id].data) };
+  return { sheets: allIds.map(id => byId[id].data), isLoading };
 }
 
 // set the actions we need in this component

@@ -7,13 +7,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        len: { args: [1, 500], msg: 'Make sure your character has a name before you save' },
+      },
+    },
     player: DataTypes.STRING,
     alignment: DataTypes.STRING,
     level: DataTypes.STRING,
     userClass: DataTypes.STRING,
     race: DataTypes.STRING,
-    campaign: DataTypes.STRING,
+    campaign: {
+      type: DataTypes.STRING,
+      validate: {
+        len: { args: [1, 500], msg: 'Make sure your character has a campaign before you save' },
+      },
+    },
     diety: DataTypes.STRING,
     size: DataTypes.STRING,
     age: DataTypes.STRING,

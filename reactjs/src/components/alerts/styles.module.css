@@ -1,0 +1,9 @@
+.alerts {
+    position: fixed;
+    top: 24px;
+    width: 280px;
+}
+
+.alert {
+    white-space: pre-line;
+}

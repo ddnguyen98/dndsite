@@ -2,25 +2,24 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { SendError, throwError, throwIf } = require('../utils/errorHandling');
 const mailer = require('../utils/mailer');
-const { Users } = require('../models');
+const { Users, Sequelize } = require('../models');
 
 exports.signup = async (req, res) => {
-  const { email, username, password } = req.body;
-  const userTest = await Users.findAll({ where: { username } });
-  if (userTest.length === 0) {
-    try {
-      const [user] = await Users.upsert({
-        username,
-        email,
-        password,
-      }, { returning: true });
-      const token = jwt.sign({ id: user.id }, process.env.secret);
-      res.json({ token, loggedInState: true });
-    } catch (e) {
-      res.json({ loggedInState: false });
-    }
-  } else {
-    res.json({ loggedInState: false });
+  const {
+    email, username, password,
+  } = req.body;
+  try {
+    const user = await Users.create({
+      username,
+      email,
+      password,
+    }, { returning: true })
+      .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
+      .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
+    const token = jwt.sign({ id: user.id }, process.env.secret);
+    res.json({ token, loggedInState: true });
+  } catch (e) {
+    SendError(res, e);
   }
 };
 
@@ -92,11 +91,13 @@ exports.resetPassword = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-  const user = await Users.findAll({ where: { username, password } });
-  if (user.length === 0) {
-    res.json({ loggedInState: false });
-  } else {
-    const token = jwt.sign({ id: user[0].dataValues.id }, process.env.secret);
+  try {
+    const user = await Users.findOne({ where: { username, password } })
+      .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
+    const token = jwt.sign({ id: user.dataValues.id }, process.env.secret);
     res.json({ token, loggedInState: true });
+  } catch (e) {
+    e.message = 'Invalid username or password';
+    SendError(res, e);
   }
 };

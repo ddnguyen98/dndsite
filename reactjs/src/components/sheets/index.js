@@ -10,6 +10,7 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
+  Spinner,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
@@ -35,7 +36,7 @@ class Sheets extends Component {
   };
 
   render() {
-    const { sheets } = this.props;
+    const { sheets, isLoading } = this.props;
     return (
       <div className={styles.sheets}>
         <Container>
@@ -43,6 +44,16 @@ class Sheets extends Component {
             <h2>Characters</h2>
             <Button onClick={this.addSheet}>Add</Button>
           </div>
+          {isLoading && (
+            <>
+              <Spinner />
+            </>
+          )}
+          {!isLoading && sheets.length === 0 && (
+            <>
+              <p>Create a character to populate your list!</p>
+            </>
+          )}
           <Row xs="3" className={styles.container}>
             {sheets.map(sheet => (
               <Col key={sheet.id}>
@@ -82,10 +93,12 @@ Sheets.propTypes = {
   fetchSheets: PropTypes.func.isRequired,
   createSheet: PropTypes.func.isRequired,
   deleteSheet: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 Sheets.defaultProps = {
   sheets: [],
+  isLoading: {},
 };
 
 export default container(Sheets);

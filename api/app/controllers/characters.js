@@ -5,9 +5,7 @@ exports.getOneById = async (req, res) => {
   const { id } = req.params;
   try {
     const character = await Characters.findByPk(id).then(
-      // success
       throwIf((row) => !row, 404, 'Project not found'),
-      // fail
       throwError(500, 'Sequelize Error'),
     );
     res.json(character);
@@ -99,7 +97,9 @@ exports.updateCharacter = async (req, res) => {
     const [, [updatedCharacter]] = await Characters.update(req.body.inputs, {
       where: { id },
       returning: true,
-    });
+    })
+      .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
+      .catch(Sequelize.BaseError, throwError(500, 'Sequelize error'));
     res.json(updatedCharacter);
   } catch (e) {
     SendError(res, e);
