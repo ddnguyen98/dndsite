@@ -62,7 +62,7 @@ Update a Feat
 
         {
             "id": "1421ed80-3ed7-11ea-a1d6-6bfe258ce555",
-            "featName": "Feat Name",
+            "featName": "Feat Namea",
             "featDescription": "Feat Desc",
             "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
         }
@@ -71,7 +71,7 @@ Update a Feat
 
         {
             "id": "1421ed80-3ed7-11ea-a1d6-6bfe258ce555",
-            "featName": "Feat Name",
+            "featName": "Feat Namea",
             "featDescription": "Feat Desc",
             "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
         }
@@ -158,7 +158,7 @@ Update a Item
 
         {
             "id": "ae835445-5f86-4a9a-a27b-17e71b60317d",
-            "itemName": "John Doe",
+            "itemName": "John Doea",
             "itemDescription": "It work oh so well",
             "itemWeight": "3",
             "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
@@ -168,7 +168,7 @@ Update a Item
 
         {
             "id": "ae835445-5f86-4a9a-a27b-17e71b60317d",
-            "itemName": "John Doe",
+            "itemName": "John Doea",
             "itemDescription": "It work oh so well",
             "itemWeight": "3",
             "characterId": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974"
@@ -260,7 +260,7 @@ Update a Skill
 
         {
             "id": "3e836f45-6f21-4a9a-a27b-17e71b60317d",
-            "skillName": "Run",
+            "skillName": "Runa",
             "skillModType": "Dex",
             "skillTotal": "6",
             "skillAbilityMod": "3",
@@ -272,7 +272,7 @@ Update a Skill
 
         {
             "id": "3e836f45-6f21-4a9a-a27b-17e71b60317d",
-            "skillName": "Run",
+            "skillName": "Runa",
             "skillModType": "Dex",
             "skillTotal": "6",
             "skillAbilityMod": "3",
@@ -372,7 +372,7 @@ Update a Spell
 
         {
             "id": "62136f45-5f86-229a-a27b-17e71b60317d",
-            "spellName": "Fireball",
+            "spellName": "Fireballa",
             "spellComponents": "None",
             "spellCastingTime": "3 seconds",
             "spellRange": "30ft",
@@ -387,7 +387,7 @@ Update a Spell
 
         {
             "id": "62136f45-5f86-229a-a27b-17e71b60317d",
-            "spellName": "Fireball",
+            "spellName": "Fireballa",
             "spellComponents": "None",
             "spellCastingTime": "3 seconds",
             "spellRange": "30ft",
@@ -495,7 +495,7 @@ Update a Weapon
 
         {
             "id": "5e836f4a-5f86-4a9a-a27b-17e71b60317d",
-            "weaponName": "Kill Death",
+            "weaponName": "Kill Deatha",
             "weaponAttackBonus": "3",
             "weaponDamage": "d20",
             "weaponCritical": "15-20",
@@ -512,7 +512,7 @@ Update a Weapon
 
         {
             "id": "5e836f4a-5f86-4a9a-a27b-17e71b60317d",
-            "weaponName": "Kill Death",
+            "weaponName": "Kill Deatha",
             "weaponAttackBonus": "3",
             "weaponDamage": "d20",
             "weaponCritical": "15-20",
@@ -530,7 +530,7 @@ Update a Weapon
         {
             "error": "error.unauthorized"
         }
-
+        
 ## /weapons/{id}
 
 + Parameters
@@ -554,17 +554,28 @@ Delete a Weapon
 Log a user in
 + Request (application/json; charset=utf-8)
 
-        {
-            "username": "test",
-            "password": "test"
-        }
+    + Body
+    
+            {
+                "username": "test",
+                "password": "test"
+            }
 
 + Response 200 (application/json; charset=utf-8)
+
         {
             "loggedInState": true
         }
+        
+
++ Response 422 (application/json; charset=utf-8)
+
+        {
+            "message": "Incorrect username / loggin"
+        }
     
 # Group Characters Collection
+
 ## /characters
 A Characters array with objects
 
@@ -709,6 +720,85 @@ Create a new Character
             "weight": ["", "", "", "", ""],
             "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
         }
+        
+## /characters/{id}
+
++ Parameters
+    + id (required, string, `59f8a9b0-3df2-11ea-ba54-ab58c1fd0974`) - Character id
+
+### Get a Character[GET]
+Get a Character
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+
+            
+            {
+                "id": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974",
+                "name": "Jimmy",
+                "player": "Dominic",
+                "alignment": "Chaotic Good",
+                "level": "3",
+                "userClass": " Fighter",
+                "race": "Human",
+                "campaign": "Curse of dog",
+                "diety": "Jenny",
+                "size": "Medium",
+                "age": "12",
+                "gender": "Male",
+                "hair": "Black",
+                "height": "5'2",
+                "characterWeight": "120",
+                "eyes": "Green",
+                "currency": " 10 Plat",
+                "languages": "Common",
+                "description": "He a real cool dude",
+                "personality": "Aaaaa",
+                "traits": "Awesome",
+                "flaws": "Lazy",
+                "contacts": "None",
+                "enemies": "Everyone",
+                "notes": "Dont forget the pie",
+                "image": "henry.jpg",
+                "stat": ["1", "1", "1", "1", "1", "1"],
+                "statMod": ["2", "2", "2", "2", "2", "2"],
+                "hp": "300",
+                "hpWounds": "250",
+                "hpDice": "10d20",
+                "dmgReduction": "None",
+                "ac": "20",
+                "acArmor": "5",
+                "acShield": "5",
+                "acDex": "5",
+                "acNatural": " 5",
+                "acMisc": "0",
+                "acTouch": "10",
+                "acFlat": "10",
+                "init": "12",
+                "initDex": "6",
+                "initMisc": "6",
+                "speed": "20ft",
+                "attackTotal": ["3","4"],
+                "attackBase": ["3","4"],
+                "attackMod": ["3","4"],
+                "attackMisc": ["3","4"],
+                "spellsKnown": ["3","4","3","4","3","4","3","4","3","4"],
+                "spellsPerDay": ["3","4","3","4","3","4","3","4","3","4"],
+                "spellDC": ["3","4","3","4","3","4","3","4","3","4"],
+                "savingThrow": ["1","2","3"],
+                "savingThrowBase": ["1","2","3"],
+                "savingThrowMod": ["1","2","3"],
+                "weight": ["1","2","3","4","5"],
+                "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
+            }
+            
+            
++ Response 401 (application/json; charset=utf-8)
+
+        {
+            "error": "error.unauthorized"
+        }
 
 ## /characters/{id}
 
@@ -722,7 +812,7 @@ Update a Character
 
         {
             "id": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974",
-            "name": "Jimmy",
+            "name": "Jimmya",
             "player": "Dominic",
             "alignment": "Chaotic Good",
             "level": "3",
@@ -783,7 +873,7 @@ Update a Character
 
         {
             "id": "59f8a9b0-3df2-11ea-ba54-ab58c1fd0974",
-            "name": "Jimmy",
+            "name": "Jimmya",
             "player": "Dominic",
             "alignment": "Chaotic Good",
             "level": "3",
@@ -839,11 +929,12 @@ Update a Character
             "weight": ["1","2","3","4","5"],
             "userId": "41236f45-5f86-4a9a-a27b-17e71b60317d"
         }
+        
 
-+ Response 401 (application/json; charset=utf-8)
++ Response 422 (application/json; charset=utf-8)
 
         {
-            "error": "error.unauthorized"
+            "error": "Incorrect"
         }
 
 ## /characters/{id}
