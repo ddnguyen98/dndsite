@@ -93,7 +93,6 @@ exports.createCharacter = async (req, res) => {
 
 exports.updateCharacter = async (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
   try {
     const [, [updatedCharacter]] = await Characters.update(req.body, {
       where: { id },

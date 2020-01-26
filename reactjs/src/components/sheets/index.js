@@ -42,7 +42,9 @@ class Sheets extends Component {
         <Container>
           <div className={styles.heading}>
             <h2>Characters</h2>
-            <Button onClick={this.addSheet}>Add</Button>
+            <Button name="add" onClick={this.addSheet}>
+              Add
+            </Button>
           </div>
           {isLoading && (
             <>
@@ -55,10 +57,11 @@ class Sheets extends Component {
             </>
           )}
           <Row xs="3" className={styles.container}>
-            {sheets.map(sheet => (
+            {sheets.map((sheet, index) => (
               <Col key={sheet.id}>
                 <Card className={styles.card}>
                   <FaTrash
+                    name={`delete${index}`}
                     className={styles.icon}
                     onClick={() => {
                       this.delete(sheet.id);
@@ -73,9 +76,13 @@ class Sheets extends Component {
                     />
                     <CardBody>
                       <h2>
-                        <CardTitle>{sheet.name}</CardTitle>
+                        <CardTitle name={`title${index}`}>
+                          {sheet.name}
+                        </CardTitle>
                       </h2>
-                      <CardSubtitle>{sheet.campaign}</CardSubtitle>
+                      <CardSubtitle name={`subtitle${index}`}>
+                        {sheet.campaign}
+                      </CardSubtitle>
                     </CardBody>
                   </Link>
                 </Card>

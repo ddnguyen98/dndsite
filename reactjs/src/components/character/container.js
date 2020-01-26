@@ -43,16 +43,17 @@ function mapStateToProps(state, props) {
   } = props;
   const {
     sheets: {
-      byId: { [id]: sheet, isLoading },
+      byId: { [id]: sheet },
+      isLoading: isLoading1,
     },
   } = state;
 
   const {
-    skills: { byId, allIds },
-    feats: { byId: byId1, allIds: allIds1 },
-    items: { byId: byId2, allIds: allIds2 },
-    spells: { byId: byId3, allIds: allIds3 },
-    weapons: { byId: byId4, allIds: allIds4 },
+    skills: { byId, allIds, isLoading: isLoading2 },
+    feats: { byId: byId1, allIds: allIds1, isLoading: isLoading3 },
+    items: { byId: byId2, allIds: allIds2, isLoading: isLoading4 },
+    spells: { byId: byId3, allIds: allIds3, isLoading: isLoading5 },
+    weapons: { byId: byId4, allIds: allIds4, isLoading: isLoading6 },
   } = state;
 
   return {
@@ -62,7 +63,16 @@ function mapStateToProps(state, props) {
     items: allIds2.map(id2 => byId2[id2].data),
     spells: allIds3.map(id3 => byId3[id3].data),
     weapons: allIds4.map(id4 => byId4[id4].data),
-    isLoading,
+    isLoading: {
+      loading: [
+        isLoading1,
+        isLoading2,
+        isLoading3,
+        isLoading4,
+        isLoading5,
+        isLoading6,
+      ],
+    },
   };
 }
 

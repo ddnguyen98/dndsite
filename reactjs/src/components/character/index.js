@@ -567,25 +567,27 @@ class Character extends Component {
       },
     } = this.props;
     const { inputs, skills, feats, items, spells, weapons } = this.state;
+    console.log(inputs);
+    console.log(skills);
     await updateSheet({ id, inputs });
     skills.forEach(async data => {
-      const id = data.id;
+      const {id} = data;
       await updateSkill({ id, data });
     });
     feats.forEach(async data => {
-      const id = data.id;
+      const {id} = data;
       await updateFeat({ id, data });
     });
     items.forEach(async data => {
-      const id = data.id;
+      const {id} = data;
       await updateItem({ id, data });
     });
     spells.forEach(async data => {
-      const id = data.id;
+      const {id} = data;
       await updateSpell({ id, data });
     });
     weapons.forEach(async data => {
-      const id = data.id;
+      const {id} = data;
       await updateWeapon({ id, data });
     });
   };
@@ -593,8 +595,9 @@ class Character extends Component {
   addSkill = async event => {
     const {
       match: {
-      params: { id },
-    }} = this.props;
+        params: { id },
+      },
+    } = this.props;
     const characterId = id;
     event.preventDefault();
     const { createSkill } = this.props;
@@ -618,8 +621,9 @@ class Character extends Component {
   addFeat = async event => {
     const {
       match: {
-      params: { id },
-    }} = this.props;
+        params: { id },
+      },
+    } = this.props;
     const characterId = id;
     event.preventDefault();
     const { createFeat } = this.props;
@@ -643,8 +647,9 @@ class Character extends Component {
   addItem = async event => {
     const {
       match: {
-      params: { id },
-    }} = this.props;
+        params: { id },
+      },
+    } = this.props;
     const characterId = id;
     event.preventDefault();
     const { createItem } = this.props;
@@ -668,8 +673,9 @@ class Character extends Component {
   addSpell = async event => {
     const {
       match: {
-      params: { id },
-    }} = this.props;
+        params: { id },
+      },
+    } = this.props;
     const characterId = id;
     event.preventDefault();
     const { createSpell } = this.props;
@@ -693,8 +699,9 @@ class Character extends Component {
   addWeapon = async event => {
     const {
       match: {
-      params: { id },
-    }} = this.props;
+        params: { id },
+      },
+    } = this.props;
     const characterId = id;
     event.preventDefault();
     const { createWeapon } = this.props;
@@ -716,17 +723,28 @@ class Character extends Component {
   };
 
   render() {
+    const { isLoading } = this.props;
     const { inputs, skills, feats, items, spells, weapons } = this.state;
     return (
       <div>
         <Container className={styles.form}>
+          {isLoading.loading[0] ||
+            isLoading.loading[1] ||
+            isLoading.loading[2] ||
+            isLoading.loading[3] ||
+            isLoading.loading[4] ||
+            isLoading.loading[5] && (
+              <>
+                <Spinner /> <p>Your content is Loading Please Wait</p>
+              </>
+            )}
           <Form onSubmit={this.saveForm}>
-            {/* Header for saving */}
             <div className={styles.heading}>
-              <Button type="submit">Save</Button>
+              <Button name="save" type="submit">
+                Save
+              </Button>
             </div>
             <Row>
-              {/* Character Image + Basic User Details */}
               <Col xs="3" className={styles.inputBasic}>
                 <img
                   src={`../${inputs.image}`}
@@ -807,7 +825,6 @@ class Character extends Component {
                   <Label for="player">Player</Label>
                 </FormGroup>
               </Col>
-              {/* User Stats */}
               <Col>
                 <Row xs="7" className={styles.stats}>
                   <Col>
@@ -928,7 +945,6 @@ class Character extends Component {
                 <Row xs="3">
                   <Col className={styles.collum}>
                     <div className={styles.borders}>
-                      {/* HP */}
                       <div>
                         <h2>Hit Points</h2>
                         <FormGroup>
@@ -960,7 +976,6 @@ class Character extends Component {
                           />
                         </FormGroup>
                       </div>
-                      {/* Resistances */}
                       <div>
                         <FormGroup>
                           <Label for="dmgReduction">Resistances</Label>
@@ -973,7 +988,6 @@ class Character extends Component {
                           />
                         </FormGroup>
                       </div>
-                      {/* Sped + inititive */}
                       <div>
                         <FormGroup>
                           <Label for="speed">Speed</Label>
@@ -1018,7 +1032,6 @@ class Character extends Component {
                   </Col>
                   <Col className={styles.collum}>
                     <div className={styles.borders}>
-                      {/* Armor */}
                       <div>
                         <h2>Armor</h2>
                         <div>
@@ -1099,7 +1112,6 @@ class Character extends Component {
                           </div>
                         </div>
                       </div>
-                      {/* Saving Throws */}
                       <div>
                         <h2>Saving Throws</h2>
                         <div>
@@ -1200,7 +1212,6 @@ class Character extends Component {
                   </Col>
                   <Col className={styles.collum}>
                     <div className={styles.borders}>
-                      {/* Attack Bonus */}
                       <div>
                         <h2>Attack Bonuses</h2>
                         <div>
@@ -1286,7 +1297,6 @@ class Character extends Component {
                           </div>
                         </div>
                       </div>
-                      {/* Weight */}
                       <div>
                         <h2>Weight</h2>
                         <div>
@@ -1340,11 +1350,12 @@ class Character extends Component {
                     </div>
                   </Col>
                 </Row>
-                {/* Skills */}
                 <Row xs="1">
                   <div>
                     <h2>Skills</h2>
-                    <Button onClick={this.addSkill}>Add</Button>
+                    <Button name="addSkill" onClick={this.addSkill}>
+                      Add
+                    </Button>
                     <Table striped>
                       <thead>
                         <tr>
@@ -1356,8 +1367,11 @@ class Character extends Component {
                         </tr>
                       </thead>
                       <tbody>
+                        {skills.length === 0 && (
+                          <p>Create A Skill to populate your skill!</p>
+                        )}
                         {skills.map((skill, index) => (
-                          <tr id={skill.id}>
+                          <tr name="skills" id={skill.id}>
                             <td>
                               <Input
                                 name={`skillName${index}`}
@@ -1399,6 +1413,7 @@ class Character extends Component {
                               />
                             </td>
                             <FaTrash
+                              name={skill.id}
                               onClick={() => {
                                 this.deleteSkill(skill.id);
                               }}
@@ -1411,28 +1426,36 @@ class Character extends Component {
                 </Row>
               </Col>
             </Row>
-            {/* Tabs */}
             <Row>
               <Col>
                 <Tabs>
                   <Nav tabs>
                     <Tab>
-                      <NavLink href="#">Character Details</NavLink>
+                      <NavLink href="#" name="characterDetails">
+                        Character Details
+                      </NavLink>
                     </Tab>
                     <Tab>
-                      <NavLink href="#">Feats/Abilities</NavLink>
+                      <NavLink href="#" name="featsTab">
+                        Feats/Abilities
+                      </NavLink>
                     </Tab>
                     <Tab>
-                      <NavLink href="#">Items</NavLink>
+                      <NavLink href="#" name="itemsTab">
+                        Items
+                      </NavLink>
                     </Tab>
                     <Tab>
-                      <NavLink href="#">Spells</NavLink>
+                      <NavLink href="#" name="spellsTab">
+                        Spells
+                      </NavLink>
                     </Tab>
                     <Tab>
-                      <NavLink href="#">Weapons</NavLink>
+                      <NavLink href="#" name="weaponsTab">
+                        Weapons
+                      </NavLink>
                     </Tab>
                   </Nav>
-                  {/* Character Details */}
                   <TabPanel>
                     <div>
                       <Row xs="2">
@@ -1605,18 +1628,23 @@ class Character extends Component {
                       </Row>
                     </div>
                   </TabPanel>
-                  {/* Feats/Abilities */}
                   <TabPanel>
                     <div>
                       <div>
-                        <Button onClick={this.addFeat}>Add</Button>
+                        <Button name="addFeat" onClick={this.addFeat}>
+                          Add
+                        </Button>
                       </div>
                       <Row xs="3">
+                        {feats.length === 0 && (
+                          <p>Create A Feat to populate your skill!</p>
+                        )}
                         {feats.map((feat, index) => (
                           <Col>
-                            <Card>
+                            <Card name="feats">
                               <CardBody>
                                 <FaTrash
+                                  name={feat.id}
                                   onClick={() => {
                                     this.deleteFeat(feat.id);
                                   }}
@@ -1648,10 +1676,11 @@ class Character extends Component {
                       </Row>
                     </div>
                   </TabPanel>
-                  {/* Items */}
                   <TabPanel>
                     <div>
-                      <Button onClick={this.addItem}>Add</Button>
+                      <Button name="addItem" onClick={this.addItem}>
+                        Add
+                      </Button>
                     </div>
                     <div>
                       <Table striped>
@@ -1663,8 +1692,11 @@ class Character extends Component {
                           </tr>
                         </thead>
                         <tbody>
+                          {items.length === 0 && (
+                            <p>Create An Item to populate your skill!</p>
+                          )}
                           {items.map((item, index) => (
-                            <tr id={item.id}>
+                            <tr name="items" id={item.id}>
                               <td>
                                 <Input
                                   name={`itemName${index}`}
@@ -1690,6 +1722,7 @@ class Character extends Component {
                                 />
                               </td>
                               <FaTrash
+                                name={item.id}
                                 onClick={() => {
                                   this.deleteItem(item.id);
                                 }}
@@ -1700,11 +1733,12 @@ class Character extends Component {
                       </Table>
                     </div>
                   </TabPanel>
-                  {/* Spells */}
                   <TabPanel>
                     <div>
                       <div>
-                        <Button onClick={this.addSpell}>Add</Button>
+                        <Button name="addSpell" onClick={this.addSpell}>
+                          Add
+                        </Button>
                       </div>
                       <Row xs="2">
                         <Col>
@@ -2056,11 +2090,15 @@ class Character extends Component {
                         </Col>
                         <Col>
                           <Row xs="3">
+                            {spells.length === 0 && (
+                              <p>Create A Spell to populate your skill!</p>
+                            )}
                             {spells.map((spell, index) => (
                               <Col>
-                                <Card>
+                                <Card name="spells">
                                   <CardBody>
                                     <FaTrash
+                                      name={spell.id}
                                       onClick={() => {
                                         this.deleteSpell(spell.id);
                                       }}
@@ -2179,15 +2217,19 @@ class Character extends Component {
                       </Row>
                     </div>
                   </TabPanel>
-                  {/* Weapons */}
                   <TabPanel>
                     <div>
                       <div>
-                        <Button onClick={this.addWeapon}>Add</Button>
+                        <Button name="addWeapon" onClick={this.addWeapon}>
+                          Add
+                        </Button>
                       </div>
                       <Row xs="1">
+                        {skills.length === 0 && (
+                          <p>Create A Weapon to populate your skill!</p>
+                        )}
                         {weapons.map((weapon, index) => (
-                          <Col>
+                          <Col name="weapons">
                             <Row xs="6">
                               <Col>
                                 <FormGroup>
@@ -2202,7 +2244,9 @@ class Character extends Component {
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for={`weaponAttackBonus${index}`}>Attack Bonus</Label>
+                                  <Label for={`weaponAttackBonus${index}`}>
+                                    Attack Bonus
+                                  </Label>
                                   <Input
                                     name={`weaponAttackBonus${index}`}
                                     id={`weaponAttackBonus${index}`}
@@ -2213,7 +2257,10 @@ class Character extends Component {
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for={`weaponDamage${index}`}> Damage </Label>
+                                  <Label for={`weaponDamage${index}`}>
+                                    {' '}
+                                    Damage{' '}
+                                  </Label>
                                   <Input
                                     name={`weaponDamage${index}`}
                                     id={`weaponDamage${index}`}
@@ -2224,7 +2271,9 @@ class Character extends Component {
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for={`weaponCritical${index}`}>Critical</Label>
+                                  <Label for={`weaponCritical${index}`}>
+                                    Critical
+                                  </Label>
                                   <Input
                                     name={`weaponCritical${index}`}
                                     id={`weaponCritical${index}`}
@@ -2235,7 +2284,9 @@ class Character extends Component {
                               </Col>
                               <Col>
                                 <FormGroup>
-                                  <Label for={`weaponRange${index}`}>Range</Label>
+                                  <Label for={`weaponRange${index}`}>
+                                    Range
+                                  </Label>
                                   <Input
                                     name={`weaponRange${index}`}
                                     id={`weaponRange${index}`}
@@ -2244,7 +2295,12 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <FaTrash onClick={()=>{this.deleteWeapon(weapon.id)}} />
+                              <FaTrash
+                                name={weapon.id}
+                                onClick={() => {
+                                  this.deleteWeapon(weapon.id);
+                                }}
+                              />
                             </Row>
                             <Row xs="3">
                               <FormGroup>
@@ -2260,7 +2316,9 @@ class Character extends Component {
                                 />
                               </FormGroup>
                               <FormGroup>
-                                <Label for={`weaponAmmunition${index}`}>Ammunition</Label>
+                                <Label for={`weaponAmmunition${index}`}>
+                                  Ammunition
+                                </Label>
                                 <Input
                                   type="textarea"
                                   name={`weaponAmmunition${index}`}
@@ -2272,7 +2330,9 @@ class Character extends Component {
                               <Row xs="1">
                                 <Col>
                                   <FormGroup>
-                                    <Label for={`weaponWeight${index}`}>Weight</Label>
+                                    <Label for={`weaponWeight${index}`}>
+                                      Weight
+                                    </Label>
                                     <Input
                                       name={`weaponWeight${index}`}
                                       id={`weaponWeight${index}`}
@@ -2283,7 +2343,9 @@ class Character extends Component {
                                 </Col>
                                 <Col>
                                   <FormGroup>
-                                    <Label for={`weaponSize${index}`}>Size</Label>
+                                    <Label for={`weaponSize${index}`}>
+                                      Size
+                                    </Label>
                                     <Input
                                       name={`weaponSize${index}`}
                                       id={`weaponSize${index}`}
@@ -2294,7 +2356,9 @@ class Character extends Component {
                                 </Col>
                                 <Col>
                                   <FormGroup>
-                                    <Label for={`weaponType${index}`}>Type</Label>
+                                    <Label for={`weaponType${index}`}>
+                                      Type
+                                    </Label>
                                     <Input
                                       name={`weaponType${index}`}
                                       id={`weaponType${index}`}
