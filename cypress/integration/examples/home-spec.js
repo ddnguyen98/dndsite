@@ -176,6 +176,7 @@ describe('Home Page Tests', () => {
     cy.get('.card').should('have.length', 1);
 
   })
+
   it('Logout test', () =>{
     cy.get('a[name="logout"]').click();
   })

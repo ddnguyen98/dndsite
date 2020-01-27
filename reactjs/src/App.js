@@ -34,8 +34,4 @@ function App() {
   );
 }
 
-if (window.Cypres) {
-  window.store = store;
-}
-
 export default App;
