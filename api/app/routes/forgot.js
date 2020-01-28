@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const authCtrl = require('../controllers/auth');
 
-router.get('/', authCtrl.forgotPassword);
+router.get('/forgot', authCtrl.forgotPassword);
+router.get('/reset', authCtrl.resetPassword);
 
 module.exports = router;

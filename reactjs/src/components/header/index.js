@@ -48,7 +48,7 @@ class Header extends Component {
             </Nav>
             {loggedIn && (
               <>
-                <Link to="/">
+                <Link name="logout" to="/">
                   <NavbarText onClick={this.logUserOut}>Logout</NavbarText>
                 </Link>
               </>

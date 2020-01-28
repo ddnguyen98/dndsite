@@ -4,6 +4,8 @@ import {
   REQ_LOGGEDIN_PENDING,
   REQ_LOGGEDIN_SUCCESS,
   REQ_LOGGEDIN_ERROR,
+  REQ_SIGNOUT_SUCCESS,
+  REQ_REGISTER_SUCCESS,
 } from '../actionTypes';
 
 const initialState = {
@@ -29,7 +31,7 @@ function loginSuccess(state, action) {
   // clear loading and error, update cache time, add feats
   return {
     ...state,
-    loggedIn: action.data.loggedIn,
+    loggedIn: action.data.loggedInState,
     isLoading: false,
     error: null,
   };
@@ -46,5 +48,7 @@ const loginError = (state, action) => {
 export default createReducer(initialState, {
   [REQ_LOGGEDIN_PENDING]: loginPending,
   [REQ_LOGGEDIN_SUCCESS]: loginSuccess,
+  [REQ_SIGNOUT_SUCCESS]: loginSuccess,
+  [REQ_REGISTER_SUCCESS]: loginSuccess,
   [REQ_LOGGEDIN_ERROR]: loginError,
 });

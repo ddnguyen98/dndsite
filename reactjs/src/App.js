@@ -10,6 +10,7 @@ import Login from './components/login';
 import Register from './components/register';
 import Sheets from './components/sheets';
 import Character from './components/character';
+import Alerts from './components/alerts';
 
 import store from './store';
 
@@ -25,15 +26,12 @@ function App() {
             <Route path="/register" exact component={Register} />
             <Route path="/sheets" exact component={Sheets} />
             <Route path="/character/:id" exact component={Character} />
+            <Alerts />
           </main>
         </Router>
       </div>
     </Provider>
   );
-}
-
-if (window.Cypres) {
-  window.store = store;
 }
 
 export default App;

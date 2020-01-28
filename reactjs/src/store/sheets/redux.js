@@ -109,6 +109,24 @@ function sheetSuccess(state, action) {
   };
 }
 
+function sheetSaveSuccess(state, action) {
+  console.log(action);
+  // clear loading and error, update cache time, add sheets
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [action.payload.id]: {
+        isLoading: false,
+        error: null,
+        loadedAt: Date.now(),
+        data: action.payload.data,
+      },
+    },
+    allIds: [...new Set([...state.allIds, action.payload.id])],
+  };
+}
+
 function sheetError(state, action) {
   // clear loading and set error
   return {
@@ -135,7 +153,7 @@ export default createReducer(initialState, {
   [REQ_SHEET_SUCCESS]: sheetSuccess,
   [REQ_SHEET_ERROR]: sheetError,
   [UPDATE_SHEET_PENDING]: sheetPending,
-  [UPDATE_SHEET_SUCCESS]: sheetSuccess,
+  [UPDATE_SHEET_SUCCESS]: sheetSaveSuccess,
   [UPDATE_SHEET_ERROR]: sheetError,
   [DELETE_SHEET_PENDING]: sheetPending,
   [DELETE_SHEET_SUCCESS]: deleteSuccess,

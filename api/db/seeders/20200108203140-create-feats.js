@@ -1,10 +1,10 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Feats', [{
-    id: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
-    characterId: '3e836f45-5f86-4a9a-a27b-17e71b60317d',
-    featName: 'John Doe',
-    featDescription: 'It work oh so well',
+    id: '1421ed80-3ed7-11ea-a1d6-6bfe258ce555',
+    characterId: '59f8a9b0-3df2-11ea-ba54-ab58c1fd0974',
+    featName: 'Feat Name',
+    featDescription: 'Feat Description',
     createdAt: Sequelize.literal('NOW()'),
     updatedAt: Sequelize.literal('NOW()'),
   }], {}),

@@ -39,14 +39,9 @@ class Register extends Component {
   save = async event => {
     // don't actually submit the form through the browser
     event.preventDefault();
-    const { saveUser, history } = this.props;
+    const { saveUser } = this.props;
     const { email, username, password } = this.state;
-    const signup = await saveUser({ email, username, password });
-    if (signup) {
-      history.push('/');
-    } else {
-      window.location.reload();
-    }
+    await saveUser({ email, username, password });
   };
 
   render() {

@@ -10,6 +10,7 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
+  Spinner,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
@@ -35,19 +36,32 @@ class Sheets extends Component {
   };
 
   render() {
-    const { sheets } = this.props;
+    const { sheets, isLoading } = this.props;
     return (
       <div className={styles.sheets}>
         <Container>
           <div className={styles.heading}>
             <h2>Characters</h2>
-            <Button onClick={this.addSheet}>Add</Button>
+            <Button name="add" onClick={this.addSheet}>
+              Add
+            </Button>
           </div>
+          {isLoading && (
+            <>
+              <Spinner />
+            </>
+          )}
+          {!isLoading && sheets.length === 0 && (
+            <>
+              <p>Create a character to populate your list!</p>
+            </>
+          )}
           <Row xs="3" className={styles.container}>
-            {sheets.map(sheet => (
+            {sheets.map((sheet, index) => (
               <Col key={sheet.id}>
                 <Card className={styles.card}>
                   <FaTrash
+                    name={`delete${index}`}
                     className={styles.icon}
                     onClick={() => {
                       this.delete(sheet.id);
@@ -62,9 +76,13 @@ class Sheets extends Component {
                     />
                     <CardBody>
                       <h2>
-                        <CardTitle>{sheet.name}</CardTitle>
+                        <CardTitle name={`title${index}`}>
+                          {sheet.name}
+                        </CardTitle>
                       </h2>
-                      <CardSubtitle>{sheet.campaign}</CardSubtitle>
+                      <CardSubtitle name={`subtitle${index}`}>
+                        {sheet.campaign}
+                      </CardSubtitle>
                     </CardBody>
                   </Link>
                 </Card>
@@ -82,10 +100,12 @@ Sheets.propTypes = {
   fetchSheets: PropTypes.func.isRequired,
   createSheet: PropTypes.func.isRequired,
   deleteSheet: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 Sheets.defaultProps = {
   sheets: [],
+  isLoading: {},
 };
 
 export default container(Sheets);
