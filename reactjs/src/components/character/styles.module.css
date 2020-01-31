@@ -52,6 +52,7 @@
 
 .collum { 
     padding: 0 .5rem;
+    text-align: center;
 }
 
 .stats {
@@ -94,5 +95,91 @@
     margin: 0 0 .5rem;
     width: 100%;
 }
+
+.health {
+    width: 100%;
+}
+
+.health input{
+    width: 100%;
+    border: none;
+    text-align: center;
+    font-size: 26px;
+}
+
+.health .formGroup {
+    width: 40%;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.resistances {
+    margin: 0 10px 16px;
+}
+
+.resistances textarea {
+    height: 100px;
+}
+
+.speed .speedGroup, .speed .initContainer{
+    margin: 0 10px 16px;
+}
+
+.speed .speedGroup input, .speed .initContainer input{
+    text-align: center;    
+}
+
+.speed .speedGroup input {
+    width: 50%;
+    margin: 0 auto;
+    border: none;
+    font-size: 26px;
+}
+
+.speed .initContainer .formGroup:first-of-type{ 
+    width: 100%;
+    display: inline-block;
+}
+.speed .initContainer .formGroup{ 
+    width: 40%;
+    display: inline-block;
+}
+
+.speed .initContainer .plus{ 
+    width: 20%;
+    display: inline-block;
+}
+
+.armor .formGroup {
+    width: 33%;
+    display: inline-block;
+}
+
+.armor .formGroup input{
+    text-align: center;
+}
+
+.armor {
+    text-align: center;
+}
+
+.armorStat .formGroup{
+    width: 15%;
+    text-align: center;
+}
+.armorStat .formGroup input{
+    padding: 2px;
+    margin: 0 2px;
+}
+
+.fortitude, .reflex, .will {
+    width: 30%;
+    display: inline-block;
+}
+
+.fortitude .formGroup, .reflex .formGroup, .will .formGroup {
+    margin: 0 5px 16px;
+}
+
 
 

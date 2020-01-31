@@ -16,6 +16,7 @@ const characterRoutes = require('./routes/characters');
 const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const forgotRouter = require('./routes/forgot');
+const resetRouter = require('./routes/reset');
 
 app.use(bodyParser.json());
 app.use('/api/feats', featRoutes);
@@ -26,7 +27,8 @@ app.use('/api/weapons', weaponRoutes);
 app.use('/api/characters', characterRoutes);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
-app.use('/api/auth/', forgotRouter);
+app.use('/api/forgot', forgotRouter);
+app.use('/api/reset', resetRouter);
 
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {

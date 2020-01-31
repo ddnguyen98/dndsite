@@ -9,17 +9,16 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from 'reactstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LoginContainer from './container';
+import ForgotContainer from './container';
 import styles from './styles.module.css';
 
-class Login extends Component {
+class Forgot extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      email: '',
     };
   }
 
@@ -38,9 +37,9 @@ class Login extends Component {
   save = async event => {
     // don't actually submit the form through the browser
     event.preventDefault();
-    const { loginAccount } = this.props;
-    const { username, password } = this.state;
-    await loginAccount({ username, password });
+    const { forgot } = this.props;
+    const { email } = this.state;
+    await forgot({ email });
   };
 
   render() {
@@ -49,41 +48,23 @@ class Login extends Component {
     return (
       <div className={styles.wrapper}>
         <Container className={styles.login}>
-          <h2>Login</h2>
-          <p>
-            If you have forgot you password
-            <Link to="/forgot"> click here</Link>
-          </p>
+          <h2>Forgot</h2>
           <Form className={styles.form} onSubmit={this.save}>
             <FormGroup>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>U</InputGroupText>
+                  <InputGroupText>@</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="username"
-                  id="username"
-                  placeholder="Username"
-                  onChange={this.handleInputChange}
-                />
-              </InputGroup>
-            </FormGroup>
-            <FormGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>P</InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
                   onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
             <Button name="submit" className={styles.button}>
-              Login
+              Submit
             </Button>
           </Form>
         </Container>
@@ -92,13 +73,13 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginAccount: PropTypes.func.isRequired,
+Forgot.propTypes = {
+  forgot: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool,
 };
 
-Login.defaultProps = {
+Forgot.defaultProps = {
   loggedIn: false,
 };
 
-export default LoginContainer(Login);
+export default ForgotContainer(Forgot);

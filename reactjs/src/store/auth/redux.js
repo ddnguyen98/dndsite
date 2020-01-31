@@ -6,6 +6,8 @@ import {
   REQ_LOGGEDIN_ERROR,
   REQ_SIGNOUT_SUCCESS,
   REQ_REGISTER_SUCCESS,
+  REQ_FORGOT_SUCCESS,
+  REQ_RESET_SUCCESS,
 } from '../actionTypes';
 
 const initialState = {
@@ -49,6 +51,8 @@ export default createReducer(initialState, {
   [REQ_LOGGEDIN_PENDING]: loginPending,
   [REQ_LOGGEDIN_SUCCESS]: loginSuccess,
   [REQ_SIGNOUT_SUCCESS]: loginSuccess,
+  [REQ_FORGOT_SUCCESS]: loginSuccess,
+  [REQ_RESET_SUCCESS]: loginSuccess,
   [REQ_REGISTER_SUCCESS]: loginSuccess,
   [REQ_LOGGEDIN_ERROR]: loginError,
 });

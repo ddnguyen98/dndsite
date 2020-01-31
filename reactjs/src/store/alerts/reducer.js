@@ -43,6 +43,20 @@ export default function reducer(state = initialState, action) {
     });
   }
 
+  if (action.type.includes('REQ_FORGOT_SUCCESS')) {
+    return addAlert(state, {
+      text: 'Check your email to reset password',
+      type: 'success',
+    });
+  }
+
+  if (action.type.includes('REQ_RESET_SUCCESS')) {
+    return addAlert(state, {
+      text: 'Password reset',
+      type: 'success',
+    });
+  }
+
   if (action.type.includes('UPDATE_SHEETS_SUCCESS')) {
     return addAlert(state, {
       text: 'Character sheet updated sucessfully',

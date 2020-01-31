@@ -1,1 +1,4 @@
 html,body { height:100%; background-color: #FBF5F3; }
+textarea { resize: none !important; }
+
+textarea, input { border-radius: 0 !important; }

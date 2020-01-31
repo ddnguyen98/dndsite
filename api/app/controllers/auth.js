@@ -27,26 +27,27 @@ exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await Users.findOne({ where: { email } })
-      .then(throwIf((r) => !r, 400, 'User Not Found'),
-        throwError(500, 'Sequelize error'));
+      .then(throwIf((r) => !r, 400, 'User Not Found'));
     const buf = crypto.randomBytes(20);
     const token = buf.toString('hex');
-
-    user.uppdate({ reset_password: token, reset_expires: Date.now() + (1000 * 60 * 60 * 24) });
+    const reset = Date.now() + (1000 * 60 * 60 * 24);
+    await Users.update({ reset_password: token, reset_expires: reset },
+      { where: { email } });
 
     const data = {
-      tp: user.email,
+      to: user.email,
       from: 'capstone_test@yourcode.app',
       template: 'forgot',
       subject: 'Password help has arrived!',
       ctx: {
-        url: `http://localhost:3000/auth/reset_password?token=${token}`,
-        name: user.name.split(' ')[0],
+        url: `http://localhost:3000/reset?token=${token}`,
+        name: user.username,
       },
     };
     await mailer.sendMail(data).catch(throwError(500, 'Mail error'));
     res.json({
       message: 'Kindly check your email for further instructions',
+      loggedInState: false,
     });
   } catch (e) {
     SendError(res, e);
@@ -57,32 +58,36 @@ exports.resetPassword = async (req, res) => {
   try {
     const { token, newPassword, verifyPassword } = req.body;
     const user = await Users.findOne({
-      reset_password: token,
-      reset_expires: { $gt: Date.now() },
+      where: {
+        reset_password: token,
+      },
     }).then(
       throwIf((r) => !r, 400, 'Password reset token invalid or expired'),
       throwError(500, 'Sequlize error'),
     );
 
     if (newPassword === verifyPassword) {
-      user.password = newPassword;
-      user.reset_password = undefined;
-      user.reset_expires = undefined;
-      await user.save();
+      await Users.update({
+        password: newPassword,
+        reset_password: undefined,
+        reset_expires: undefined,
+      }, { where: { email: user.dataValues.email } });
+
       const data = {
-        to: user.email,
+        to: user.dataValues.email,
         from: 'capstone_test@yourcode.app',
         template: 'reset',
         subject: 'Password Reset Confirmation',
         ctx: {
-          name: user.name.split(' ')[0],
+          name: user.dataValues.username,
         },
       };
 
       await mailer.sendMail(data).catch(throwError(500, 'Mail error'));
-      res.json({ message: 'Password reset' });
+      const tokenn = jwt.sign({ id: user.dataValues.id }, process.env.secret);
+      res.json({ token: tokenn, loggedInState: true });
     } else {
-      throwError(422, 'passwords do not match');
+      throwError(422, 'Passwords do not match');
     }
   } catch (e) {
     SendError(res, e);

@@ -945,9 +945,9 @@ class Character extends Component {
                 <Row xs="3">
                   <Col className={styles.collum}>
                     <div className={styles.borders}>
-                      <div>
+                      <div className={styles.health}>
                         <h2>Hit Points</h2>
-                        <FormGroup>
+                        <FormGroup className={styles.formGroup}>
                           <Label for="hpWounds">Current</Label>
                           <Input
                             name="hpWounds"
@@ -956,8 +956,7 @@ class Character extends Component {
                             onChange={this.handleInputChange}
                           />
                         </FormGroup>
-                        /
-                        <FormGroup>
+                        <FormGroup className={styles.formGroup}>
                           <Label for="hp">Max</Label>
                           <Input
                             name="hp"
@@ -966,7 +965,7 @@ class Character extends Component {
                             onChange={this.handleInputChange}
                           />
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup className={styles.formGroup}>
                           <Label for="hpDice">Hie Dice</Label>
                           <Input
                             name="hpDice"
@@ -977,7 +976,7 @@ class Character extends Component {
                         </FormGroup>
                       </div>
                       <div>
-                        <FormGroup>
+                        <FormGroup className={styles.resistances}>
                           <Label for="dmgReduction">Resistances</Label>
                           <Input
                             type="textarea"
@@ -988,8 +987,8 @@ class Character extends Component {
                           />
                         </FormGroup>
                       </div>
-                      <div>
-                        <FormGroup>
+                      <div className={styles.speed}>
+                        <FormGroup className={styles.speedGroup}>
                           <Label for="speed">Speed</Label>
                           <Input
                             name="speed"
@@ -998,8 +997,8 @@ class Character extends Component {
                             onChange={this.handleInputChange}
                           />
                         </FormGroup>
-                        <div>
-                          <FormGroup>
+                        <div className={styles.initContainer}>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="init">Inititive</Label>
                             <Input
                               name="init"
@@ -1008,7 +1007,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="initDex">Base</Label>
                             <Input
                               name="initDex"
@@ -1017,7 +1016,8 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <p className={styles.plus}>+</p>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="initMisc">Misc</Label>
                             <Input
                               name="initMisc"
@@ -1034,8 +1034,8 @@ class Character extends Component {
                     <div className={styles.borders}>
                       <div>
                         <h2>Armor</h2>
-                        <div>
-                          <FormGroup>
+                        <div className={styles.armor}>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="acTouch">Touch</Label>
                             <Input
                               name="acTouch"
@@ -1044,7 +1044,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="ac">Total</Label>
                             <Input
                               name="ac"
@@ -1053,7 +1053,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="acFlat">Flat</Label>
                             <Input
                               name="acFlat"
@@ -1062,9 +1062,8 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <div>
-                            <h3>Base: 10</h3>
-                            <FormGroup>
+                          <div className={styles.armorStat}>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="acArmor">Armor</Label>
                               <Input
                                 name="acArmor"
@@ -1073,7 +1072,8 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            +
+                            <FormGroup className={styles.formGroup}>
                               <Label for="acShield">Shield</Label>
                               <Input
                                 name="acShield"
@@ -1082,7 +1082,8 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            +
+                            <FormGroup className={styles.formGroup}>
                               <Label for="acDex">Dex</Label>
                               <Input
                                 name="acDex"
@@ -1091,7 +1092,8 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            +
+                            <FormGroup className={styles.formGroup}>
                               <Label for="acNatural">Natural</Label>
                               <Input
                                 name="acNatural"
@@ -1100,7 +1102,8 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            +
+                            <FormGroup className={styles.formGroup}>
                               <Label for="acMisc">Misc</Label>
                               <Input
                                 name="acMisc"
@@ -1114,8 +1117,8 @@ class Character extends Component {
                       </div>
                       <div>
                         <h2>Saving Throws</h2>
-                        <div>
-                          <FormGroup>
+                        <div className={styles.fortitude}>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="fortitude">Fortitude</Label>
                             <Input
                               name="fortitude"
@@ -1125,7 +1128,7 @@ class Character extends Component {
                             />
                           </FormGroup>
                           <div>
-                            <FormGroup>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="fortitudeBase">Base</Label>
                               <Input
                                 name="fortitudeBase"
@@ -1134,7 +1137,7 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="fortitudeMod">Mod</Label>
                               <Input
                                 name="fortitudeMod"
@@ -1145,8 +1148,8 @@ class Character extends Component {
                             </FormGroup>
                           </div>
                         </div>
-                        <div>
-                          <FormGroup>
+                        <div className={styles.reflex}>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="reflex">Reflex</Label>
                             <Input
                               name="reflex"
@@ -1156,7 +1159,7 @@ class Character extends Component {
                             />
                           </FormGroup>
                           <div>
-                            <FormGroup>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="reflexBase">Base</Label>
                               <Input
                                 name="reflexBase"
@@ -1165,7 +1168,7 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="reflexMod">Mod</Label>
                               <Input
                                 name="reflexMod"
@@ -1176,8 +1179,8 @@ class Character extends Component {
                             </FormGroup>
                           </div>
                         </div>
-                        <div>
-                          <FormGroup>
+                        <div className={styles.will}>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="will">Will</Label>
                             <Input
                               name="will"
@@ -1187,7 +1190,7 @@ class Character extends Component {
                             />
                           </FormGroup>
                           <div>
-                            <FormGroup>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="willBase">Base</Label>
                               <Input
                                 name="willBase"
@@ -1196,7 +1199,7 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <FormGroup>
+                            <FormGroup className={styles.formGroup}>
                               <Label for="willMod">Mod</Label>
                               <Input
                                 name="willMod"

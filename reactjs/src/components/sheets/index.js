@@ -12,6 +12,8 @@ import {
   Button,
   Spinner,
 } from 'reactstrap';
+// eslint-disable-next-line import/no-duplicates
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
 import container from './container';
@@ -36,7 +38,8 @@ class Sheets extends Component {
   };
 
   render() {
-    const { sheets, isLoading } = this.props;
+    const { sheets, isLoading, loggedIn } = this.props;
+    if (!loggedIn) return <Redirect to="/" />;
     return (
       <div className={styles.sheets}>
         <Container>
@@ -101,11 +104,13 @@ Sheets.propTypes = {
   createSheet: PropTypes.func.isRequired,
   deleteSheet: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  loggedIn: PropTypes.bool,
 };
 
 Sheets.defaultProps = {
   sheets: [],
   isLoading: {},
+  loggedIn: {},
 };
 
 export default container(Sheets);
