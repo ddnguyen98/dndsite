@@ -45,6 +45,9 @@ class Header extends Component {
                   </NavItem>
                 </>
               )}
+              <NavItem>
+                <Link to="/emailer">Contact</Link>
+              </NavItem>
             </Nav>
             {loggedIn && (
               <>

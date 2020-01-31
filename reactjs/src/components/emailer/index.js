@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -14,13 +13,12 @@ import {
 import styles from './styles.module.css';
 import container from './container';
 
-class Register extends Component {
+class Emailer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      username: '',
-      password: '',
+      message: '',
       emailf: '',
     };
   }
@@ -40,27 +38,20 @@ class Register extends Component {
   save = async event => {
     // don't actually submit the form through the browser
     event.preventDefault();
-    const { saveUser } = this.props;
-    const { email, username, password, emailf } = this.state;
+    const { emailer } = this.props;
+    const { email, message, emailf } = this.state;
     if (emailf.length === 0) {
-      await saveUser({ email, username, password });
+      await emailer({ email, message });
     }
   };
 
   render() {
-    const { loggedIn } = this.props;
-    if (loggedIn) return <Redirect to="/" />;
     return (
       <div className={styles.wrapper}>
         <Container className={styles.login}>
           <div>
-            <h2>Register</h2>
-            <p>
-              {' '}
-              If you already have an account with us,
-              <Link to="/login">click here</Link> to be redirected to our login
-              page{' '}
-            </p>
+            <h2>Send Message</h2>
+            <p>Submit here to send the creator of the site a message</p>
           </div>
           <Form className={styles.form} onSubmit={this.save}>
             <FormGroup>
@@ -78,33 +69,20 @@ class Register extends Component {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <InputGroup>
+              <InputGroup className={styles.message}>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>U</InputGroupText>
+                  <InputGroupText>M</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="username"
-                  id="username"
-                  placeholder="Username"
+                  type="textarea"
+                  name="message"
+                  id="message"
+                  placeholder="Message"
                   onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
-            <FormGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>P</InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  onChange={this.handleInputChange}
-                />
-              </InputGroup>
-            </FormGroup>
-            <Button className={styles.button}>Register</Button>
+            <Button className={styles.button}>Send Message</Button>
             <input
               className={styles.emailf}
               name="emailf"
@@ -118,13 +96,8 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
-  saveUser: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool,
+Emailer.propTypes = {
+  emailer: PropTypes.func.isRequired,
 };
 
-Register.defaultProps = {
-  loggedIn: false,
-};
-
-export default container(Register);
+export default container(Emailer);

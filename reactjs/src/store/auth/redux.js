@@ -8,6 +8,9 @@ import {
   REQ_REGISTER_SUCCESS,
   REQ_FORGOT_SUCCESS,
   REQ_RESET_SUCCESS,
+  REQ_EMAILER_PENDING,
+  REQ_EMAILER_SUCCESS,
+  REQ_EMAILER_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -47,6 +50,28 @@ const loginError = (state, action) => {
   };
 };
 
+const emailerPending = (state, action) => {
+  return {
+    ...state,
+    isLoading: true,
+    error: null,
+  };
+};
+
+const emailerSuccess = (state, action) => {
+  return {
+    ...state,
+  };
+};
+
+const emailerError = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: action.err,
+  };
+};
+
 export default createReducer(initialState, {
   [REQ_LOGGEDIN_PENDING]: loginPending,
   [REQ_LOGGEDIN_SUCCESS]: loginSuccess,
@@ -55,4 +80,7 @@ export default createReducer(initialState, {
   [REQ_RESET_SUCCESS]: loginSuccess,
   [REQ_REGISTER_SUCCESS]: loginSuccess,
   [REQ_LOGGEDIN_ERROR]: loginError,
+  [REQ_EMAILER_PENDING]: emailerPending,
+  [REQ_EMAILER_SUCCESS]: emailerSuccess,
+  [REQ_EMAILER_ERROR]: emailerError,
 });

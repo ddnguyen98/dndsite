@@ -6,6 +6,9 @@ import {
   REQ_FORGOT_SUCCESS,
   REQ_LOGGEDIN_ERROR,
   REQ_RESET_SUCCESS,
+  REQ_EMAILER_PENDING,
+  REQ_EMAILER_SUCCESS,
+  REQ_EMAILER_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
@@ -40,6 +43,14 @@ export const forgot = forget => {
   return {
     types: [REQ_LOGGEDIN_PENDING, REQ_FORGOT_SUCCESS, REQ_LOGGEDIN_ERROR],
     callAPI: () => API.post('/forgot', { email }),
+  };
+};
+
+export const emailer = content => {
+  const { email, message } = content;
+  return {
+    types: [REQ_EMAILER_PENDING, REQ_EMAILER_SUCCESS, REQ_EMAILER_ERROR],
+    callAPI: () => API.post('/email', { email, message }),
   };
 };
 

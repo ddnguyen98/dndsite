@@ -54,6 +54,28 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
+exports.emailMe = async (req, res) => {
+  try {
+    const { email, message } = req.body;
+    const data = {
+      to: 'shamze33@gmail.com',
+      from: 'capstone_test@yourcode.app',
+      template: 'contact',
+      subject: 'User Message',
+      ctx: {
+        message,
+        email,
+      },
+    };
+    await mailer.sendMail(data).catch(throwError(500, 'Mail error'));
+    res.json({
+      message: 'Message Sent',
+    });
+  } catch (e) {
+    SendError(res, e);
+  }
+};
+
 exports.resetPassword = async (req, res) => {
   try {
     const { token, newPassword, verifyPassword } = req.body;

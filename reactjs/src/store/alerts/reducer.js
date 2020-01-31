@@ -64,6 +64,13 @@ export default function reducer(state = initialState, action) {
     });
   }
 
+  if (action.type.includes('REQ_EMAILER_SUCCESS')) {
+    return addAlert(state, {
+      text: 'Message sent to creator',
+      type: 'success',
+    });
+  }
+
   if (action.type.includes('ADD') && action.type.includes('SUCCESS')) {
     return addAlert(state, {
       text: 'Added successfully',

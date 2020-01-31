@@ -28,6 +28,7 @@ class Character extends Component {
     this.state = {
       inputs: {
         image: 'henry.jpg',
+        emailf: '',
         stat: [],
         statMod: [],
         attackTotal: [],
@@ -567,29 +568,29 @@ class Character extends Component {
       },
     } = this.props;
     const { inputs, skills, feats, items, spells, weapons } = this.state;
-    console.log(inputs);
-    console.log(skills);
-    await updateSheet({ id, inputs });
-    skills.forEach(async data => {
-      const {id} = data;
-      await updateSkill({ id, data });
-    });
-    feats.forEach(async data => {
-      const {id} = data;
-      await updateFeat({ id, data });
-    });
-    items.forEach(async data => {
-      const {id} = data;
-      await updateItem({ id, data });
-    });
-    spells.forEach(async data => {
-      const {id} = data;
-      await updateSpell({ id, data });
-    });
-    weapons.forEach(async data => {
-      const {id} = data;
-      await updateWeapon({ id, data });
-    });
+    if (inputs.emailf.length === 0) {
+      await updateSheet({ id, inputs });
+      skills.forEach(async data => {
+        const { id } = data;
+        await updateSkill({ id, data });
+      });
+      feats.forEach(async data => {
+        const { id } = data;
+        await updateFeat({ id, data });
+      });
+      items.forEach(async data => {
+        const { id } = data;
+        await updateItem({ id, data });
+      });
+      spells.forEach(async data => {
+        const { id } = data;
+        await updateSpell({ id, data });
+      });
+      weapons.forEach(async data => {
+        const { id } = data;
+        await updateWeapon({ id, data });
+      });
+    }
   };
 
   addSkill = async event => {
@@ -740,6 +741,12 @@ class Character extends Component {
             )}
           <Form onSubmit={this.saveForm}>
             <div className={styles.heading}>
+              <input
+                className={styles.emailf}
+                name="emailf"
+                id="emailf"
+                onChange={this.handleInputChange}
+              />
               <Button name="save" type="submit">
                 Save
               </Button>

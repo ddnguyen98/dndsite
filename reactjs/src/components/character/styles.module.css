@@ -2,6 +2,10 @@
     background-color: white;
 }
 
+.emailf {
+    display: none;
+}
+
 .form img {
     border: black solid 1px;
 }

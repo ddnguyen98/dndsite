@@ -36,3 +36,7 @@
 .emailf {
     display: none;
 }
+
+.message {
+    height: 200px;
+}

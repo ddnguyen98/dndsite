@@ -17,6 +17,7 @@ const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const forgotRouter = require('./routes/forgot');
 const resetRouter = require('./routes/reset');
+const emailRouter = require('./routes/email');
 
 app.use(bodyParser.json());
 app.use('/api/feats', featRoutes);
@@ -29,6 +30,7 @@ app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/forgot', forgotRouter);
 app.use('/api/reset', resetRouter);
+app.use('/api/email', emailRouter);
 
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
