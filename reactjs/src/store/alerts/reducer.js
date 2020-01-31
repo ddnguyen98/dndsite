@@ -4,6 +4,9 @@ const initialState = [];
 
 let id = 0;
 
+// Whenever type runs, it goes through this to make sure its the correct action
+// Below are actions that add messages based on specific action
+
 const addAlert = (state, alert) => {
   if (!alert.text) return state;
   id += 1;

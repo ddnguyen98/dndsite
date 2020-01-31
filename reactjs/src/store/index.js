@@ -13,6 +13,8 @@ import weapons from './weapons/redux';
 import auth from './auth/redux';
 import alerts from './alerts/reducer';
 
+// Grabs all reducers and combines them into middleware
+
 const rootReducer = combineReducers({
   sheets,
   skills,

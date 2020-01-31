@@ -1226,7 +1226,7 @@ class Character extends Component {
                         <h2>Attack Bonuses</h2>
                         <div>
                           <div>
-                            <FormGroup>
+                            <FormGroup className={styles.meleeLeft}>
                               <Label for="attackTotalM">Melee</Label>
                               <Input
                                 name="attackTotalM"
@@ -1235,8 +1235,8 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <div>
-                              <FormGroup>
+                            <div className={styles.meleeRight}>
+                              <FormGroup className={styles.formGroup}>
                                 <Label for="attackBaseM">Base</Label>
                                 <Input
                                   name="attackBaseM"
@@ -1245,7 +1245,8 @@ class Character extends Component {
                                   onChange={this.handleInputChange}
                                 />
                               </FormGroup>
-                              <FormGroup>
+                              +
+                              <FormGroup className={styles.formGroup}>
                                 <Label for="attackModM">Mod</Label>
                                 <Input
                                   name="attackModM"
@@ -1254,7 +1255,8 @@ class Character extends Component {
                                   onChange={this.handleInputChange}
                                 />
                               </FormGroup>
-                              <FormGroup>
+                              +
+                              <FormGroup className={styles.formGroup}>
                                 <Label for="attackMiscM">Misc</Label>
                                 <Input
                                   name="attackMiscM"
@@ -1266,7 +1268,7 @@ class Character extends Component {
                             </div>
                           </div>
                           <div>
-                            <FormGroup>
+                            <FormGroup className={styles.rangedLeft}>
                               <Label for="attackTotalR">Ranged</Label>
                               <Input
                                 name="attackTotalR"
@@ -1275,8 +1277,8 @@ class Character extends Component {
                                 onChange={this.handleInputChange}
                               />
                             </FormGroup>
-                            <div>
-                              <FormGroup>
+                            <div className={styles.rangedRight}>
+                              <FormGroup className={styles.formGroup}>
                                 <Label for="attackBaseR">Base</Label>
                                 <Input
                                   name="attackBaseR"
@@ -1285,7 +1287,8 @@ class Character extends Component {
                                   onChange={this.handleInputChange}
                                 />
                               </FormGroup>
-                              <FormGroup>
+                              +
+                              <FormGroup className={styles.formGroup}>
                                 <Label for="attackBaseR">Mod</Label>
                                 <Input
                                   name="attackModR"
@@ -1294,7 +1297,8 @@ class Character extends Component {
                                   onChange={this.handleInputChange}
                                 />
                               </FormGroup>
-                              <FormGroup>
+                              +
+                              <FormGroup className={styles.formGroup}>
                                 <Label for="attackBaseR">Misc</Label>
                                 <Input
                                   name="attackMiscR"
@@ -1307,10 +1311,10 @@ class Character extends Component {
                           </div>
                         </div>
                       </div>
-                      <div>
+                      <div className={styles.weight}>
                         <h2>Weight</h2>
                         <div>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="weightLight">Light</Label>
                             <Input
                               name="weightLight"
@@ -1319,7 +1323,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="weightMedium">Medium</Label>
                             <Input
                               name="weightMedium"
@@ -1328,7 +1332,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="weightHeavy">Heavy</Label>
                             <Input
                               name="weightHeavy"
@@ -1337,7 +1341,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="weightPull">Pull</Label>
                             <Input
                               name="weightPull"
@@ -1346,7 +1350,7 @@ class Character extends Component {
                               onChange={this.handleInputChange}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          <FormGroup className={styles.formGroup}>
                             <Label for="weightTotal">Total</Label>
                             <Input
                               name="weightTotal"
@@ -1361,7 +1365,7 @@ class Character extends Component {
                   </Col>
                 </Row>
                 <Row xs="1">
-                  <div>
+                  <div className={styles.skills}>
                     <h2>Skills</h2>
                     <Button name="addSkill" onClick={this.addSkill}>
                       Add
@@ -1640,7 +1644,7 @@ class Character extends Component {
                   </TabPanel>
                   <TabPanel>
                     <div>
-                      <div>
+                      <div className={styles.feats}>
                         <Button name="addFeat" onClick={this.addFeat}>
                           Add
                         </Button>
@@ -1687,7 +1691,7 @@ class Character extends Component {
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    <div>
+                    <div className={styles.items}>
                       <Button name="addItem" onClick={this.addItem}>
                         Add
                       </Button>
@@ -1745,18 +1749,18 @@ class Character extends Component {
                   </TabPanel>
                   <TabPanel>
                     <div>
-                      <div>
+                      <div className={styles.spells}>
                         <Button name="addSpell" onClick={this.addSpell}>
                           Add
                         </Button>
                       </div>
                       <Row xs="2">
-                        <Col>
+                        <Col className={styles.spellsEct}>
                           <h2>Spells Known</h2>
                           <div>
                             <Row xs="2">
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown0">0</Label>
                                   <Input
                                     name="spellsKnown0"
@@ -1766,8 +1770,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown1">1st</Label>
                                   <Input
                                     name="spellsKnown1"
@@ -1777,8 +1781,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown2">2nd</Label>
                                   <Input
                                     name="spellsKnown2"
@@ -1788,8 +1792,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown3">3rd</Label>
                                   <Input
                                     name="spellsKnown3"
@@ -1799,8 +1803,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown4">4th</Label>
                                   <Input
                                     name="spellsKnown4"
@@ -1810,8 +1814,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown5">5th</Label>
                                   <Input
                                     name="spellsKnown5"
@@ -1821,8 +1825,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown6">6th</Label>
                                   <Input
                                     name="spellsKnown6"
@@ -1832,8 +1836,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown7">7th</Label>
                                   <Input
                                     name="spellsKnown7"
@@ -1843,8 +1847,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown8">8th</Label>
                                   <Input
                                     name="spellsKnown8"
@@ -1854,8 +1858,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsKnown9">9th</Label>
                                   <Input
                                     name="spellsKnown9"
@@ -1870,8 +1874,8 @@ class Character extends Component {
                           <h2>Spell Saves</h2>
                           <div>
                             <Row xs="2">
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC0">0</Label>
                                   <Input
                                     name="spellDC0"
@@ -1881,8 +1885,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC1">1st</Label>
                                   <Input
                                     name="spellDC1"
@@ -1892,8 +1896,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC2">2nd</Label>
                                   <Input
                                     name="spellDC2"
@@ -1903,8 +1907,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC3">3rd</Label>
                                   <Input
                                     name="spellDC3"
@@ -1914,8 +1918,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC4">4th</Label>
                                   <Input
                                     name="spellDC4"
@@ -1925,8 +1929,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC5">5th</Label>
                                   <Input
                                     name="spellDC5"
@@ -1936,8 +1940,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC6">6th</Label>
                                   <Input
                                     name="spellDC6"
@@ -1947,8 +1951,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC7">7th</Label>
                                   <Input
                                     name="spellDC7"
@@ -1958,8 +1962,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC8">8th</Label>
                                   <Input
                                     name="spellDC8"
@@ -1969,8 +1973,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellDC9">9th</Label>
                                   <Input
                                     name="spellDC9"
@@ -1985,8 +1989,8 @@ class Character extends Component {
                           <h2>Spells Per Day</h2>
                           <div>
                             <Row xs="2">
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay0">0</Label>
                                   <Input
                                     name="spellsPerDay0"
@@ -1996,8 +2000,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay1">1st</Label>
                                   <Input
                                     name="spellsPerDay1"
@@ -2007,8 +2011,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay2">2nd</Label>
                                   <Input
                                     name="spellsPerDay2"
@@ -2018,8 +2022,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay3">3rd</Label>
                                   <Input
                                     name="spellsPerDay3"
@@ -2029,8 +2033,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay4">4th</Label>
                                   <Input
                                     name="spellsPerDay4"
@@ -2040,8 +2044,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay5">5th</Label>
                                   <Input
                                     name="spellsPerDay5"
@@ -2051,8 +2055,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay6">6th</Label>
                                   <Input
                                     name="spellsPerDay6"
@@ -2062,8 +2066,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay7">7th</Label>
                                   <Input
                                     name="spellsPerDay7"
@@ -2073,8 +2077,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay8">8th</Label>
                                   <Input
                                     name="spellsPerDay8"
@@ -2084,8 +2088,8 @@ class Character extends Component {
                                   />
                                 </FormGroup>
                               </Col>
-                              <Col>
-                                <FormGroup>
+                              <Col className={styles.formGroup}>
+                                <FormGroup className={styles.group}>
                                   <Label for="spellsPerDay9">9th</Label>
                                   <Input
                                     name="spellsPerDay9"
@@ -2229,7 +2233,7 @@ class Character extends Component {
                   </TabPanel>
                   <TabPanel>
                     <div>
-                      <div>
+                      <div className={styles.weapons}>
                         <Button name="addWeapon" onClick={this.addWeapon}>
                           Add
                         </Button>

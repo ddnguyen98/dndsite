@@ -1,6 +1,7 @@
 const { Skills, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
+// Grabs all skills based on character id in params
 exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
@@ -11,6 +12,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Prebuilt data that creats skill to be edited in save editor
 exports.createSkill = async (req, res) => {
   const { id, characterId } = req.body;
   try {
@@ -31,6 +33,7 @@ exports.createSkill = async (req, res) => {
   }
 };
 
+// Updates skill based on content
 exports.updateSkill = async (req, res) => {
   const { id } = req.params;
   try {
@@ -44,6 +47,7 @@ exports.updateSkill = async (req, res) => {
   }
 };
 
+// Removes skill from database
 exports.removeSkill = async (req, res) => {
   try {
     const { id } = req.params;

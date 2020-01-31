@@ -4,6 +4,8 @@ const { SendError, throwError, throwIf } = require('../utils/errorHandling');
 const mailer = require('../utils/mailer');
 const { Users, Sequelize } = require('../models');
 
+
+// Signs user up by creating user and adding logged in state + token
 exports.signup = async (req, res) => {
   const {
     email, username, password,
@@ -23,6 +25,7 @@ exports.signup = async (req, res) => {
   }
 };
 
+// Sends email to give password reset link
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
@@ -54,6 +57,7 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
+// Emails creator with message from sender
 exports.emailMe = async (req, res) => {
   try {
     const { email, message } = req.body;
@@ -76,6 +80,7 @@ exports.emailMe = async (req, res) => {
   }
 };
 
+// Resets password from link gotten in email
 exports.resetPassword = async (req, res) => {
   try {
     const { token, newPassword, verifyPassword } = req.body;
@@ -116,6 +121,7 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
+// Logs user in and sets state
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   try {

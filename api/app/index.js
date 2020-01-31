@@ -32,6 +32,8 @@ app.use('/api/forgot', forgotRouter);
 app.use('/api/reset', resetRouter);
 app.use('/api/email', emailRouter);
 
+// Routes to check api calls
+
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   app.use(express.static(path.join(__dirname, '../../reactjs/build')));

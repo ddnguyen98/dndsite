@@ -13,6 +13,8 @@ import {
   REQ_EMAILER_ERROR,
 } from '../actionTypes';
 
+// After Actions called from components, data added to state
+
 const initialState = {
   loggedIn: !!localStorage.getItem('token'),
   isLoading: false,

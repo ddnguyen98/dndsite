@@ -16,6 +16,8 @@ import {
   DELETE_FEAT_PENDING,
 } from '../actionTypes';
 
+// After Actions called from components, data added to state
+
 const initialState = {
   byId: {},
   allIds: [],

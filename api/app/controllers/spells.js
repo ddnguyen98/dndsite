@@ -1,6 +1,7 @@
 const { Spells, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
+// Gets all spellsed based on character id from params
 exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
@@ -11,6 +12,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Creates spell with prebuilt data to be edited later
 exports.createSpell = async (req, res) => {
   const { id, characterId } = req.body;
   try {
@@ -34,6 +36,7 @@ exports.createSpell = async (req, res) => {
   }
 };
 
+// Updates spell based on content
 exports.updateSpell = async (req, res) => {
   const { id } = req.params;
   try {
@@ -47,6 +50,7 @@ exports.updateSpell = async (req, res) => {
   }
 };
 
+// Removes spell from database
 exports.removeSpell = async (req, res) => {
   try {
     const { id } = req.params;

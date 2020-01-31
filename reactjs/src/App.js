@@ -14,6 +14,7 @@ import Alerts from './components/alerts';
 import Forgot from './components/forgot';
 import Reset from './components/reset';
 import Emailer from './components/emailer';
+import About from './components/about';
 
 import store from './store';
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/forgot" exact component={Forgot} />
             <Route path="/reset" exact component={Reset} />
             <Route path="/emailer" exact component={Emailer} />
+            <Route path="/about" exact component={About} />
             <Route path="/register" exact component={Register} />
             <Route path="/sheets" exact component={Sheets} />
             <Route path="/character/:id" exact component={Character} />

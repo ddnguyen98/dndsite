@@ -1,5 +1,6 @@
 .form {
     background-color: white;
+    padding-bottom: 20px;
 }
 
 .emailf {
@@ -52,7 +53,6 @@
     border-radius: 0;
     background-color: #710627;
 }
-
 
 .collum { 
     padding: 0 .5rem;
@@ -185,5 +185,95 @@
     margin: 0 5px 16px;
 }
 
+.meleeLeft, .meleeRight {
+    width: 60%;
+    display: inline-block;
+    text-align: center;
+}
+
+.meleeLeft {
+    width: 40%
+}
+
+.meleeRight .formGroup{
+    width: 25%;
+    display: inline-block;
+}
+.meleeRight .formGroup input{
+    padding: 1px;
+    text-align: center;
+}
+
+.meleeLeft input{
+    border: none;
+    font-size: 26px;
+    text-align: center;
+}
+
+.rangedLeft, .rangedRight {
+    width: 60%;
+    display: inline-block;
+    text-align: center;
+}
+
+.rangedLeft {
+    width: 40%
+}
+
+.rangedRight .formGroup{
+    width: 25%;
+    display: inline-block;
+}
+.rangedRight .formGroup input{
+    padding: 1px;
+    text-align: center;
+}
+
+.rangedLeft input{
+    border: none;
+    font-size: 26px;
+    text-align: center;
+}
+
+.weight .formGroup{
+    width: 45%;
+    margin: 0 5px 5px;
+    display: inline-block;
+}
+
+.skills button, .feats button, .items button, .spells button, .weapons button {
+    padding: .5rem 2rem;
+    margin: .2rem;
+    border: none;
+    border-radius: 0;
+    background-color: #710627;
+    float: right;
+}
+
+.feats, .items, .spells, .weapons {
+    padding-bottom: 50px;
+}
+
+.skills {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.skills h2 {
+    display: inline-block;
+}
+
+.skills svg {
+    margin: 20px 5px;
+    cursor: pointer;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.spellsEct{
+    max-width: 300px;
+}
 
 

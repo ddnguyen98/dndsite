@@ -1,6 +1,7 @@
 const { Weapons, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
+// Gets all weapons based on character id from params
 exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
@@ -11,6 +12,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Creates weapon with prebuilt data to be edited later
 exports.createWeapon = async (req, res) => {
   const { id, characterId } = req.body;
   try {
@@ -36,6 +38,7 @@ exports.createWeapon = async (req, res) => {
   }
 };
 
+// Updates weapon based on content
 exports.updateWeapon = async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,6 +52,7 @@ exports.updateWeapon = async (req, res) => {
   }
 };
 
+// Removes weapon from database
 exports.removeWeapon = async (req, res) => {
   try {
     const { id } = req.params;
