@@ -9,17 +9,17 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from 'reactstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import LoginContainer from './container';
+import ResetContainer from './container';
 import styles from './styles.module.css';
 
-class Login extends Component {
+class Reset extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      newPassword: '',
+      verifyPassword: '',
     };
   }
 
@@ -38,9 +38,11 @@ class Login extends Component {
   save = async event => {
     // don't actually submit the form through the browser
     event.preventDefault();
-    const { loginAccount } = this.props;
-    const { username, password } = this.state;
-    await loginAccount({ username, password });
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const { reset } = this.props;
+    const { newPassword, verifyPassword } = this.state;
+    await reset({ newPassword, verifyPassword, token });
   };
 
   render() {
@@ -49,21 +51,17 @@ class Login extends Component {
     return (
       <div className={styles.wrapper}>
         <Container className={styles.login}>
-          <h2>Login</h2>
-          <p>
-            If you have forgot you password
-            <Link to="/forgot"> click here</Link>
-          </p>
+          <h2>Forgot</h2>
           <Form className={styles.form} onSubmit={this.save}>
             <FormGroup>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>U</InputGroupText>
+                  <InputGroupText>NP</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="username"
-                  id="username"
-                  placeholder="Username"
+                  name="newPassword"
+                  id="newPassword"
+                  placeholder="new Password"
                   onChange={this.handleInputChange}
                 />
               </InputGroup>
@@ -71,19 +69,18 @@ class Login extends Component {
             <FormGroup>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>P</InputGroupText>
+                  <InputGroupText>VP</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
+                  name="verifyPassword"
+                  id="verifyPassword"
+                  placeholder="verify Password"
                   onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
             <Button name="submit" className={styles.button}>
-              Login
+              Submit
             </Button>
           </Form>
         </Container>
@@ -92,13 +89,13 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginAccount: PropTypes.func.isRequired,
+Reset.propTypes = {
+  reset: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool,
 };
 
-Login.defaultProps = {
+Reset.defaultProps = {
   loggedIn: false,
 };
 
-export default LoginContainer(Login);
+export default ResetContainer(Reset);

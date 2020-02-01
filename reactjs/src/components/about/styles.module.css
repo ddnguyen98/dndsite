@@ -27,12 +27,3 @@
 .wrapper span{
     font-family: 'Malgun Gothic';
 }
-
-.wrapper a{
-    font-family: 'Malgun Gothic';
-    color: #710627;
-    cursor: pointer;
-}
-.emailf {
-    display: none;
-}

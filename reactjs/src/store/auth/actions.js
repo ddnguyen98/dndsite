@@ -3,10 +3,19 @@ import {
   REQ_LOGGEDIN_SUCCESS,
   REQ_SIGNOUT_SUCCESS,
   REQ_REGISTER_SUCCESS,
+  REQ_FORGOT_SUCCESS,
   REQ_LOGGEDIN_ERROR,
+  REQ_RESET_SUCCESS,
+  REQ_EMAILER_PENDING,
+  REQ_EMAILER_SUCCESS,
+  REQ_EMAILER_ERROR,
 } from '../actionTypes';
 
 import API from '../../API';
+
+// Actions called from components come here, go through 3 types based on loading
+// Next used function in utils to post or get data based on given data
+// If needed will send payload with response data
 
 export const loginAccount = login => {
   const { username, password } = login;
@@ -30,5 +39,29 @@ export const logout = () => {
     callAPI: () => {
       return { data: { loggedIn: false } };
     },
+  };
+};
+
+export const forgot = forget => {
+  const { email } = forget;
+  return {
+    types: [REQ_LOGGEDIN_PENDING, REQ_FORGOT_SUCCESS, REQ_LOGGEDIN_ERROR],
+    callAPI: () => API.post('/forgot', { email }),
+  };
+};
+
+export const emailer = content => {
+  const { email, message } = content;
+  return {
+    types: [REQ_EMAILER_PENDING, REQ_EMAILER_SUCCESS, REQ_EMAILER_ERROR],
+    callAPI: () => API.post('/email', { email, message }),
+  };
+};
+
+export const reset = rese => {
+  const { verifyPassword, newPassword, token } = rese;
+  return {
+    types: [REQ_LOGGEDIN_PENDING, REQ_RESET_SUCCESS, REQ_LOGGEDIN_ERROR],
+    callAPI: () => API.post('/reset', { verifyPassword, newPassword, token }),
   };
 };

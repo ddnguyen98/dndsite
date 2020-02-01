@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Button,
   Form,
@@ -9,17 +10,16 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from 'reactstrap';
-import { Redirect, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import LoginContainer from './container';
 import styles from './styles.module.css';
+import container from './container';
 
-class Login extends Component {
+class Emailer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      email: '',
+      message: '',
+      emailf: '',
     };
   }
 
@@ -38,53 +38,57 @@ class Login extends Component {
   save = async event => {
     // don't actually submit the form through the browser
     event.preventDefault();
-    const { loginAccount } = this.props;
-    const { username, password } = this.state;
-    await loginAccount({ username, password });
+    const { emailer } = this.props;
+    const { email, message, emailf } = this.state;
+    if (emailf.length === 0) {
+      await emailer({ email, message });
+    }
   };
 
   render() {
-    const { loggedIn } = this.props;
-    if (loggedIn) return <Redirect to="/" />;
     return (
       <div className={styles.wrapper}>
         <Container className={styles.login}>
-          <h2>Login</h2>
-          <p>
-            If you have forgot you password
-            <Link to="/forgot"> click here</Link>
-          </p>
+          <div>
+            <h2>Send Message</h2>
+            <p>Submit here to send the creator of the site a message</p>
+          </div>
           <Form className={styles.form} onSubmit={this.save}>
             <FormGroup>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>U</InputGroupText>
+                  <InputGroupText>@</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="username"
-                  id="username"
-                  placeholder="Username"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
                   onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <InputGroup>
+              <InputGroup className={styles.message}>
                 <InputGroupAddon addonType="prepend">
-                  <InputGroupText>P</InputGroupText>
+                  <InputGroupText>M</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
+                  type="textarea"
+                  name="message"
+                  id="message"
+                  placeholder="Message"
                   onChange={this.handleInputChange}
                 />
               </InputGroup>
             </FormGroup>
-            <Button name="submit" className={styles.button}>
-              Login
-            </Button>
+            <Button className={styles.button}>Send Message</Button>
+            <input
+              className={styles.emailf}
+              name="emailf"
+              id="emailf"
+              onChange={this.handleInputChange}
+            />
           </Form>
         </Container>
       </div>
@@ -92,13 +96,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginAccount: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool,
+Emailer.propTypes = {
+  emailer: PropTypes.func.isRequired,
 };
 
-Login.defaultProps = {
-  loggedIn: false,
-};
-
-export default LoginContainer(Login);
+export default container(Emailer);

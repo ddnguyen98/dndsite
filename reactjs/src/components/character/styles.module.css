@@ -1,5 +1,10 @@
 .form {
     background-color: white;
+    padding-bottom: 20px;
+}
+
+.emailf {
+    display: none;
 }
 
 .form img {
@@ -49,9 +54,9 @@
     background-color: #710627;
 }
 
-
 .collum { 
     padding: 0 .5rem;
+    text-align: center;
 }
 
 .stats {
@@ -93,6 +98,182 @@
     font-size: 20px;
     margin: 0 0 .5rem;
     width: 100%;
+}
+
+.health {
+    width: 100%;
+}
+
+.health input{
+    width: 100%;
+    border: none;
+    text-align: center;
+    font-size: 26px;
+}
+
+.health .formGroup {
+    width: 40%;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.resistances {
+    margin: 0 10px 16px;
+}
+
+.resistances textarea {
+    height: 100px;
+}
+
+.speed .speedGroup, .speed .initContainer{
+    margin: 0 10px 16px;
+}
+
+.speed .speedGroup input, .speed .initContainer input{
+    text-align: center;    
+}
+
+.speed .speedGroup input {
+    width: 50%;
+    margin: 0 auto;
+    border: none;
+    font-size: 26px;
+}
+
+.speed .initContainer .formGroup:first-of-type{ 
+    width: 100%;
+    display: inline-block;
+}
+.speed .initContainer .formGroup{ 
+    width: 40%;
+    display: inline-block;
+}
+
+.speed .initContainer .plus{ 
+    width: 20%;
+    display: inline-block;
+}
+
+.armor .formGroup {
+    width: 33%;
+    display: inline-block;
+}
+
+.armor .formGroup input{
+    text-align: center;
+}
+
+.armor {
+    text-align: center;
+}
+
+.armorStat .formGroup{
+    width: 15%;
+    text-align: center;
+}
+.armorStat .formGroup input{
+    padding: 2px;
+    margin: 0 2px;
+}
+
+.fortitude, .reflex, .will {
+    width: 30%;
+    display: inline-block;
+}
+
+.fortitude .formGroup, .reflex .formGroup, .will .formGroup {
+    margin: 0 5px 16px;
+}
+
+.meleeLeft, .meleeRight {
+    width: 60%;
+    display: inline-block;
+    text-align: center;
+}
+
+.meleeLeft {
+    width: 40%
+}
+
+.meleeRight .formGroup{
+    width: 25%;
+    display: inline-block;
+}
+.meleeRight .formGroup input{
+    padding: 1px;
+    text-align: center;
+}
+
+.meleeLeft input{
+    border: none;
+    font-size: 26px;
+    text-align: center;
+}
+
+.rangedLeft, .rangedRight {
+    width: 60%;
+    display: inline-block;
+    text-align: center;
+}
+
+.rangedLeft {
+    width: 40%
+}
+
+.rangedRight .formGroup{
+    width: 25%;
+    display: inline-block;
+}
+.rangedRight .formGroup input{
+    padding: 1px;
+    text-align: center;
+}
+
+.rangedLeft input{
+    border: none;
+    font-size: 26px;
+    text-align: center;
+}
+
+.weight .formGroup{
+    width: 45%;
+    margin: 0 5px 5px;
+    display: inline-block;
+}
+
+.skills button, .feats button, .items button, .spells button, .weapons button {
+    padding: .5rem 2rem;
+    margin: .2rem;
+    border: none;
+    border-radius: 0;
+    background-color: #710627;
+    float: right;
+}
+
+.feats, .items, .spells, .weapons {
+    padding-bottom: 50px;
+}
+
+.skills {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.skills h2 {
+    display: inline-block;
+}
+
+.skills svg {
+    margin: 20px 5px;
+    cursor: pointer;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.spellsEct{
+    max-width: 300px;
 }
 
 

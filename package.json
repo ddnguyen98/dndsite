@@ -31,7 +31,9 @@
     "concurrently": "^5.0.1",
     "cypress-pipe": "^1.6.0",
     "dredd": "^12.2.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "prettier-stylelint": "^0.4.2",
+    "stylelint-config-standard": "^19.0.0"
   },
   "devDependencies": {
     "cypress": "^3.8.3",

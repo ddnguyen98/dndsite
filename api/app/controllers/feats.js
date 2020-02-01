@@ -1,6 +1,7 @@
 const { Feats, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
+// Gets all based on params of form
 exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
@@ -11,6 +12,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Creates feat with empty data
 exports.createFeat = async (req, res) => {
   const { id, characterId } = req.body;
   try {
@@ -25,6 +27,7 @@ exports.createFeat = async (req, res) => {
   }
 };
 
+// Updates feat based on content
 exports.updateFeat = async (req, res) => {
   const { id } = req.params;
   try {
@@ -38,6 +41,7 @@ exports.updateFeat = async (req, res) => {
   }
 };
 
+// Removes feat from database
 exports.removeFeat = async (req, res) => {
   try {
     const { id } = req.params;

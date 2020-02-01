@@ -1,6 +1,7 @@
 const { Characters, Sequelize } = require('../models');
 const { SendError, throwError, throwIf } = require('../utils/errorHandling');
 
+// Grabs one character by using id from params
 exports.getOneById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -13,6 +14,8 @@ exports.getOneById = async (req, res) => {
     SendError(res, e);
   }
 };
+
+// Gets all characters using a user id
 exports.getAll = async (req, res) => {
   try {
     const characters = await Characters.findAll({ where: { userId: req.userId } });
@@ -22,6 +25,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Creates a character with prebuit empty data for character form
 exports.createCharacter = async (req, res) => {
   const { id } = req.body;
   try {
@@ -91,6 +95,7 @@ exports.createCharacter = async (req, res) => {
   }
 };
 
+// Replaces changed content based on body
 exports.updateCharacter = async (req, res) => {
   const { id } = req.params;
   try {
@@ -106,6 +111,7 @@ exports.updateCharacter = async (req, res) => {
   }
 };
 
+// Removes character from database
 exports.removeCharacter = async (req, res) => {
   try {
     const { id } = req.params;

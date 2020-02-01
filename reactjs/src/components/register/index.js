@@ -21,6 +21,7 @@ class Register extends Component {
       email: '',
       username: '',
       password: '',
+      emailf: '',
     };
   }
 
@@ -40,8 +41,10 @@ class Register extends Component {
     // don't actually submit the form through the browser
     event.preventDefault();
     const { saveUser } = this.props;
-    const { email, username, password } = this.state;
-    await saveUser({ email, username, password });
+    const { email, username, password, emailf } = this.state;
+    if (emailf.length === 0) {
+      await saveUser({ email, username, password });
+    }
   };
 
   render() {
@@ -102,6 +105,12 @@ class Register extends Component {
               </InputGroup>
             </FormGroup>
             <Button className={styles.button}>Register</Button>
+            <input
+              className={styles.emailf}
+              name="emailf"
+              id="emailf"
+              onChange={this.handleInputChange}
+            />
           </Form>
         </Container>
       </div>

@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 // creating a middleware
 const protectedRoute = (req, res, next) => {
-  console.log(req.headers);
   const { 'user-agent': userAgent } = req.headers;
   if (userAgent.includes('Dredd')) {
     req.userId = '41236f45-5f86-4a9a-a27b-17e71b60317d';

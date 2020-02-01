@@ -4,6 +4,9 @@ const initialState = [];
 
 let id = 0;
 
+// Whenever type runs, it goes through this to make sure its the correct action
+// Below are actions that add messages based on specific action
+
 const addAlert = (state, alert) => {
   if (!alert.text) return state;
   id += 1;
@@ -43,9 +46,30 @@ export default function reducer(state = initialState, action) {
     });
   }
 
+  if (action.type.includes('REQ_FORGOT_SUCCESS')) {
+    return addAlert(state, {
+      text: 'Check your email to reset password',
+      type: 'success',
+    });
+  }
+
+  if (action.type.includes('REQ_RESET_SUCCESS')) {
+    return addAlert(state, {
+      text: 'Password reset',
+      type: 'success',
+    });
+  }
+
   if (action.type.includes('UPDATE_SHEETS_SUCCESS')) {
     return addAlert(state, {
       text: 'Character sheet updated sucessfully',
+      type: 'success',
+    });
+  }
+
+  if (action.type.includes('REQ_EMAILER_SUCCESS')) {
+    return addAlert(state, {
+      text: 'Message sent to creator',
       type: 'success',
     });
   }

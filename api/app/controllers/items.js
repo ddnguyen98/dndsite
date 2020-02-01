@@ -1,6 +1,7 @@
 const { Items, Sequelize } = require('../models');
 const { SendError, throwError } = require('../utils/errorHandling');
 
+// Grabs all items from db that match character id
 exports.getAll = async (req, res) => {
   const { characterId } = req.query;
   try {
@@ -11,6 +12,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Creates an item with prebuilt data to be edited later
 exports.createItem = async (req, res) => {
   const { id, characterId } = req.body;
   try {
@@ -25,6 +27,7 @@ exports.createItem = async (req, res) => {
   }
 };
 
+// Updates item based on content
 exports.updateItem = async (req, res) => {
   const { id } = req.params;
   try {
@@ -38,6 +41,7 @@ exports.updateItem = async (req, res) => {
   }
 };
 
+// Removes item from database
 exports.removeItem = async (req, res) => {
   try {
     const { id } = req.params;

@@ -16,6 +16,10 @@ import {
 
 import API from '../../API';
 
+// Actions called from components come here, go through 3 types based on loading
+// Next used function in utils to post or get data based on given data
+// If needed will send payload with response data
+
 const CACHE_TIME = 1000 * 60 * 5;
 
 export const fetchWeapons = id => ({
